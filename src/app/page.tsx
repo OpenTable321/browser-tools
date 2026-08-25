@@ -8,6 +8,9 @@ import { siteConfig } from "@/lib/site";
 
 export const metadata = createMetadata({
   path: "/",
+  verification: {
+    google: "_cO61RNkjtmNOgD7hPlizj7GaAOmBl3Q21VocD8n3ig",
+  },
 });
 
 const websiteJsonLd = {

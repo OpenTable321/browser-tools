@@ -3,7 +3,7 @@ export const siteConfig = {
   title: "BrowserTools — Free Online Tools",
   description:
     "Free, fast, and privacy-friendly online tools that run entirely in your browser. No uploads, no sign-up, no tracking.",
-  url: "https://browsertools.dev",
+  url: "https://browser-tools-two.vercel.app",
   locale: "en_US",
   twitter: "@browsertools",
   author: "BrowserTools",

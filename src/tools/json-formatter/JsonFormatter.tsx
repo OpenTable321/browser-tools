@@ -4,6 +4,7 @@ import { useState } from "react";
 import { CopyButton } from "@/components/CopyButton";
 
 type IndentSize = 2 | 4;
+type ActionMode = "format" | "minify" | "validate" | null;
 
 export function JsonFormatter() {
   const [input, setInput] = useState("");
@@ -11,11 +12,13 @@ export function JsonFormatter() {
   const [indent, setIndent] = useState<IndentSize>(2);
   const [error, setError] = useState<string | null>(null);
   const [isValid, setIsValid] = useState(false);
+  const [actionMode, setActionMode] = useState<ActionMode>(null);
 
   function format() {
     setError(null);
     setOutput("");
     setIsValid(false);
+    setActionMode("format");
 
     if (!input.trim()) {
       setError("Please enter JSON to format.");
@@ -35,6 +38,7 @@ export function JsonFormatter() {
     setError(null);
     setOutput("");
     setIsValid(false);
+    setActionMode("minify");
 
     if (!input.trim()) {
       setError("Please enter JSON to minify.");
@@ -54,6 +58,7 @@ export function JsonFormatter() {
     setError(null);
     setOutput("");
     setIsValid(false);
+    setActionMode("validate");
 
     if (!input.trim()) {
       setError("Please enter JSON to validate.");
@@ -83,6 +88,7 @@ export function JsonFormatter() {
             setOutput("");
             setError(null);
             setIsValid(false);
+            setActionMode(null);
           }}
           placeholder='{"key": "value", "items": [1, 2, 3]}'
           className="input-field min-h-[200px] resize-y font-mono text-sm"
@@ -134,13 +140,13 @@ export function JsonFormatter() {
         </div>
       )}
 
-      {isValid && !error && !output.startsWith("{") && !output.startsWith("[") && (
+      {isValid && !error && actionMode === "validate" && (
         <div className="rounded-lg border border-green-200 bg-green-50 px-4 py-3 text-sm text-green-700">
           {output}
         </div>
       )}
 
-      {output && (output.startsWith("{") || output.startsWith("[")) && (
+      {output && (actionMode === "format" || actionMode === "minify") && !error && (
         <div>
           <div className="mb-2 flex items-center justify-between">
             <label htmlFor="json-output" className="text-sm font-medium text-slate-600">
@@ -160,7 +166,7 @@ export function JsonFormatter() {
 
       <div className="flex flex-wrap gap-3">
         <button
-          onClick={() => { setInput(""); setOutput(""); setError(null); setIsValid(false); }}
+          onClick={() => { setInput(""); setOutput(""); setError(null); setIsValid(false); setActionMode(null); }}
           disabled={!input}
           className="btn-secondary"
         >

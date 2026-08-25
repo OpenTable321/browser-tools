@@ -50,7 +50,7 @@ export default function ContactPage() {
           </a>
 
           <a
-            href="https://github.com/browsertools/browsertools"
+            href="https://github.com/OpenTable321/browser-tools"
             className="card group p-6"
             target="_blank"
             rel="noopener noreferrer"

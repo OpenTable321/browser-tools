@@ -1,7 +1,6 @@
 export type CategorySlug =
   | "image"
   | "text"
-  | "converters"
   | "generators"
   | "developers"
   | "calculators"
@@ -29,13 +28,6 @@ export const categories: Category[] = [
     description:
       "Transform, format, count, and analyze text with fast client-side utilities.",
     icon: "📝",
-  },
-  {
-    slug: "converters",
-    name: "Converters",
-    description:
-      "Convert between formats — JSON to YAML, CSV to JSON, and more — without leaving your browser.",
-    icon: "🔄",
   },
   {
     slug: "generators",

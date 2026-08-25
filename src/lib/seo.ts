@@ -7,6 +7,7 @@ interface PageMetaInput {
   path?: string;
   keywords?: string[];
   ogType?: "website" | "article";
+  verification?: Metadata["verification"];
 }
 
 export function createMetadata({
@@ -15,6 +16,7 @@ export function createMetadata({
   path = "",
   keywords = [],
   ogType = "website",
+  verification,
 }: PageMetaInput): Metadata {
   const fullTitle = title
     ? `${title} — ${siteConfig.name}`
@@ -57,5 +59,6 @@ export function createMetadata({
       index: true,
       follow: true,
     },
+    ...(verification ? { verification } : {}),
   };
 }
