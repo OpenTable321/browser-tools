@@ -99,6 +99,22 @@ export function CaseConverter() {
 
       <div className="flex flex-wrap gap-3">
         {output && <CopyButton text={output} label="Result" />}
+        {output && (
+          <button
+            onClick={() => {
+              const blob = new Blob([output], { type: "text/plain" });
+              const url = URL.createObjectURL(blob);
+              const a = document.createElement("a");
+              a.href = url;
+              a.download = "converted-text.txt";
+              a.click();
+              URL.revokeObjectURL(url);
+            }}
+            className="btn-secondary"
+          >
+            Download TXT
+          </button>
+        )}
         <button
           onClick={() => {
             setText("");

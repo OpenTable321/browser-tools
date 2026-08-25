@@ -7,17 +7,22 @@ export function CharacterCounter() {
   const [text, setText] = useState("");
 
   const stats = useMemo(() => {
+    const trimmed = text.trim();
     const characters = text.length;
     const charactersNoSpaces = text.replace(/\s/g, "").length;
-    const words = text.trim() ? text.trim().split(/\s+/).length : 0;
+    const words = trimmed ? trimmed.split(/\s+/).length : 0;
     const lines = text ? text.split("\n").length : 0;
-    return { characters, charactersNoSpaces, words, lines };
+    const sentences = trimmed ? (trimmed.match(/[.!?]+/g) || []).length || (trimmed.length > 0 ? 1 : 0) : 0;
+    const paragraphs = trimmed ? trimmed.split(/\n+/).filter((p) => p.trim().length > 0).length : 0;
+    return { characters, charactersNoSpaces, words, lines, sentences, paragraphs };
   }, [text]);
 
   const statCards = [
     { label: "Characters", value: stats.characters },
     { label: "Characters (no spaces)", value: stats.charactersNoSpaces },
     { label: "Words", value: stats.words },
+    { label: "Sentences", value: stats.sentences },
+    { label: "Paragraphs", value: stats.paragraphs },
     { label: "Lines", value: stats.lines },
   ];
 

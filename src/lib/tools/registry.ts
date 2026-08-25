@@ -796,6 +796,453 @@ export const toolRegistry: ToolMeta[] = [
       },
     ],
   },
+  {
+    slug: "png-to-jpg",
+    name: "PNG to JPG",
+    description:
+      "Convert PNG images to JPG format in your browser. Adjust quality, set background color for transparency, and download instantly — no uploads.",
+    longDescription:
+      "Convert PNG images to the widely compatible JPG format directly in your browser. Since JPG does not support transparency, you can choose a background color to fill transparent areas. Adjust the quality slider to control the balance between file size and visual quality. All processing is local via the Canvas API — your images never leave your device.",
+    category: "image",
+    keywords: [
+      "png to jpg",
+      "convert png to jpg",
+      "png to jpg converter",
+      "png to jpeg",
+      "png to jpeg converter",
+    ],
+    icon: "🔄",
+    isClientSide: true,
+    relatedSlugs: ["jpg-to-png", "png-to-webp", "webp-to-jpg"],
+    supportedFormats: ["PNG"],
+    limitations: [
+      "Only PNG input is accepted",
+      "Maximum file size: 50 MB",
+      "JPG does not support transparency — transparent areas are filled with the chosen background color",
+    ],
+    faq: [
+      {
+        question: "What happens to transparency when converting PNG to JPG?",
+        answer:
+          "JPG does not support alpha transparency. Any transparent or semi-transparent pixels in the PNG will be filled with the background color you choose (white by default). You can change this color in the settings.",
+      },
+      {
+        question: "Will the converted JPG be smaller than the original PNG?",
+        answer:
+          "In most cases, yes. JPG uses lossy compression which typically produces much smaller files than PNG's lossless compression, especially for photographs and complex images.",
+      },
+    ],
+  },
+  {
+    slug: "webp-to-png",
+    name: "WebP to PNG",
+    description:
+      "Convert WebP images to PNG format in your browser. Get lossless output with transparency support — no uploads, no sign-up.",
+    longDescription:
+      "Convert WebP images to PNG format entirely in your browser. PNG provides lossless compression and supports alpha transparency, making it ideal when you need the highest visual fidelity or when working with images that require transparency. The conversion runs locally via the Canvas API — your images never leave your device.",
+    category: "image",
+    keywords: [
+      "webp to png",
+      "convert webp to png",
+      "webp to png converter",
+      "webp to png conversion",
+    ],
+    icon: "🔄",
+    isClientSide: true,
+    relatedSlugs: ["webp-to-jpg", "png-to-webp", "jpg-to-png"],
+    supportedFormats: ["WebP"],
+    limitations: [
+      "Only WebP input is accepted",
+      "Maximum file size: 50 MB",
+    ],
+    faq: [
+      {
+        question: "Why convert WebP to PNG?",
+        answer:
+          "PNG provides lossless compression and universal compatibility. It's ideal when you need the highest visual fidelity, transparency support, or when working with software that doesn't support WebP.",
+      },
+      {
+        question: "Does PNG preserve transparency from WebP?",
+        answer:
+          "Yes. Both WebP and PNG support alpha transparency, so transparent areas in the WebP will be preserved in the PNG output.",
+      },
+    ],
+  },
+  {
+    slug: "image-cropper",
+    name: "Image Cropper",
+    description:
+      "Crop images in your browser with aspect ratio presets. Drag to adjust the crop area, choose output format, and download — no uploads.",
+    longDescription:
+      "Crop images visually in your browser with an interactive crop area. Drag to move and resize the selection, or apply aspect ratio presets like 1:1, 4:3, 16:9, 3:4, or 9:16. Choose between PNG and JPG output format, adjust quality for JPG, and download the cropped result. All processing is local via the Canvas API — your images never leave your device.",
+    category: "image",
+    keywords: [
+      "image cropper",
+      "crop image",
+      "photo cropper",
+      "crop image online",
+      "aspect ratio crop",
+      "image trim",
+    ],
+    icon: "✂️",
+    isClientSide: true,
+    relatedSlugs: ["image-resizer", "image-compressor", "png-to-jpg"],
+    supportedFormats: ["JPG", "JPEG", "PNG", "WebP"],
+    limitations: [
+      "Maximum file size: 50 MB",
+      "Crop area must be at least 1×1 pixel",
+      "Animated images are not supported",
+    ],
+    faq: [
+      {
+        question: "How do I crop to a specific aspect ratio?",
+        answer:
+          "Click one of the aspect ratio preset buttons (1:1, 4:3, 16:9, 3:4, 9:16). The crop area will adjust to that ratio. You can then drag to move or resize it while maintaining the ratio.",
+      },
+      {
+        question: "Can I crop freely without a fixed ratio?",
+        answer:
+          'Yes. Select the "Free" preset to crop without any aspect ratio constraint. You can drag the crop area and resize handle freely.',
+      },
+    ],
+  },
+  {
+    slug: "lorem-ipsum-generator",
+    name: "Lorem Ipsum Generator",
+    description:
+      "Generate Lorem Ipsum placeholder text in your browser. Choose paragraphs, sentences, or words — copy or download instantly, no sign-up.",
+    longDescription:
+      "Generate classic Lorem Ipsum placeholder text for your designs, mockups, or development projects. Choose to generate by paragraphs, sentences, or words, and specify the quantity (1–50). The generated text can be copied to the clipboard or downloaded as a TXT file. All generation happens locally in your browser.",
+    category: "generators",
+    keywords: [
+      "lorem ipsum generator",
+      "lorem ipsum",
+      "placeholder text",
+      "dummy text generator",
+      "lipsum",
+      "filler text",
+    ],
+    icon: "📄",
+    isClientSide: true,
+    relatedSlugs: ["word-counter", "character-counter", "password-generator"],
+    supportedFormats: ["Plain text"],
+    limitations: [
+      "Maximum 50 paragraphs, sentences, or words per generation",
+      "Generated text uses a fixed word pool — some repetition may occur in longer outputs",
+    ],
+    faq: [
+      {
+        question: "What is Lorem Ipsum?",
+        answer:
+          "Lorem Ipsum is standard placeholder text used in printing, design, and development. It's derived from a Latin text by Cicero and has been used as dummy text since the 1500s.",
+      },
+      {
+        question: "Can I generate more than 50 paragraphs?",
+        answer:
+          "The limit is 50 per generation to keep the output manageable. You can click Generate multiple times and combine the results if you need more.",
+      },
+    ],
+  },
+  {
+    slug: "discount-calculator",
+    name: "Discount Calculator",
+    description:
+      "Calculate discounts and final prices in your browser. Enter original price and discount percentage to see savings instantly — free, no sign-up.",
+    longDescription:
+      "Quickly calculate the final price and savings amount after applying a discount. Enter the original price and the discount percentage, and the tool shows the discount amount, final price, and percentage off. Useful for shopping, sales, and budgeting. All calculations happen locally in your browser.",
+    category: "calculators",
+    keywords: [
+      "discount calculator",
+      "sale calculator",
+      "price calculator",
+      "percent off calculator",
+      "discount price",
+      "savings calculator",
+    ],
+    icon: "🏷️",
+    isClientSide: true,
+    relatedSlugs: ["percentage-calculator", "bmi-calculator", "age-calculator"],
+    supportedFormats: ["Numeric input"],
+    limitations: [
+      "Discount percentage must be between 0 and 100",
+      "Does not support compound or stacked discounts",
+    ],
+    faq: [
+      {
+        question: "How is the discount calculated?",
+        answer:
+          "The discount amount is calculated as (original price × discount %) / 100. The final price is the original price minus the discount amount.",
+      },
+      {
+        question: "Can I calculate discounts with tax?",
+        answer:
+          "This tool calculates the discount only. To include tax, calculate the discounted price first, then apply tax to the result separately.",
+      },
+    ],
+  },
+  {
+    slug: "age-calculator",
+    name: "Age Calculator",
+    description:
+      "Calculate your exact age in years, months, and days from your date of birth. See total days, weeks, months, and next birthday — all in your browser.",
+    longDescription:
+      "Calculate your exact age from your date of birth. The tool shows your age in years, months, and days, plus the total number of days, weeks, and months you've lived. It also calculates the number of days until your next birthday. Useful for age verification, milestone tracking, or curiosity. All calculations happen locally in your browser.",
+    category: "calculators",
+    keywords: [
+      "age calculator",
+      "calculate age",
+      "age from date of birth",
+      "birthday calculator",
+      "how old am i",
+      "age in days",
+    ],
+    icon: "🎂",
+    isClientSide: true,
+    relatedSlugs: ["date-calculator", "discount-calculator", "percentage-calculator"],
+    supportedFormats: ["Date input"],
+    limitations: [
+      "Date of birth must be in the past",
+      "Calculations use the Gregorian calendar",
+    ],
+    faq: [
+      {
+        question: "How is age calculated?",
+        answer:
+          "Age is calculated by comparing your date of birth to today's date, accounting for the difference in years, months, and days. If your birthday hasn't occurred yet this year, the year count is reduced by one.",
+      },
+      {
+        question: "Is my date of birth stored or sent anywhere?",
+        answer:
+          "No. All calculations happen entirely in your browser. Your date of birth is never transmitted to any server or stored anywhere.",
+      },
+    ],
+  },
+  {
+    slug: "date-calculator",
+    name: "Date Calculator",
+    description:
+      "Add or subtract days from a date, or calculate the difference between two dates in days, weeks, months, and years — all in your browser.",
+    longDescription:
+      "Perform date calculations in two modes: add or subtract days from a starting date, or find the difference between two dates. The difference mode shows the result in days, weeks, months, and years. Useful for project planning, deadline tracking, and calculating durations. All calculations happen locally in your browser.",
+    category: "calculators",
+    keywords: [
+      "date calculator",
+      "add days to date",
+      "date difference calculator",
+      "days between dates",
+      "subtract days from date",
+      "date math",
+    ],
+    icon: "📅",
+    isClientSide: true,
+    relatedSlugs: ["age-calculator", "discount-calculator", "percentage-calculator"],
+    supportedFormats: ["Date input"],
+    limitations: [
+      "Calculations use the Gregorian calendar and ignore time zones",
+      "Month and year calculations approximate by calendar difference, not exact days",
+    ],
+    faq: [
+      {
+        question: "Can I subtract days from a date?",
+        answer:
+          'Yes. In the "Add / Subtract Days" mode, enter a negative number of days to subtract. For example, entering -7 will give you the date 7 days before the start date.',
+      },
+      {
+        question: "How is the difference between dates calculated?",
+        answer:
+          "The tool calculates the total number of days between the two dates, then derives weeks, months, and years from that difference using calendar arithmetic.",
+      },
+    ],
+  },
+  {
+    slug: "bmi-calculator",
+    name: "BMI Calculator",
+    description:
+      "Calculate your Body Mass Index (BMI) in metric or imperial units. See your BMI category instantly — free, no sign-up, all in your browser.",
+    longDescription:
+      "Calculate your Body Mass Index (BMI) using either metric (cm, kg) or imperial (inches, lbs) units. The tool displays your BMI value and category (underweight, normal, overweight, or obese) with a reference chart. BMI is a general screening tool for body weight relative to height. All calculations happen locally in your browser.",
+    category: "calculators",
+    keywords: [
+      "bmi calculator",
+      "body mass index",
+      "bmi calculator metric",
+      "bmi calculator imperial",
+      "calculate bmi",
+      "health calculator",
+    ],
+    icon: "⚖️",
+    isClientSide: true,
+    relatedSlugs: ["percentage-calculator", "discount-calculator", "age-calculator"],
+    supportedFormats: ["Numeric input (metric or imperial)"],
+    limitations: [
+      "BMI does not account for muscle mass, bone density, or body composition",
+      "BMI is a general screening tool, not a medical diagnosis",
+      "Not suitable for athletes, children, or pregnant women without professional consultation",
+    ],
+    faq: [
+      {
+        question: "What is BMI?",
+        answer:
+          "Body Mass Index (BMI) is a value derived from your height and weight. It's used as a general screening tool to identify whether you're at a healthy weight for your height.",
+      },
+      {
+        question: "Is BMI accurate?",
+        answer:
+          "BMI is a general indicator and does not account for muscle mass, bone density, age, or sex. Athletes with high muscle mass may have a high BMI without being overweight. Consult a healthcare professional for a comprehensive assessment.",
+      },
+    ],
+  },
+  {
+    slug: "json-formatter",
+    name: "JSON Formatter",
+    description:
+      "Format, minify, and validate JSON in your browser. Choose 2 or 4 space indentation, see error messages, and copy results — no uploads.",
+    longDescription:
+      "Format, minify, and validate JSON data directly in your browser. Paste your JSON, choose between 2 or 4 space indentation, and click Format to beautify it. Use Minify to compress JSON to a single line. The Validate option checks if your JSON is well-formed and reports any syntax errors with descriptive messages. All processing happens locally — your data never leaves your device.",
+    category: "developers",
+    keywords: [
+      "json formatter",
+      "json beautifier",
+      "format json",
+      "minify json",
+      "json validator",
+      "json pretty print",
+      "validate json",
+    ],
+    icon: "🔧",
+    isClientSide: true,
+    relatedSlugs: ["base64-encoder", "base64-decoder", "uuid-generator"],
+    supportedFormats: ["JSON"],
+    limitations: [
+      "Input must be valid JSON — JSONP or JavaScript objects are not supported",
+      "Very large JSON files may cause browser performance issues",
+    ],
+    faq: [
+      {
+        question: "What's the difference between format and minify?",
+        answer:
+          "Format (beautify) adds indentation and line breaks to make JSON human-readable. Minify removes all unnecessary whitespace to produce the smallest possible JSON string.",
+      },
+      {
+        question: "How are JSON errors reported?",
+        answer:
+          "When JSON is invalid, the browser's native JSON.parse error message is displayed, which typically includes the position of the syntax error.",
+      },
+    ],
+  },
+  {
+    slug: "base64-encoder",
+    name: "Base64 Encoder",
+    description:
+      "Encode text to Base64 in your browser. Supports UTF-8 text including emoji and special characters — no uploads, no sign-up.",
+    longDescription:
+      "Encode any text to Base64 format directly in your browser. The tool uses the TextEncoder API to properly handle UTF-8 text, including emoji, accented characters, and multi-byte characters. Paste your text, click encode, and copy the Base64 result. All processing happens locally — your text never leaves your device.",
+    category: "developers",
+    keywords: [
+      "base64 encoder",
+      "encode base64",
+      "text to base64",
+      "base64 encode online",
+      "utf-8 base64",
+    ],
+    icon: "🔐",
+    isClientSide: true,
+    relatedSlugs: ["base64-decoder", "json-formatter", "uuid-generator"],
+    supportedFormats: ["Plain text", "UTF-8"],
+    limitations: [
+      "Encodes text only — binary data and files are not supported",
+      "Base64 encoding increases size by approximately 33%",
+    ],
+    faq: [
+      {
+        question: "Does this support UTF-8 and emoji?",
+        answer:
+          "Yes. The tool uses the TextEncoder API to encode text as UTF-8 before converting to Base64, ensuring that emoji, accented characters, and other multi-byte characters are handled correctly.",
+      },
+      {
+        question: "Is my text sent to a server?",
+        answer:
+          "No. All encoding happens entirely in your browser. Your text is never transmitted to any server.",
+      },
+    ],
+  },
+  {
+    slug: "base64-decoder",
+    name: "Base64 Decoder",
+    description:
+      "Decode Base64 to text in your browser. Supports UTF-8 text including emoji and special characters — no uploads, no sign-up.",
+    longDescription:
+      "Decode Base64 encoded text back to its original form directly in your browser. The tool uses the TextDecoder API to properly handle UTF-8 text, including emoji, accented characters, and multi-byte characters. Paste your Base64 string, click decode, and copy the result. All processing happens locally — your data never leaves your device.",
+    category: "developers",
+    keywords: [
+      "base64 decoder",
+      "decode base64",
+      "base64 to text",
+      "base64 decode online",
+      "base64 to string",
+    ],
+    icon: "🔓",
+    isClientSide: true,
+    relatedSlugs: ["base64-encoder", "json-formatter", "uuid-generator"],
+    supportedFormats: ["Base64 encoded text"],
+    limitations: [
+      "Input must be valid Base64 — invalid characters will produce an error",
+      "Decodes to UTF-8 text only — binary data output is not supported",
+    ],
+    faq: [
+      {
+        question: "What happens if the Base64 input is invalid?",
+        answer:
+          "The tool will display an error message indicating the input is not valid Base64. Check for extra whitespace, special characters, or incomplete padding (=).",
+      },
+      {
+        question: "Does this support UTF-8 and emoji?",
+        answer:
+          "Yes. The tool uses the TextDecoder API to decode the Base64 data as UTF-8, ensuring that emoji, accented characters, and other multi-byte characters are handled correctly.",
+      },
+    ],
+  },
+  {
+    slug: "unit-converter",
+    name: "Unit Converter",
+    description:
+      "Convert between units of length, weight, temperature, area, volume, speed, and time in your browser. Free, instant, no sign-up.",
+    longDescription:
+      "Convert between units across seven categories: length, weight, temperature, area, volume, speed, and time. Select a category, choose the from and to units, enter a value, and see the result instantly. The tool supports metric and imperial units, including common cooking measurements. All conversions happen locally in your browser.",
+    category: "unit",
+    keywords: [
+      "unit converter",
+      "length converter",
+      "weight converter",
+      "temperature converter",
+      "area converter",
+      "volume converter",
+      "speed converter",
+      "time converter",
+      "metric to imperial",
+    ],
+    icon: "📏",
+    isClientSide: true,
+    relatedSlugs: ["percentage-calculator", "bmi-calculator", "discount-calculator"],
+    supportedFormats: ["Numeric input"],
+    limitations: [
+      "Temperature conversions use Celsius as the base unit",
+      "Volume conversions use US customary units (not imperial)",
+      "Time conversions approximate a month as 30 days and a year as 365 days",
+    ],
+    faq: [
+      {
+        question: "What categories of units are supported?",
+        answer:
+          "Seven categories: length (mm to miles), weight (mg to stones), temperature (Celsius, Fahrenheit, Kelvin), area (mm² to acres), volume (ml to gallons), speed (m/s to knots), and time (ms to years).",
+      },
+      {
+        question: "Are the volume units US or imperial?",
+        answer:
+          "Volume units use US customary measurements (US teaspoons, tablespoons, fluid ounces, cups, pints, quarts, and gallons). Imperial units are not currently supported.",
+      },
+    ],
+  },
 ];
 
 /* ---- Lookup helpers ---- */

@@ -26,6 +26,7 @@ export function RandomNumberGenerator() {
   const [min, setMin] = useState("1");
   const [max, setMax] = useState("100");
   const [isInteger, setIsInteger] = useState(true);
+  const [allowDuplicates, setAllowDuplicates] = useState(true);
   const [count, setCount] = useState(1);
   const [results, setResults] = useState<number[]>([]);
   const [error, setError] = useState<string | null>(null);
@@ -46,12 +47,34 @@ export function RandomNumberGenerator() {
       return;
     }
 
+    if (!allowDuplicates && isInteger) {
+      const range = Math.abs(maxNum - minNum) + 1;
+      if (count > range) {
+        setError(`Cannot generate ${count} unique numbers in a range of ${range} values. Increase the range or reduce the quantity.`);
+        return;
+      }
+    }
+
     const nums: number[] = [];
-    for (let i = 0; i < count; i++) {
-      nums.push(generateNumber(minNum, maxNum, isInteger));
+    if (!allowDuplicates && isInteger) {
+      const available: number[] = [];
+      const lo = Math.min(minNum, maxNum);
+      const hi = Math.max(minNum, maxNum);
+      for (let i = lo; i <= hi; i++) available.push(i);
+      for (let i = available.length - 1; i > 0; i--) {
+        const array = new Uint32Array(1);
+        crypto.getRandomValues(array);
+        const j = (array[0] ?? 0) % (i + 1);
+        [available[i], available[j]] = [available[j]!, available[i]!];
+      }
+      for (let i = 0; i < count; i++) nums.push(available[i]!);
+    } else {
+      for (let i = 0; i < count; i++) {
+        nums.push(generateNumber(minNum, maxNum, isInteger));
+      }
     }
     setResults(nums);
-  }, [min, max, isInteger, count]);
+  }, [min, max, isInteger, count, allowDuplicates]);
 
   return (
     <div className="space-y-6">
@@ -123,6 +146,18 @@ export function RandomNumberGenerator() {
               </button>
             </div>
           </div>
+        </div>
+
+        <div className="mt-4">
+          <label className="flex items-center gap-2 text-sm text-slate-600">
+            <input
+              type="checkbox"
+              checked={allowDuplicates}
+              onChange={(e) => setAllowDuplicates(e.target.checked)}
+              className="h-4 w-4 rounded border-slate-300 accent-brand-600"
+            />
+            Allow duplicate numbers
+          </label>
         </div>
 
         <div className="mt-6 flex flex-wrap gap-3">

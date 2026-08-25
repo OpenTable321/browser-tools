@@ -13,6 +13,7 @@ export function TextSorter() {
   const [caseSensitive, setCaseSensitive] = useState(false);
   const [trimLines, setTrimLines] = useState(true);
   const [removeEmpty, setRemoveEmpty] = useState(true);
+  const [removeDuplicates, setRemoveDuplicates] = useState(false);
 
   const result = useMemo(() => {
     if (!text.trim()) return "";
@@ -42,8 +43,18 @@ export function TextSorter() {
       return order === "asc" ? cmp : -cmp;
     });
 
+    if (removeDuplicates) {
+      const seen = new Set<string>();
+      lines = lines.filter((l) => {
+        const key = caseSensitive ? l : l.toLowerCase();
+        if (seen.has(key)) return false;
+        seen.add(key);
+        return true;
+      });
+    }
+
     return lines.join("\n");
-  }, [text, order, mode, caseSensitive, trimLines, removeEmpty]);
+  }, [text, order, mode, caseSensitive, trimLines, removeEmpty, removeDuplicates]);
 
   return (
     <div className="space-y-6">
@@ -136,6 +147,15 @@ export function TextSorter() {
               className="h-4 w-4 rounded border-slate-300 accent-brand-600"
             />
             Remove empty lines
+          </label>
+          <label className="flex items-center gap-2 text-sm text-slate-600">
+            <input
+              type="checkbox"
+              checked={removeDuplicates}
+              onChange={(e) => setRemoveDuplicates(e.target.checked)}
+              className="h-4 w-4 rounded border-slate-300 accent-brand-600"
+            />
+            Remove duplicates
           </label>
         </div>
       </div>

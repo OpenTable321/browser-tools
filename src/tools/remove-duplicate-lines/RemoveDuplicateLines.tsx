@@ -87,6 +87,22 @@ export function RemoveDuplicateLines() {
 
       <div className="flex flex-wrap gap-3">
         {result.output && <CopyButton text={result.output} label="Result" />}
+        {result.output && (
+          <button
+            onClick={() => {
+              const blob = new Blob([result.output], { type: "text/plain" });
+              const url = URL.createObjectURL(blob);
+              const a = document.createElement("a");
+              a.href = url;
+              a.download = "unique-lines.txt";
+              a.click();
+              URL.revokeObjectURL(url);
+            }}
+            className="btn-secondary"
+          >
+            Download TXT
+          </button>
+        )}
         <button
           onClick={() => setText("")}
           disabled={!text}

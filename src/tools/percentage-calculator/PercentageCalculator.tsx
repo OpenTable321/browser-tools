@@ -2,10 +2,11 @@
 
 import { useState } from "react";
 
-type CalcMode = "percentOf" | "percentChange" | "percentDifference";
+type CalcMode = "percentOf" | "isWhatPercent" | "percentChange" | "percentDifference";
 
 const MODES: { mode: CalcMode; label: string }[] = [
   { mode: "percentOf", label: "X% of Y" },
+  { mode: "isWhatPercent", label: "X is what % of Y" },
   { mode: "percentChange", label: "% Increase/Decrease" },
   { mode: "percentDifference", label: "% Difference" },
 ];
@@ -33,6 +34,15 @@ export function PercentageCalculator() {
       case "percentOf": {
         const answer = (a / 100) * b;
         setResult(`${a}% of ${b} = ${answer}`);
+        break;
+      }
+      case "isWhatPercent": {
+        if (b === 0) {
+          setError("The second value cannot be zero.");
+          return;
+        }
+        const pct = (a / b) * 100;
+        setResult(`${a} is ${pct.toFixed(2)}% of ${b}`);
         break;
       }
       case "percentChange": {
@@ -64,6 +74,7 @@ export function PercentageCalculator() {
 
   const labels: Record<CalcMode, [string, string]> = {
     percentOf: ["Percentage (X)", "Value (Y)"],
+    isWhatPercent: ["Value (X)", "Total (Y)"],
     percentChange: ["New Value", "Original Value"],
     percentDifference: ["Value 1", "Value 2"],
   };

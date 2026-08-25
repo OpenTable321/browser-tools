@@ -6,6 +6,9 @@ import { JpgToWebp } from "@/tools/jpg-to-webp/JpgToWebp";
 import { PngToWebp } from "@/tools/png-to-webp/PngToWebp";
 import { JpgToPng } from "@/tools/jpg-to-png/JpgToPng";
 import { WebpToJpg } from "@/tools/webp-to-jpg/WebpToJpg";
+import { PngToJpg } from "@/tools/png-to-jpg/PngToJpg";
+import { WebpToPng } from "@/tools/webp-to-png/WebpToPng";
+import { ImageCropper } from "@/tools/image-cropper/ImageCropper";
 import { WordCounter } from "@/tools/word-counter/WordCounter";
 import { CharacterCounter } from "@/tools/character-counter/CharacterCounter";
 import { CaseConverter } from "@/tools/case-converter/CaseConverter";
@@ -15,6 +18,15 @@ import { PasswordGenerator } from "@/tools/password-generator/PasswordGenerator"
 import { UuidGenerator } from "@/tools/uuid-generator/UuidGenerator";
 import { RandomNumberGenerator } from "@/tools/random-number-generator/RandomNumberGenerator";
 import { PercentageCalculator } from "@/tools/percentage-calculator/PercentageCalculator";
+import { DiscountCalculator } from "@/tools/discount-calculator/DiscountCalculator";
+import { AgeCalculator } from "@/tools/age-calculator/AgeCalculator";
+import { DateCalculator } from "@/tools/date-calculator/DateCalculator";
+import { BmiCalculator } from "@/tools/bmi-calculator/BmiCalculator";
+import { JsonFormatter } from "@/tools/json-formatter/JsonFormatter";
+import { Base64Encoder } from "@/tools/base64-encoder/Base64Encoder";
+import { Base64Decoder } from "@/tools/base64-decoder/Base64Decoder";
+import { UnitConverter } from "@/tools/unit-converter/UnitConverter";
+import { LoremIpsumGenerator } from "@/tools/lorem-ipsum-generator/LoremIpsumGenerator";
 
 const JpgToPdf = dynamic(() =>
   import("@/tools/jpg-to-pdf/JpgToPdf").then((m) => m.JpgToPdf),
@@ -44,6 +56,9 @@ const toolComponents: Record<string, ComponentType> = {
   "png-to-webp": PngToWebp,
   "jpg-to-png": JpgToPng,
   "webp-to-jpg": WebpToJpg,
+  "png-to-jpg": PngToJpg,
+  "webp-to-png": WebpToPng,
+  "image-cropper": ImageCropper,
   "jpg-to-pdf": JpgToPdf,
   "pdf-to-jpg": PdfToJpg,
   "merge-pdf": MergePdf,
@@ -58,6 +73,15 @@ const toolComponents: Record<string, ComponentType> = {
   "uuid-generator": UuidGenerator,
   "random-number-generator": RandomNumberGenerator,
   "percentage-calculator": PercentageCalculator,
+  "discount-calculator": DiscountCalculator,
+  "age-calculator": AgeCalculator,
+  "date-calculator": DateCalculator,
+  "bmi-calculator": BmiCalculator,
+  "json-formatter": JsonFormatter,
+  "base64-encoder": Base64Encoder,
+  "base64-decoder": Base64Decoder,
+  "unit-converter": UnitConverter,
+  "lorem-ipsum-generator": LoremIpsumGenerator,
 };
 
 export function getToolComponent(slug: string): ComponentType | undefined {

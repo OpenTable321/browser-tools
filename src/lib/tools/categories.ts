@@ -5,6 +5,7 @@ export type CategorySlug =
   | "generators"
   | "developers"
   | "calculators"
+  | "unit"
   | "pdf";
 
 export interface Category {
@@ -55,6 +56,13 @@ export const categories: Category[] = [
     name: "Calculators",
     description: "Quick calculations for everyday tasks — no spreadsheet needed.",
     icon: "🧮",
+  },
+  {
+    slug: "unit",
+    name: "Unit Converters",
+    description:
+      "Convert between units of length, weight, temperature, area, volume, speed, and time — all in your browser.",
+    icon: "📏",
   },
   {
     slug: "pdf",

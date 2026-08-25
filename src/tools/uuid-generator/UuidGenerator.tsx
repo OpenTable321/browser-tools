@@ -77,6 +77,22 @@ export function UuidGenerator() {
           {uuids.length > 0 && (
             <CopyButton text={uuids.join("\n")} label="All UUIDs" />
           )}
+          {uuids.length > 0 && (
+            <button
+              onClick={() => {
+                const blob = new Blob([uuids.join("\n")], { type: "text/plain" });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement("a");
+                a.href = url;
+                a.download = "uuids.txt";
+                a.click();
+                URL.revokeObjectURL(url);
+              }}
+              className="btn-secondary"
+            >
+              Download TXT
+            </button>
+          )}
         </div>
       </div>
 
