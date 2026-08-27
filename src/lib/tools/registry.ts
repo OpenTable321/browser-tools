@@ -1243,6 +1243,44 @@ export const toolRegistry: ToolMeta[] = [
       },
     ],
   },
+  {
+    slug: "url-encoder-decoder",
+    name: "URL Encoder/Decoder",
+    description:
+      "Encode and decode URL parameters in your browser. Handle spaces, special characters, and percent-encoding — no uploads, no sign-up.",
+    longDescription:
+      "Encode and decode URLs and URL parameters directly in your browser. Use encodeURIComponent for individual query parameters or encodeURI for full URLs. The decoder handles percent-encoded strings and converts them back to readable text. Supports spaces, special characters, Unicode, and multi-byte characters. All processing happens locally — your data never leaves your device.",
+    category: "developers",
+    keywords: [
+      "url encoder",
+      "url decoder",
+      "percent encoding",
+      "encode url",
+      "decode url",
+      "uri encoder",
+      "uri decoder",
+      "query parameter encoder",
+    ],
+    icon: "🔗",
+    isClientSide: true,
+    relatedSlugs: ["base64-encoder", "base64-decoder", "json-formatter"],
+    limitations: [
+      "encodeURI does not encode characters that are part of the URL syntax (?, &, =, /, etc.) — use encodeURIComponent for individual query parameter values",
+      "Decoding invalid percent-encoded strings (e.g., stray % signs) will produce an error",
+    ],
+    faq: [
+      {
+        question: "What is the difference between encodeURI and encodeURIComponent?",
+        answer:
+          "encodeURI is for encoding full URLs — it preserves characters like :, /, ?, &, and = that are part of the URL structure. encodeURIComponent is for encoding individual query parameter values — it encodes all special characters including those that have meaning in URLs.",
+      },
+      {
+        question: "Can I encode URLs with Unicode or emoji characters?",
+        answer:
+          "Yes. Both encodeURI and encodeURIComponent handle Unicode characters including emoji. They are converted to UTF-8 percent-encoded sequences (e.g., 🔗 becomes %F0%9F%94%97).",
+      },
+    ],
+  },
 ];
 
 /* ---- Lookup helpers ---- */

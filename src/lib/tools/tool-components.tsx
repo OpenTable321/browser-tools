@@ -27,6 +27,7 @@ import { Base64Encoder } from "@/tools/base64-encoder/Base64Encoder";
 import { Base64Decoder } from "@/tools/base64-decoder/Base64Decoder";
 import { UnitConverter } from "@/tools/unit-converter/UnitConverter";
 import { LoremIpsumGenerator } from "@/tools/lorem-ipsum-generator/LoremIpsumGenerator";
+import { UrlEncoderDecoder } from "@/tools/url-encoder-decoder/UrlEncoderDecoder";
 
 const JpgToPdf = dynamic(() =>
   import("@/tools/jpg-to-pdf/JpgToPdf").then((m) => m.JpgToPdf),
@@ -82,6 +83,7 @@ const toolComponents: Record<string, ComponentType> = {
   "base64-decoder": Base64Decoder,
   "unit-converter": UnitConverter,
   "lorem-ipsum-generator": LoremIpsumGenerator,
+  "url-encoder-decoder": UrlEncoderDecoder,
 };
 
 export function getToolComponent(slug: string): ComponentType | undefined {

@@ -190,6 +190,7 @@
     "base64-encoder": { "name": "Base64 Encoder", "description": "Encode text to Base64 in your browser. Supports UTF-8 text including emoji and special characters — no uploads, no sign-up." },
     "base64-decoder": { "name": "Base64 Decoder", "description": "Decode Base64 to text in your browser. Supports UTF-8 text including emoji and special characters — no uploads, no sign-up." },
     "unit-converter": { "name": "Unit Converter", "description": "Convert between units of length, weight, temperature, area, volume, speed, and time in your browser. Free, instant, no sign-up." },
-    "lorem-ipsum-generator": { "name": "Lorem Ipsum Generator", "description": "Generate Lorem Ipsum placeholder text in your browser. Choose paragraphs, sentences, or words — copy or download instantly, no sign-up." }
+    "lorem-ipsum-generator": { "name": "Lorem Ipsum Generator", "description": "Generate Lorem Ipsum placeholder text in your browser. Choose paragraphs, sentences, or words — copy or download instantly, no sign-up." },
+    "url-encoder-decoder": { "name": "URL Encoder/Decoder", "description": "Encode and decode URL parameters in your browser. Handle spaces, special characters, and percent-encoding — no uploads, no sign-up." }
   }
 }
