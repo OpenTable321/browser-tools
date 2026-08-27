@@ -1,22 +1,23 @@
-import { createMetadata } from "@/lib/seo";
-import { siteConfig } from "@/lib/site";
+"use client";
 
-export const metadata = createMetadata({
-  title: "Contact",
-  description: `Get in touch with the ${siteConfig.name} team. Suggest new tools, report bugs, or send feedback.`,
-  path: "/contact",
-});
+import { useTranslation } from "@/i18n/LanguageProvider";
+import { MetadataUpdater } from "@/i18n/MetadataUpdater";
 
 export default function ContactPage() {
+  const { t } = useTranslation();
+
   return (
     <div className="container-page py-12">
+      <MetadataUpdater
+        titleKey="pages.contact.title"
+        descriptionKey="pages.contact.description"
+      />
       <div className="mx-auto max-w-2xl">
         <h1 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
-          Contact Us
+          {t("pages.contact.heading")}
         </h1>
         <p className="mt-3 text-lg text-slate-600">
-          Have a suggestion for a new tool, found a bug, or want to share
-          feedback? We would love to hear from you.
+          {t("pages.contact.p1")}
         </p>
 
         <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2">
@@ -42,7 +43,7 @@ export default function ContactPage() {
               </div>
               <div>
                 <h3 className="font-semibold text-slate-900 group-hover:text-brand-600 transition">
-                  Email
+                  {t("pages.contact.email")}
                 </h3>
                 <p className="text-sm text-slate-500">hello@browsertools.dev</p>
               </div>
@@ -67,10 +68,10 @@ export default function ContactPage() {
               </div>
               <div>
                 <h3 className="font-semibold text-slate-900 group-hover:text-brand-600 transition">
-                  GitHub
+                  {t("pages.contact.github")}
                 </h3>
                 <p className="text-sm text-slate-500">
-                  Report issues or contribute
+                  {t("pages.contact.githubDesc")}
                 </p>
               </div>
             </div>
@@ -79,13 +80,10 @@ export default function ContactPage() {
 
         <div className="mt-8 rounded-xl border border-slate-200 bg-slate-50 p-6">
           <h2 className="font-semibold text-slate-900">
-            Suggest a Tool
+            {t("pages.contact.suggestTool")}
           </h2>
           <p className="mt-2 text-sm text-slate-600">
-            We are actively expanding our tool collection. If there is a tool
-            you need that we do not yet offer, let us know. We prioritize
-            tools that can run entirely client-side and do not require paid
-            APIs.
+            {t("pages.contact.suggestToolP")}
           </p>
         </div>
       </div>

@@ -5,6 +5,7 @@ import { useSearchParams } from "next/navigation";
 import { ToolCard } from "./ToolCard";
 import { categories } from "@/lib/tools/categories";
 import { getAllTools } from "@/lib/tools/registry";
+import { useTranslation } from "@/i18n/LanguageProvider";
 
 export function ToolsExplorer() {
   const searchParams = useSearchParams();
@@ -15,17 +16,18 @@ export function ToolsExplorer() {
   const [activeCategory, setActiveCategory] = useState(initialCategory);
 
   const allTools = getAllTools();
+  const { t } = useTranslation();
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
-    return allTools.filter((t) => {
+    return allTools.filter((tool) => {
       const matchesCategory =
-        activeCategory === "all" || t.category === activeCategory;
+        activeCategory === "all" || tool.category === activeCategory;
       const matchesQuery =
         !q ||
-        t.name.toLowerCase().includes(q) ||
-        t.description.toLowerCase().includes(q) ||
-        t.keywords.some((k) => k.toLowerCase().includes(q));
+        tool.name.toLowerCase().includes(q) ||
+        tool.description.toLowerCase().includes(q) ||
+        tool.keywords.some((k) => k.toLowerCase().includes(q));
       return matchesCategory && matchesQuery;
     });
   }, [query, activeCategory, allTools]);
@@ -51,8 +53,8 @@ export function ToolsExplorer() {
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search tools by name or keyword…"
-            aria-label="Search tools by name or keyword"
+            placeholder={t("common.searchPlaceholder")}
+            aria-label={t("common.searchAria")}
             className="input-field pl-10"
           />
         </div>
@@ -67,7 +69,7 @@ export function ToolsExplorer() {
               : "bg-slate-100 text-slate-700 hover:bg-slate-200"
           }`}
         >
-          All
+          {t("common.all")}
         </button>
         {categories.map((cat) => (
           <button
@@ -79,7 +81,7 @@ export function ToolsExplorer() {
                 : "bg-slate-100 text-slate-700 hover:bg-slate-200"
             }`}
           >
-            {cat.icon} {cat.name}
+            {cat.icon} {t(`categories.${cat.slug}.name`)}
           </button>
         ))}
       </div>
@@ -93,10 +95,10 @@ export function ToolsExplorer() {
       ) : (
         <div className="rounded-xl border border-dashed border-slate-300 py-16 text-center">
           <p className="text-lg font-medium text-slate-700">
-            No tools found
+            {t("common.noToolsFound")}
           </p>
           <p className="mt-1 text-sm text-slate-500">
-            Try a different search term or category.
+            {t("common.noToolsFoundDesc")}
           </p>
         </div>
       )}

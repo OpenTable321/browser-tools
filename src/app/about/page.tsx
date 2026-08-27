@@ -1,65 +1,55 @@
-import Link from "next/link";
-import { createMetadata } from "@/lib/seo";
-import { siteConfig } from "@/lib/site";
+"use client";
 
-export const metadata = createMetadata({
-  title: "About",
-  description: `Learn about ${siteConfig.name} — a collection of free, privacy-first online tools that run entirely in your browser.`,
-  path: "/about",
-});
+import Link from "next/link";
+import { useTranslation } from "@/i18n/LanguageProvider";
+import { MetadataUpdater } from "@/i18n/MetadataUpdater";
 
 export default function AboutPage() {
+  const { t } = useTranslation();
+
   return (
     <div className="container-page py-12">
+      <MetadataUpdater
+        titleKey="pages.about.title"
+        descriptionKey="pages.about.description"
+      />
       <div className="mx-auto max-w-3xl">
         <h1 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
-          About {siteConfig.name}
+          {t("pages.about.heading")}
         </h1>
 
         <div className="mt-6 space-y-6 text-slate-600">
           <p>
-            {siteConfig.name} is a collection of free online tools designed to
-            be fast, private, and accessible to everyone. Unlike traditional
-            online tools that upload your files to a server for processing,
-            every tool on this site runs entirely in your web browser.
+            {t("pages.about.p1")}
           </p>
 
-          <h2 className="text-xl font-bold text-slate-900">Our Mission</h2>
+          <h2 className="text-xl font-bold text-slate-900">{t("pages.about.mission")}</h2>
           <p>
-            We believe utility tools should be simple, fast, and respectful of
-            your privacy. That is why we build tools that work without
-            requiring accounts, without uploading your data, and without
-            adding unnecessary complexity.
+            {t("pages.about.missionP")}
           </p>
 
           <h2 className="text-xl font-bold text-slate-900">
-            How It Works
+            {t("pages.about.howItWorks")}
           </h2>
           <p>
-            All processing happens locally using standard browser APIs such as
-            Canvas, Web Crypto, and the File API. When you upload a file to
-            one of our tools, it never leaves your device. This means:
+            {t("pages.about.howItWorksP")}
           </p>
           <ul className="list-disc space-y-2 pl-6">
-            <li>Your data stays private — no server uploads</li>
-            <li>Processing is instant — no network latency</li>
-            <li>Tools work offline once the page is loaded</li>
-            <li>No file size limits imposed by server constraints</li>
+            <li>{t("pages.about.howItWorksLi1")}</li>
+            <li>{t("pages.about.howItWorksLi2")}</li>
+            <li>{t("pages.about.howItWorksLi3")}</li>
+            <li>{t("pages.about.howItWorksLi4")}</li>
           </ul>
 
-          <h2 className="text-xl font-bold text-slate-900">Technology</h2>
+          <h2 className="text-xl font-bold text-slate-900">{t("pages.about.technology")}</h2>
           <p>
-            This site is built with Next.js, TypeScript, and Tailwind CSS. It
-            is deployed on Vercel and optimized for performance and
-            accessibility. The architecture is designed to be easily
-            extensible — new tools can be added without modifying dozens of
-            files.
+            {t("pages.about.technologyP")}
           </p>
 
-          <h2 className="text-xl font-bold text-slate-900">Contact</h2>
+          <h2 className="text-xl font-bold text-slate-900">{t("pages.about.contact")}</h2>
           <p>
-            Have a suggestion for a new tool or found a bug? We would love to
-            hear from you. Visit our <Link href="/contact" className="text-brand-600 hover:underline">contact page</Link> to get in touch.
+            {t("pages.about.contactP")}{" "}
+            <Link href="/contact" className="text-brand-600 hover:underline">{t("pages.about.contactLink")}</Link>.
           </p>
         </div>
       </div>

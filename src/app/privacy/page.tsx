@@ -1,68 +1,58 @@
-import Link from "next/link";
-import { createMetadata } from "@/lib/seo";
-import { siteConfig } from "@/lib/site";
+"use client";
 
-export const metadata = createMetadata({
-  title: "Privacy Policy",
-  description: `Privacy Policy for ${siteConfig.name}. We do not collect, store, or transmit your data. All tools run entirely in your browser.`,
-  path: "/privacy",
-});
+import Link from "next/link";
+import { useTranslation } from "@/i18n/LanguageProvider";
+import { MetadataUpdater } from "@/i18n/MetadataUpdater";
 
 export default function PrivacyPage() {
+  const { t } = useTranslation();
+  const year = new Date().getFullYear();
+
   return (
     <div className="container-page py-12">
+      <MetadataUpdater
+        titleKey="pages.privacy.title"
+        descriptionKey="pages.privacy.description"
+      />
       <div className="mx-auto max-w-3xl">
         <h1 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
-          Privacy Policy
+          {t("pages.privacy.heading")}
         </h1>
         <p className="mt-2 text-sm text-slate-500">
-          Last updated: {new Date().getFullYear()}
+          {t("pages.privacy.lastUpdated", { year })}
         </p>
 
         <div className="mt-6 space-y-6 text-slate-600">
           <p>
-            Your privacy is fundamental to how {siteConfig.name} operates.
-            This policy explains what data we do and do not collect.
+            {t("pages.privacy.p1")}
           </p>
 
           <h2 className="text-xl font-bold text-slate-900">
-            Tool Data — Never Collected
+            {t("pages.privacy.toolData")}
           </h2>
           <p>
-            All tools on {siteConfig.name} process data entirely within your
-            browser. When you use any tool — whether compressing an image,
-            converting text, or generating a password — the data you provide
-            is never sent to our servers. We do not have access to your files,
-            inputs, or outputs.
+            {t("pages.privacy.toolDataP")}
           </p>
 
           <h2 className="text-xl font-bold text-slate-900">
-            Analytics
+            {t("pages.privacy.analytics")}
           </h2>
           <p>
-            We may use privacy-respecting analytics to understand which tools
-            are most used and how visitors find the site. We do not use
-            cross-site tracking cookies. Any analytics we use are configured
-            to not collect personally identifiable information.
+            {t("pages.privacy.analyticsP")}
           </p>
 
           <h2 className="text-xl font-bold text-slate-900">
-            Cookies
+            {t("pages.privacy.cookies")}
           </h2>
           <p>
-            {siteConfig.name} does not set any cookies for tool functionality.
-            If we add analytics in the future, we will update this policy and
-            provide appropriate disclosure.
+            {t("pages.privacy.cookiesP")}
           </p>
 
           <h2 className="text-xl font-bold text-slate-900">
-            Third-Party Services
+            {t("pages.privacy.thirdParty")}
           </h2>
           <p>
-            Our site is hosted on Vercel. When you visit {siteConfig.name},
-            Vercel may process basic request data (IP address, request
-            headers) to serve the website. This is standard for any website
-            and is governed by{" "}
+            {t("pages.privacy.thirdPartyP")}{" "}
             <a
               href="https://vercel.com/legal/privacy-policy"
               className="text-brand-600 hover:underline"
@@ -75,30 +65,26 @@ export default function PrivacyPage() {
           </p>
 
           <h2 className="text-xl font-bold text-slate-900">
-            Advertising
+            {t("pages.privacy.advertising")}
           </h2>
           <p>
-            If we introduce advertising in the future, we will update this
-            policy to disclose what advertising partners we work with and what
-            data they may collect. We are committed to using only
-            privacy-respecting ad networks.
+            {t("pages.privacy.advertisingP")}
           </p>
 
           <h2 className="text-xl font-bold text-slate-900">
-            Changes to This Policy
+            {t("pages.privacy.changes")}
           </h2>
           <p>
-            We may update this Privacy Policy from time to time. Any changes
-            will be posted on this page with an updated revision date.
+            {t("pages.privacy.changesP")}
           </p>
 
           <h2 className="text-xl font-bold text-slate-900">
-            Contact
+            {t("pages.privacy.contact")}
           </h2>
           <p>
-            If you have questions about this Privacy Policy, please visit our{" "}
+            {t("pages.privacy.contactP")}{" "}
             <Link href="/contact" className="text-brand-600 hover:underline">
-              contact page
+              {t("pages.privacy.contactLink")}
             </Link>
             .
           </p>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslation } from "@/i18n/LanguageProvider";
 
 interface CopyButtonProps {
   text: string;
@@ -10,6 +11,7 @@ interface CopyButtonProps {
 
 export function CopyButton({ text, label = "Copy", className }: CopyButtonProps) {
   const [copied, setCopied] = useState(false);
+  const { t } = useTranslation();
 
   async function handleCopy() {
     try {
@@ -39,9 +41,9 @@ export function CopyButton({ text, label = "Copy", className }: CopyButtonProps)
       onClick={handleCopy}
       disabled={!text}
       className={className ?? "btn-secondary"}
-      aria-label={`Copy ${label} to clipboard`}
+      aria-label={t("common.copyAria", { label })}
     >
-      {copied ? "✓ Copied" : `Copy ${label}`}
+      {copied ? t("common.copied") : `${t("common.copy")} ${label}`}
     </button>
   );
 }

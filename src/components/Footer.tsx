@@ -1,8 +1,11 @@
+"use client";
+
 import Link from "next/link";
 import { categories } from "@/lib/tools/categories";
-import { siteConfig } from "@/lib/site";
+import { useTranslation } from "@/i18n/LanguageProvider";
 
 export function Footer() {
+  const { t } = useTranslation();
   const year = new Date().getFullYear();
 
   return (
@@ -15,15 +18,15 @@ export function Footer() {
               className="flex items-center gap-2 font-bold text-slate-900"
             >
               <span className="text-xl">🧰</span>
-              <span className="text-lg">{siteConfig.name}</span>
+              <span className="text-lg">{t("site.name")}</span>
             </Link>
             <p className="mt-3 text-sm text-slate-600">
-              {siteConfig.description}
+              {t("site.description")}
             </p>
           </div>
 
           <div>
-            <h3 className="text-sm font-semibold text-slate-900">Categories</h3>
+            <h3 className="text-sm font-semibold text-slate-900">{t("footer.categories")}</h3>
             <ul className="mt-3 space-y-2">
               {categories.map((cat) => (
                 <li key={cat.slug}>
@@ -31,7 +34,7 @@ export function Footer() {
                     href={`/tools?category=${cat.slug}`}
                     className="text-sm text-slate-600 transition hover:text-slate-900"
                   >
-                    {cat.name}
+                    {t(`categories.${cat.slug}.name`)}
                   </Link>
                 </li>
               ))}
@@ -39,14 +42,14 @@ export function Footer() {
           </div>
 
           <div>
-            <h3 className="text-sm font-semibold text-slate-900">Site</h3>
+            <h3 className="text-sm font-semibold text-slate-900">{t("footer.site")}</h3>
             <ul className="mt-3 space-y-2">
               <li>
                 <Link
                   href="/tools"
                   className="text-sm text-slate-600 transition hover:text-slate-900"
                 >
-                  All Tools
+                  {t("nav.allTools")}
                 </Link>
               </li>
               <li>
@@ -54,7 +57,7 @@ export function Footer() {
                   href="/about"
                   className="text-sm text-slate-600 transition hover:text-slate-900"
                 >
-                  About
+                  {t("nav.about")}
                 </Link>
               </li>
               <li>
@@ -62,21 +65,21 @@ export function Footer() {
                   href="/contact"
                   className="text-sm text-slate-600 transition hover:text-slate-900"
                 >
-                  Contact
+                  {t("nav.contact")}
                 </Link>
               </li>
             </ul>
           </div>
 
           <div>
-            <h3 className="text-sm font-semibold text-slate-900">Legal</h3>
+            <h3 className="text-sm font-semibold text-slate-900">{t("footer.legal")}</h3>
             <ul className="mt-3 space-y-2">
               <li>
                 <Link
                   href="/privacy"
                   className="text-sm text-slate-600 transition hover:text-slate-900"
                 >
-                  Privacy Policy
+                  {t("footer.privacyPolicy")}
                 </Link>
               </li>
               <li>
@@ -84,7 +87,7 @@ export function Footer() {
                   href="/terms"
                   className="text-sm text-slate-600 transition hover:text-slate-900"
                 >
-                  Terms of Service
+                  {t("footer.termsOfService")}
                 </Link>
               </li>
             </ul>
@@ -93,8 +96,7 @@ export function Footer() {
 
         <div className="mt-8 border-t border-slate-200 pt-6">
           <p className="text-center text-sm text-slate-500">
-            © {year} {siteConfig.name}. All tools run in your browser — your
-            data never leaves your device.
+            {t("footer.copyright", { year, name: t("site.name") })}
           </p>
         </div>
       </div>

@@ -4,12 +4,15 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { searchTools } from "@/lib/tools/registry";
+import { useTranslation } from "@/i18n/LanguageProvider";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 
 export function Header() {
   const [query, setQuery] = useState("");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const router = useRouter();
+  const { t } = useTranslation();
 
   const results = query.trim() ? searchTools(query).slice(0, 5) : [];
 
@@ -36,23 +39,24 @@ export function Header() {
             href="/"
             className="text-sm font-medium text-slate-600 transition hover:text-slate-900"
           >
-            Home
+            {t("nav.home")}
           </Link>
           <Link
             href="/tools"
             className="text-sm font-medium text-slate-600 transition hover:text-slate-900"
           >
-            All Tools
+            {t("nav.allTools")}
           </Link>
           <Link
             href="/about"
             className="text-sm font-medium text-slate-600 transition hover:text-slate-900"
           >
-            About
+            {t("nav.about")}
           </Link>
         </nav>
 
-        <div className="relative hidden sm:block">
+        <div className="flex items-center gap-3">
+          <div className="relative hidden sm:block">
           <form onSubmit={handleSubmit}>
             <input
               type="text"
@@ -60,8 +64,8 @@ export function Header() {
               onChange={(e) => setQuery(e.target.value)}
               onFocus={() => setIsSearchOpen(true)}
               onBlur={() => setTimeout(() => setIsSearchOpen(false), 200)}
-              placeholder="Search tools…"
-              aria-label="Search tools"
+              placeholder={t("nav.search")}
+              aria-label={t("nav.searchAria")}
               className="w-40 rounded-lg border border-slate-300 bg-white px-3.5 py-2 text-sm placeholder:text-slate-400 focus:w-56 focus:border-brand-500 focus:outline-none focus:ring-1 focus:ring-brand-500 transition-all sm:w-48"
             />
           </form>
@@ -91,12 +95,14 @@ export function Header() {
               ))}
             </div>
           )}
+          </div>
+          <LanguageSwitcher />
         </div>
 
         <button
           className="md:hidden"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
-          aria-label="Toggle menu"
+          aria-label={t("nav.toggleMenu")}
           aria-expanded={isMenuOpen}
         >
           <svg
@@ -123,29 +129,32 @@ export function Header() {
               className="rounded-md px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-100"
               onClick={() => setIsMenuOpen(false)}
             >
-              Home
+              {t("nav.home")}
             </Link>
             <Link
               href="/tools"
               className="rounded-md px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-100"
               onClick={() => setIsMenuOpen(false)}
             >
-              All Tools
+              {t("nav.allTools")}
             </Link>
             <Link
               href="/about"
               className="rounded-md px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-100"
               onClick={() => setIsMenuOpen(false)}
             >
-              About
+              {t("nav.about")}
             </Link>
+            <div className="px-3 pt-2">
+              <LanguageSwitcher />
+            </div>
             <form onSubmit={handleSubmit} className="px-3 pt-2">
               <input
                 type="text"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
-                placeholder="Search tools…"
-                aria-label="Search tools"
+                placeholder={t("nav.search")}
+                aria-label={t("nav.searchAria")}
                 className="input-field"
               />
             </form>
