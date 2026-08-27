@@ -2,6 +2,7 @@
 
 import { useState, useCallback } from "react";
 import { CopyButton } from "@/components/CopyButton";
+import { useTranslation } from "@/i18n/LanguageProvider";
 
 function generateUUID(): string {
   if (typeof crypto !== "undefined" && typeof crypto.randomUUID === "function") {
@@ -20,6 +21,7 @@ function generateUUID(): string {
 }
 
 export function UuidGenerator() {
+  const { t } = useTranslation();
   const [count, setCount] = useState(1);
   const [uppercase, setUppercase] = useState(false);
   const [uuids, setUuids] = useState<string[]>([]);
@@ -37,12 +39,12 @@ export function UuidGenerator() {
   return (
     <div className="space-y-6">
       <div className="rounded-xl border border-slate-200 bg-white p-6">
-        <h3 className="mb-4 text-sm font-semibold text-slate-700">Settings</h3>
+        <h3 className="mb-4 text-sm font-semibold text-slate-700">{t("common.settings")}</h3>
 
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
           <div>
             <label htmlFor="uuid-count" className="mb-2 block text-sm font-medium text-slate-600">
-              Quantity: <span className="font-bold text-brand-600">{count}</span>
+              {t("common.quantity")}: <span className="font-bold text-brand-600">{count}</span>
             </label>
             <input
               id="uuid-count"
@@ -57,7 +59,7 @@ export function UuidGenerator() {
           </div>
 
           <div>
-            <label className="mb-2 block text-sm font-medium text-slate-600">Format</label>
+            <label className="mb-2 block text-sm font-medium text-slate-600">{t("common.format")}</label>
             <label className="flex items-center gap-2 text-sm text-slate-600">
               <input
                 type="checkbox"
@@ -65,17 +67,17 @@ export function UuidGenerator() {
                 onChange={(e) => setUppercase(e.target.checked)}
                 className="h-4 w-4 rounded border-slate-300 accent-brand-600"
               />
-              Uppercase
+              {t("common.uppercaseLabel")}
             </label>
           </div>
         </div>
 
         <div className="mt-4 flex flex-wrap gap-3">
           <button onClick={generate} className="btn-primary">
-            Generate
+            {t("common.generate")}
           </button>
           {uuids.length > 0 && (
-            <CopyButton text={uuids.join("\n")} label="All UUIDs" />
+            <CopyButton text={uuids.join("\n")} label={t("common.allUuids")} />
           )}
           {uuids.length > 0 && (
             <button
@@ -90,7 +92,7 @@ export function UuidGenerator() {
               }}
               className="btn-secondary"
             >
-              Download TXT
+              {t("common.downloadTxt")}
             </button>
           )}
         </div>

@@ -92,7 +92,7 @@ export function ToolContent({ slug }: ToolContentProps) {
         <h2 className="text-xl font-bold text-slate-900">
           {t("common.aboutTool", { name: toolName })}
         </h2>
-        <p className="mt-3 text-slate-600">{tool.longDescription}</p>
+        <p className="mt-3 text-slate-600">{t(`tools.${tool.slug}.longDescription`)}</p>
 
         {(tool.supportedFormats || tool.limitations) && (
           <div className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2">
@@ -102,8 +102,8 @@ export function ToolContent({ slug }: ToolContentProps) {
                   {t("common.supportedFormats")}
                 </h3>
                 <ul className="mt-2 space-y-1">
-                  {tool.supportedFormats.map((fmt) => (
-                    <li key={fmt} className="text-sm text-slate-600">
+                  {tool.supportedFormats.map((fmt, i) => (
+                    <li key={i} className="text-sm text-slate-600">
                       {fmt}
                     </li>
                   ))}
@@ -116,9 +116,9 @@ export function ToolContent({ slug }: ToolContentProps) {
                   {t("common.limitations")}
                 </h3>
                 <ul className="mt-2 space-y-1">
-                  {tool.limitations.map((lim) => (
-                    <li key={lim} className="text-sm text-slate-600">
-                      {lim}
+                  {tool.limitations.map((lim, i) => (
+                    <li key={i} className="text-sm text-slate-600">
+                      {t(`tools.${tool.slug}.limitations.${i}`)}
                     </li>
                   ))}
                 </ul>
@@ -148,9 +148,9 @@ export function ToolContent({ slug }: ToolContentProps) {
             {tool.faq.map((item, i) => (
               <div key={i}>
                 <h3 className="font-semibold text-slate-900">
-                  {item.question}
+                  {t(`tools.${tool.slug}.faq.${i}.question`)}
                 </h3>
-                <p className="mt-1 text-slate-600">{item.answer}</p>
+                <p className="mt-1 text-slate-600">{t(`tools.${tool.slug}.faq.${i}.answer`)}</p>
               </div>
             ))}
           </div>

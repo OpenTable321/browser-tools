@@ -2,11 +2,13 @@
 
 import { useState } from "react";
 import { CopyButton } from "@/components/CopyButton";
+import { useTranslation } from "@/i18n/LanguageProvider";
 
 type Mode = "encode" | "decode";
 type Encoding = "encodeURIComponent" | "encodeURI";
 
 export function UrlEncoderDecoder() {
+  const { t } = useTranslation();
   const [input, setInput] = useState("");
   const [output, setOutput] = useState("");
   const [error, setError] = useState<string | null>(null);
@@ -16,7 +18,7 @@ export function UrlEncoderDecoder() {
   function process() {
     setError(null);
     if (!input) {
-      setError("Please enter text to process.");
+      setError(t("common.pleaseEnterUrlText"));
       setOutput("");
       return;
     }
@@ -38,7 +40,7 @@ export function UrlEncoderDecoder() {
       setError(
         err instanceof Error
           ? err.message
-          : "Failed to process the input. Check for invalid percent-encoded sequences.",
+          : t("common.failedToProcess"),
       );
       setOutput("");
     }
@@ -56,7 +58,7 @@ export function UrlEncoderDecoder() {
                 : "text-slate-600 hover:bg-slate-100"
             }`}
           >
-            Encode
+            {t("common.encode")}
           </button>
           <button
             onClick={() => { setMode("decode"); setOutput(""); setError(null); }}
@@ -66,7 +68,7 @@ export function UrlEncoderDecoder() {
                 : "text-slate-600 hover:bg-slate-100"
             }`}
           >
-            Decode
+            {t("common.decode")}
           </button>
         </div>
 
@@ -99,7 +101,7 @@ export function UrlEncoderDecoder() {
           htmlFor="url-enc-input"
           className="mb-2 block text-sm font-medium text-slate-600"
         >
-          {mode === "encode" ? "Text to Encode" : "Text to Decode"}
+          {mode === "encode" ? t("common.textToEncode") : t("common.textToDecode")}
         </label>
         <textarea
           id="url-enc-input"
@@ -111,8 +113,8 @@ export function UrlEncoderDecoder() {
           }}
           placeholder={
             mode === "encode"
-              ? "Enter text or URL to encode…"
-              : "Enter percent-encoded text to decode…"
+              ? t("common.enterTextToEncodeUrl")
+              : t("common.enterPercentEncoded")
           }
           className="input-field min-h-[150px] resize-y font-mono text-sm"
           spellCheck={false}
@@ -121,9 +123,9 @@ export function UrlEncoderDecoder() {
 
       <div className="flex flex-wrap gap-3">
         <button onClick={process} className="btn-primary">
-          {mode === "encode" ? "Encode" : "Decode"}
+          {mode === "encode" ? t("common.encode") : t("common.decode")}
         </button>
-        {output && <CopyButton text={output} label="Result" />}
+        {output && <CopyButton text={output} label={t("common.result")} />}
         <button
           onClick={() => {
             setInput("");
@@ -133,7 +135,7 @@ export function UrlEncoderDecoder() {
           disabled={!input}
           className="btn-secondary"
         >
-          Clear
+          {t("common.clear")}
         </button>
       </div>
 
@@ -149,7 +151,7 @@ export function UrlEncoderDecoder() {
             htmlFor="url-enc-output"
             className="mb-2 block text-sm font-medium text-slate-600"
           >
-            Result
+            {t("common.result")}
           </label>
           <textarea
             id="url-enc-output"

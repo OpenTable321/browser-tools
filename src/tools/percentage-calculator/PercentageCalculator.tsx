@@ -1,17 +1,12 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslation } from "@/i18n/LanguageProvider";
 
 type CalcMode = "percentOf" | "isWhatPercent" | "percentChange" | "percentDifference";
 
-const MODES: { mode: CalcMode; label: string }[] = [
-  { mode: "percentOf", label: "X% of Y" },
-  { mode: "isWhatPercent", label: "X is what % of Y" },
-  { mode: "percentChange", label: "% Increase/Decrease" },
-  { mode: "percentDifference", label: "% Difference" },
-];
-
 export function PercentageCalculator() {
+  const { t } = useTranslation();
   const [mode, setMode] = useState<CalcMode>("percentOf");
   const [val1, setVal1] = useState("");
   const [val2, setVal2] = useState("");
@@ -26,7 +21,7 @@ export function PercentageCalculator() {
     const b = parseFloat(val2);
 
     if (isNaN(a) || isNaN(b)) {
-      setError("Please enter valid numbers in both fields.");
+      setError(t("common.pleaseEnterValidNumbersBoth"));
       return;
     }
 
@@ -38,7 +33,7 @@ export function PercentageCalculator() {
       }
       case "isWhatPercent": {
         if (b === 0) {
-          setError("The second value cannot be zero.");
+          setError(t("common.secondValueCannotBeZero"));
           return;
         }
         const pct = (a / b) * 100;
@@ -47,7 +42,7 @@ export function PercentageCalculator() {
       }
       case "percentChange": {
         if (b === 0) {
-          setError("The original value cannot be zero when calculating percentage change.");
+          setError(t("common.originalValueCannotBeZero"));
           return;
         }
         const change = ((a - b) / Math.abs(b)) * 100;
@@ -57,12 +52,12 @@ export function PercentageCalculator() {
       }
       case "percentDifference": {
         if (a === 0 && b === 0) {
-          setError("Both values cannot be zero.");
+          setError(t("common.bothValuesCannotBeZero"));
           return;
         }
         const avg = (a + b) / 2;
         if (avg === 0) {
-          setError("The average of both values cannot be zero.");
+          setError(t("common.averageCannotBeZero"));
           return;
         }
         const diff = (Math.abs(a - b) / Math.abs(avg)) * 100;
@@ -73,16 +68,23 @@ export function PercentageCalculator() {
   }
 
   const labels: Record<CalcMode, [string, string]> = {
-    percentOf: ["Percentage (X)", "Value (Y)"],
-    isWhatPercent: ["Value (X)", "Total (Y)"],
-    percentChange: ["New Value", "Original Value"],
-    percentDifference: ["Value 1", "Value 2"],
+    percentOf: [t("common.percentageX"), t("common.valueY")],
+    isWhatPercent: [t("common.valueX"), t("common.totalY")],
+    percentChange: [t("common.newValue"), t("common.originalValue")],
+    percentDifference: [t("common.value1"), t("common.value2")],
   };
+
+  const MODES: { mode: CalcMode; label: string }[] = [
+    { mode: "percentOf", label: "X% of Y" },
+    { mode: "isWhatPercent", label: "X is what % of Y" },
+    { mode: "percentChange", label: "% ↑/↓" },
+    { mode: "percentDifference", label: "% Δ" },
+  ];
 
   return (
     <div className="space-y-6">
       <div className="rounded-xl border border-slate-200 bg-white p-6">
-        <h3 className="mb-4 text-sm font-semibold text-slate-700">Calculation Type</h3>
+        <h3 className="mb-4 text-sm font-semibold text-slate-700">{t("common.calculationType")}</h3>
         <div className="flex flex-wrap gap-2">
           {MODES.map((m) => (
             <button
@@ -128,13 +130,13 @@ export function PercentageCalculator() {
 
         <div className="mt-6 flex flex-wrap gap-3">
           <button onClick={calculate} className="btn-primary">
-            Calculate
+            {t("common.calculate")}
           </button>
           <button
             onClick={() => { setVal1(""); setVal2(""); setResult(null); setError(null); }}
             className="btn-secondary"
           >
-            Clear
+            {t("common.clear")}
           </button>
         </div>
       </div>

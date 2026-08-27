@@ -2,6 +2,7 @@
 
 import { useState, useCallback } from "react";
 import { CopyButton } from "@/components/CopyButton";
+import { useTranslation } from "@/i18n/LanguageProvider";
 
 const WORDS = [
   "lorem", "ipsum", "dolor", "sit", "amet", "consectetur", "adipiscing", "elit",
@@ -70,6 +71,7 @@ function generateText(mode: GenMode, count: number): string {
 }
 
 export function LoremIpsumGenerator() {
+  const { t } = useTranslation();
   const [mode, setMode] = useState<GenMode>("paragraphs");
   const [count, setCount] = useState(3);
   const [output, setOutput] = useState("");
@@ -94,23 +96,23 @@ export function LoremIpsumGenerator() {
   return (
     <div className="space-y-6">
       <div className="rounded-xl border border-slate-200 bg-white p-6">
-        <h3 className="mb-4 text-sm font-semibold text-slate-700">Settings</h3>
+        <h3 className="mb-4 text-sm font-semibold text-slate-700">{t("common.settings")}</h3>
 
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
           <div>
-            <label className="mb-2 block text-sm font-medium text-slate-600">Generate</label>
+            <label className="mb-2 block text-sm font-medium text-slate-600">{t("common.generateLabel")}</label>
             <div className="flex flex-wrap gap-2">
               {(["paragraphs", "sentences", "words"] as GenMode[]).map((m) => (
                 <button
                   key={m}
                   onClick={() => setMode(m)}
-                  className={`rounded-lg px-4 py-2 text-sm font-medium capitalize transition ${
+                  className={`rounded-lg px-4 py-2 text-sm font-medium transition ${
                     mode === m
                       ? "bg-brand-600 text-white"
                       : "bg-slate-100 text-slate-700 hover:bg-slate-200"
                   }`}
                 >
-                  {m}
+                  {m === "paragraphs" ? t("common.paragraphsMode") : m === "sentences" ? t("common.sentencesMode") : t("common.wordsMode")}
                 </button>
               ))}
             </div>
@@ -118,7 +120,7 @@ export function LoremIpsumGenerator() {
 
           <div>
             <label htmlFor="lorem-count" className="mb-2 block text-sm font-medium text-slate-600">
-              Quantity: <span className="font-bold text-brand-600">{count}</span>
+              {t("common.quantity")}: <span className="font-bold text-brand-600">{count}</span>
             </label>
             <input
               id="lorem-count"
@@ -135,17 +137,17 @@ export function LoremIpsumGenerator() {
 
         <div className="mt-6 flex flex-wrap gap-3">
           <button onClick={generate} className="btn-primary">
-            Generate
+            {t("common.generate")}
           </button>
-          {output && <CopyButton text={output} label="Text" />}
+          {output && <CopyButton text={output} label={t("common.text")} />}
           {output && (
             <button onClick={handleDownload} className="btn-secondary">
-              Download TXT
+              {t("common.downloadTxt")}
             </button>
           )}
           {output && (
             <button onClick={() => setOutput("")} className="btn-secondary">
-              Clear
+              {t("common.clear")}
             </button>
           )}
         </div>
@@ -154,7 +156,7 @@ export function LoremIpsumGenerator() {
       {output && (
         <div>
           <label htmlFor="lorem-output" className="mb-2 block text-sm font-medium text-slate-600">
-            Result
+            {t("common.result")}
           </label>
           <textarea
             id="lorem-output"
@@ -168,14 +170,14 @@ export function LoremIpsumGenerator() {
       {!output && (
         <div className="flex min-h-[200px] items-center justify-center rounded-xl border-2 border-dashed border-slate-300 bg-slate-50">
           <p className="text-sm text-slate-400">
-            Click &ldquo;Generate&rdquo; to create Lorem Ipsum text
+            {t("common.clickGenerate")}
           </p>
         </div>
       )}
 
       {seed > 0 && (
         <p className="text-center text-xs text-slate-400">
-          Generated {count} {mode} · Click Generate again for new text
+          {t("common.generatedCount", { count, mode: mode === "paragraphs" ? t("common.paragraphsMode").toLowerCase() : mode === "sentences" ? t("common.sentencesMode").toLowerCase() : t("common.wordsMode").toLowerCase() })}
         </p>
       )}
     </div>

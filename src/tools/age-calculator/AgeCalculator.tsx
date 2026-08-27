@@ -1,8 +1,10 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslation } from "@/i18n/LanguageProvider";
 
 export function AgeCalculator() {
+  const { t } = useTranslation();
   const [dob, setDob] = useState("");
   const [result, setResult] = useState<{
     years: number;
@@ -20,13 +22,13 @@ export function AgeCalculator() {
     setResult(null);
 
     if (!dob) {
-      setError("Please select your date of birth.");
+      setError(t("common.pleaseSelectDob"));
       return;
     }
 
     const birthDate = new Date(dob);
     if (isNaN(birthDate.getTime())) {
-      setError("Invalid date of birth.");
+      setError(t("common.invalidDob"));
       return;
     }
 
@@ -34,7 +36,7 @@ export function AgeCalculator() {
     today.setHours(0, 0, 0, 0);
 
     if (birthDate > today) {
-      setError("Date of birth cannot be in the future.");
+      setError(t("common.dobCannotBeInFuture"));
       return;
     }
 
@@ -87,11 +89,11 @@ export function AgeCalculator() {
   return (
     <div className="space-y-6">
       <div className="rounded-xl border border-slate-200 bg-white p-6">
-        <h3 className="mb-4 text-sm font-semibold text-slate-700">Age Calculator</h3>
+        <h3 className="mb-4 text-sm font-semibold text-slate-700">{t("common.dateOfBirth")}</h3>
 
         <div>
           <label htmlFor="age-dob" className="mb-2 block text-sm font-medium text-slate-600">
-            Date of Birth
+            {t("common.dateOfBirth")}
           </label>
           <input
             id="age-dob"
@@ -104,7 +106,7 @@ export function AgeCalculator() {
 
         <div className="mt-6 flex flex-wrap gap-3">
           <button onClick={calculate} className="btn-primary">
-            Calculate Age
+            {t("common.calculateAge")}
           </button>
           <button
             onClick={() => {
@@ -114,7 +116,7 @@ export function AgeCalculator() {
             }}
             className="btn-secondary"
           >
-            Clear
+            {t("common.clear")}
           </button>
         </div>
       </div>
@@ -128,27 +130,27 @@ export function AgeCalculator() {
       {result && (
         <div className="space-y-4">
           <div className="rounded-lg border border-brand-200 bg-brand-50 p-6 text-center">
-            <p className="text-sm text-brand-600">Your Age</p>
+            <p className="text-sm text-brand-600">{t("common.yourAge")}</p>
             <p className="mt-2 text-3xl font-bold text-brand-700">
-              {result.years} years, {result.months} months, {result.days} days
+              {t("common.yearsMonthsDays", { years: result.years, months: result.months, days: result.days })}
             </p>
           </div>
 
           <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
             <div className="rounded-lg bg-slate-100 p-4 text-center">
-              <p className="text-xs text-slate-500">Total Days</p>
+              <p className="text-xs text-slate-500">{t("common.totalDays")}</p>
               <p className="mt-1 text-lg font-bold text-slate-900">
                 {result.totalDays.toLocaleString()}
               </p>
             </div>
             <div className="rounded-lg bg-slate-100 p-4 text-center">
-              <p className="text-xs text-slate-500">Total Weeks</p>
+              <p className="text-xs text-slate-500">{t("common.totalWeeks")}</p>
               <p className="mt-1 text-lg font-bold text-slate-900">
                 {result.totalWeeks.toLocaleString()}
               </p>
             </div>
             <div className="rounded-lg bg-slate-100 p-4 text-center">
-              <p className="text-xs text-slate-500">Total Months</p>
+              <p className="text-xs text-slate-500">{t("common.totalMonths")}</p>
               <p className="mt-1 text-lg font-bold text-slate-900">
                 {result.totalMonths.toLocaleString()}
               </p>
@@ -157,7 +159,7 @@ export function AgeCalculator() {
 
           <div className="rounded-lg border border-green-200 bg-green-50 p-4 text-center">
             <p className="text-sm text-green-700">
-              Next birthday: <strong>{result.nextBirthday.date}</strong> ({result.nextBirthday.days} days away)
+              {t("common.nextBirthday", { date: result.nextBirthday.date, days: result.nextBirthday.days })}
             </p>
           </div>
         </div>

@@ -2,16 +2,9 @@
 
 import { useState } from "react";
 import { CopyButton } from "@/components/CopyButton";
+import { useTranslation } from "@/i18n/LanguageProvider";
 
 type CaseType = "upper" | "lower" | "title" | "sentence" | "toggle";
-
-const CASE_LABELS: Record<CaseType, string> = {
-  upper: "UPPERCASE",
-  lower: "lowercase",
-  title: "Title Case",
-  sentence: "Sentence case",
-  toggle: "tOGGLE cASE",
-};
 
 function toTitleCase(str: string): string {
   return str.replace(/\w\S*/g, (txt) => txt.charAt(0).toUpperCase() + txt.slice(1).toLowerCase());
@@ -36,8 +29,17 @@ function convertCase(text: string, type: CaseType): string {
 }
 
 export function CaseConverter() {
+  const { t } = useTranslation();
   const [text, setText] = useState("");
   const [activeCase, setActiveCase] = useState<CaseType | null>(null);
+
+  const CASE_LABELS: Record<CaseType, string> = {
+    upper: t("common.uppercase"),
+    lower: t("common.lowercase"),
+    title: t("common.titleCase"),
+    sentence: t("common.sentenceCase"),
+    toggle: t("common.toggleCase"),
+  };
 
   const output = activeCase ? convertCase(text, activeCase) : "";
 
@@ -49,7 +51,7 @@ export function CaseConverter() {
     <div className="space-y-6">
       <div>
         <label htmlFor="case-input" className="mb-2 block text-sm font-medium text-slate-600">
-          Enter or paste your text
+          {t("common.enterOrPasteText")}
         </label>
         <textarea
           id="case-input"
@@ -58,13 +60,13 @@ export function CaseConverter() {
             setText(e.target.value);
             setActiveCase(null);
           }}
-          placeholder="Start typing or paste text here…"
+          placeholder={t("common.startTypingPlaceholder")}
           className="input-field min-h-[150px] resize-y font-mono text-sm"
         />
       </div>
 
       <div>
-        <h3 className="mb-3 text-sm font-semibold text-slate-700">Choose a case transformation</h3>
+        <h3 className="mb-3 text-sm font-semibold text-slate-700">{t("common.chooseCase")}</h3>
         <div className="flex flex-wrap gap-2">
           {(Object.keys(CASE_LABELS) as CaseType[]).map((type) => (
             <button
@@ -86,7 +88,7 @@ export function CaseConverter() {
       {activeCase && (
         <div>
           <label htmlFor="case-output" className="mb-2 block text-sm font-medium text-slate-600">
-            Result
+            {t("common.result")}
           </label>
           <textarea
             id="case-output"
@@ -98,7 +100,7 @@ export function CaseConverter() {
       )}
 
       <div className="flex flex-wrap gap-3">
-        {output && <CopyButton text={output} label="Result" />}
+        {output && <CopyButton text={output} label={t("common.result")} />}
         {output && (
           <button
             onClick={() => {
@@ -112,7 +114,7 @@ export function CaseConverter() {
             }}
             className="btn-secondary"
           >
-            Download TXT
+            {t("common.downloadTxt")}
           </button>
         )}
         <button
@@ -123,7 +125,7 @@ export function CaseConverter() {
           disabled={!text}
           className="btn-secondary"
         >
-          Clear
+          {t("common.clear")}
         </button>
       </div>
     </div>

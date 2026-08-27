@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
+import { useTranslation } from "@/i18n/LanguageProvider";
 import { ImageDropZone } from "@/components/ImageDropZone";
 import {
   formatBytes,
@@ -22,15 +23,15 @@ interface ResizeResult {
   height: number;
 }
 
-const PRESETS = [
-  { label: "Original", width: null as number | null, height: null as number | null },
-  { label: "1920×1080", width: 1920, height: 1080 },
-  { label: "1280×720", width: 1280, height: 720 },
-  { label: "800×600", width: 800, height: 600 },
-  { label: "640×480", width: 640, height: 480 },
-];
-
 export function ImageResizer() {
+  const { t } = useTranslation();
+  const PRESETS = [
+    { label: t("common.original"), width: null as number | null, height: null as number | null },
+    { label: "1920×1080", width: 1920, height: 1080 },
+    { label: "1280×720", width: 1280, height: 720 },
+    { label: "800×600", width: 800, height: 600 },
+    { label: "640×480", width: 640, height: 480 },
+  ];
   const [originalUrl, setOriginalUrl] = useState<string | null>(null);
   const [originalSize, setOriginalSize] = useState(0);
   const [originalWidth, setOriginalWidth] = useState(0);
@@ -73,7 +74,7 @@ export function ImageResizer() {
       setTargetHeight(img.naturalHeight);
       setResult(null);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Failed to load image.");
+      setError(err instanceof Error ? err.message : t("common.failedToLoadImage"));
     } finally {
       setIsProcessing(false);
     }
@@ -130,7 +131,7 @@ export function ImageResizer() {
     if (!img || !canvas) return;
 
     if (targetWidth <= 0 || targetHeight <= 0) {
-      setError("Width and height must be greater than 0.");
+      setError(t("common.widthHeightMustBePositive"));
       return;
     }
 
@@ -163,7 +164,7 @@ export function ImageResizer() {
         };
       });
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Failed to resize image.");
+      setError(err instanceof Error ? err.message : t("common.failedToResize"));
     } finally {
       setIsProcessing(false);
     }
@@ -202,8 +203,8 @@ export function ImageResizer() {
         <ImageDropZone
           onFileSelect={handleFileSelect}
           accept="image/jpeg,image/png,image/webp"
-          label="Drop an image here or click to upload"
-          hint="Supports JPG, PNG, and WebP — resized entirely in your browser"
+          label={t("common.dropImageHere")}
+          hint={t("common.resizedInBrowser")}
         />
       )}
 
@@ -226,13 +227,13 @@ export function ImageResizer() {
               onClick={handleReset}
               className="text-sm font-medium text-slate-500 transition hover:text-slate-700"
             >
-              ← Choose different image
+              {t("common.chooseDifferentImage")}
             </button>
           </div>
 
           <div className="rounded-xl border border-slate-200 bg-white p-6">
             <h3 className="mb-4 text-sm font-semibold text-slate-700">
-              Resize Settings
+              {t("common.resizeSettings")}
             </h3>
 
             <div className="mb-4 flex flex-wrap gap-2">
@@ -250,7 +251,7 @@ export function ImageResizer() {
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
               <div>
                 <label className="mb-2 block text-sm font-medium text-slate-600">
-                  Width (px)
+                  {t("common.widthPx")}
                 </label>
                 <input
                   type="number"
@@ -263,7 +264,7 @@ export function ImageResizer() {
 
               <div>
                 <label className="mb-2 block text-sm font-medium text-slate-600">
-                  Height (px)
+                  {t("common.heightPx")}
                 </label>
                 <input
                   type="number"
@@ -282,12 +283,12 @@ export function ImageResizer() {
                 onChange={(e) => setLockAspect(e.target.checked)}
                 className="h-4 w-4 rounded border-slate-300 accent-brand-600"
               />
-              Lock aspect ratio ({originalWidth > 0 ? (originalWidth / originalHeight).toFixed(2) : "—"})
+              {t("common.lockAspectRatio")} ({originalWidth > 0 ? (originalWidth / originalHeight).toFixed(2) : "—"})
             </label>
 
             <div className="mt-6 border-t border-slate-200 pt-6">
               <h3 className="mb-3 text-sm font-semibold text-slate-600">
-                Output Format
+                {t("common.outputFormat")}
               </h3>
               <div className="flex flex-wrap gap-2">
                 {(["image/png", "image/jpeg", "image/webp"] as OutputFormat[]).map((fmt) => (
@@ -308,7 +309,7 @@ export function ImageResizer() {
               {format !== "image/png" && (
                 <div className="mt-4">
                   <label className="mb-2 block text-sm font-medium text-slate-600">
-                    Quality:{" "}
+                    {t("common.quality")}: {" "}
                     <span className="font-bold text-brand-600">
                       {Math.round(quality * 100)}%
                     </span>
@@ -332,11 +333,11 @@ export function ImageResizer() {
                 disabled={isProcessing}
                 className="btn-primary"
               >
-                {isProcessing ? "Processing…" : "Resize Image"}
+                {isProcessing ? t("common.processing") : t("common.resizeImage")}
               </button>
               {result && (
                 <button onClick={handleDownload} className="btn-secondary">
-                  Download
+                  {t("common.download")}
                 </button>
               )}
             </div>
@@ -347,7 +348,7 @@ export function ImageResizer() {
               <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
                 <div className="rounded-xl border border-slate-200 bg-white p-4">
                   <h3 className="mb-3 text-sm font-semibold text-slate-700">
-                    Original ({originalWidth}×{originalHeight})
+                    {t("common.original")} ({originalWidth}×{originalHeight})
                   </h3>
                   <div
                     className="flex items-center justify-center overflow-hidden rounded-lg bg-slate-50"
@@ -367,7 +368,7 @@ export function ImageResizer() {
 
                 <div className="rounded-xl border border-slate-200 bg-white p-4">
                   <h3 className="mb-3 text-sm font-semibold text-slate-700">
-                    Resized ({result.width}×{result.height})
+                    {t("common.resized")} ({result.width}×{result.height})
                   </h3>
                   <div
                     className="flex items-center justify-center overflow-hidden rounded-lg bg-slate-50"
@@ -400,13 +401,13 @@ export function ImageResizer() {
 
               <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
                 <div className="rounded-lg bg-slate-100 p-4 text-center">
-                  <p className="text-xs text-slate-500">Original Size</p>
+                  <p className="text-xs text-slate-500">{t("common.originalSize")}</p>
                   <p className="mt-1 text-lg font-bold text-slate-900">
                     {formatBytes(result.originalSize)}
                   </p>
                 </div>
                 <div className="rounded-lg bg-slate-100 p-4 text-center">
-                  <p className="text-xs text-slate-500">Resized</p>
+                  <p className="text-xs text-slate-500">{t("common.resized")}</p>
                   <p className="mt-1 text-lg font-bold text-slate-900">
                     {formatBytes(result.resizedSize)}
                   </p>
@@ -421,7 +422,7 @@ export function ImageResizer() {
                       sizeDiff < 0 ? "text-green-600" : "text-amber-600"
                     }`}
                   >
-                    Change
+                    {t("common.change")}
                   </p>
                   <p
                     className={`mt-1 text-lg font-bold ${
@@ -433,7 +434,7 @@ export function ImageResizer() {
                   </p>
                 </div>
                 <div className="rounded-lg bg-slate-100 p-4 text-center">
-                  <p className="text-xs text-slate-500">New Dimensions</p>
+                  <p className="text-xs text-slate-500">{t("common.newDimensions")}</p>
                   <p className="mt-1 text-lg font-bold text-slate-900">
                     {result.width}×{result.height}
                   </p>

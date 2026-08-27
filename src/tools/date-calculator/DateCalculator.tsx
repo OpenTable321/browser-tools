@@ -1,10 +1,12 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslation } from "@/i18n/LanguageProvider";
 
 type CalcMode = "addSubtract" | "difference";
 
 export function DateCalculator() {
+  const { t } = useTranslation();
   const [mode, setMode] = useState<CalcMode>("addSubtract");
 
   const [startDate, setStartDate] = useState("");
@@ -26,19 +28,19 @@ export function DateCalculator() {
     setAddResult(null);
 
     if (!startDate) {
-      setError("Please select a start date.");
+      setError(t("common.pleaseSelectStartDate"));
       return;
     }
 
     const start = new Date(startDate);
     if (isNaN(start.getTime())) {
-      setError("Invalid start date.");
+      setError(t("common.invalidStartDate"));
       return;
     }
 
     const days = parseInt(daysToAdd, 10);
     if (isNaN(days)) {
-      setError("Please enter a valid number of days.");
+      setError(t("common.pleaseEnterValidDays"));
       return;
     }
 
@@ -60,14 +62,14 @@ export function DateCalculator() {
     setDiffResult(null);
 
     if (!startDate || !endDate) {
-      setError("Please select both start and end dates.");
+      setError(t("common.pleaseSelectBothDates"));
       return;
     }
 
     const start = new Date(startDate);
     const end = new Date(endDate);
     if (isNaN(start.getTime()) || isNaN(end.getTime())) {
-      setError("Invalid date(s).");
+      setError(t("common.invalidDates"));
       return;
     }
 
@@ -102,7 +104,7 @@ export function DateCalculator() {
   return (
     <div className="space-y-6">
       <div className="rounded-xl border border-slate-200 bg-white p-6">
-        <h3 className="mb-4 text-sm font-semibold text-slate-700">Calculation Mode</h3>
+        <h3 className="mb-4 text-sm font-semibold text-slate-700">{t("common.calculationMode")}</h3>
         <div className="flex flex-wrap gap-2">
           <button
             onClick={() => { setMode("addSubtract"); setError(null); setAddResult(null); setDiffResult(null); }}
@@ -110,7 +112,7 @@ export function DateCalculator() {
               mode === "addSubtract" ? "bg-brand-600 text-white" : "bg-slate-100 text-slate-700 hover:bg-slate-200"
             }`}
           >
-            Add / Subtract Days
+            {t("common.addSubtractDays")}
           </button>
           <button
             onClick={() => { setMode("difference"); setError(null); setAddResult(null); setDiffResult(null); }}
@@ -118,7 +120,7 @@ export function DateCalculator() {
               mode === "difference" ? "bg-brand-600 text-white" : "bg-slate-100 text-slate-700 hover:bg-slate-200"
             }`}
           >
-            Difference Between Dates
+            {t("common.differenceBetweenDates")}
           </button>
         </div>
       </div>
@@ -128,7 +130,7 @@ export function DateCalculator() {
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
             <div>
               <label htmlFor="date-start" className="mb-2 block text-sm font-medium text-slate-600">
-                Start Date
+                {t("common.startDate")}
               </label>
               <input
                 id="date-start"
@@ -140,7 +142,7 @@ export function DateCalculator() {
             </div>
             <div>
               <label htmlFor="date-days" className="mb-2 block text-sm font-medium text-slate-600">
-                Days to Add/Subtract
+                {t("common.daysToAddSubtract")}
               </label>
               <input
                 id="date-days"
@@ -151,20 +153,20 @@ export function DateCalculator() {
                 className="input-field"
               />
               <p className="mt-1 text-xs text-slate-400">
-                Use negative numbers to subtract days.
+                {t("common.useNegativeToSubtract")}
               </p>
             </div>
           </div>
 
           <div className="mt-6 flex flex-wrap gap-3">
             <button onClick={calculateAddSubtract} className="btn-primary">
-              Calculate
+              {t("common.calculate")}
             </button>
             <button
               onClick={() => { setStartDate(""); setDaysToAdd(""); setAddResult(null); setError(null); }}
               className="btn-secondary"
             >
-              Clear
+              {t("common.clear")}
             </button>
           </div>
         </div>
@@ -175,7 +177,7 @@ export function DateCalculator() {
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
             <div>
               <label htmlFor="date-diff-start" className="mb-2 block text-sm font-medium text-slate-600">
-                Start Date
+                {t("common.startDate")}
               </label>
               <input
                 id="date-diff-start"
@@ -187,7 +189,7 @@ export function DateCalculator() {
             </div>
             <div>
               <label htmlFor="date-diff-end" className="mb-2 block text-sm font-medium text-slate-600">
-                End Date
+                {t("common.endDate")}
               </label>
               <input
                 id="date-diff-end"
@@ -201,13 +203,13 @@ export function DateCalculator() {
 
           <div className="mt-6 flex flex-wrap gap-3">
             <button onClick={calculateDifference} className="btn-primary">
-              Calculate Difference
+              {t("common.calculateDifference")}
             </button>
             <button
               onClick={() => { setStartDate(""); setEndDate(""); setDiffResult(null); setError(null); }}
               className="btn-secondary"
             >
-              Clear
+              {t("common.clear")}
             </button>
           </div>
         </div>
@@ -221,7 +223,7 @@ export function DateCalculator() {
 
       {addResult && (
         <div className="rounded-lg border border-green-200 bg-green-50 px-4 py-4 text-center">
-          <p className="text-sm text-green-600">Result Date</p>
+          <p className="text-sm text-green-600">{t("common.resultDate")}</p>
           <p className="mt-1 text-xl font-bold text-green-700">{addResult}</p>
         </div>
       )}
@@ -229,19 +231,19 @@ export function DateCalculator() {
       {diffResult && (
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
           <div className="rounded-lg bg-slate-100 p-4 text-center">
-            <p className="text-xs text-slate-500">Days</p>
+            <p className="text-xs text-slate-500">{t("common.days")}</p>
             <p className="mt-1 text-lg font-bold text-slate-900">{diffResult.days}</p>
           </div>
           <div className="rounded-lg bg-slate-100 p-4 text-center">
-            <p className="text-xs text-slate-500">Weeks</p>
+            <p className="text-xs text-slate-500">{t("common.weeks")}</p>
             <p className="mt-1 text-lg font-bold text-slate-900">{diffResult.weeks}</p>
           </div>
           <div className="rounded-lg bg-slate-100 p-4 text-center">
-            <p className="text-xs text-slate-500">Months</p>
+            <p className="text-xs text-slate-500">{t("common.months")}</p>
             <p className="mt-1 text-lg font-bold text-slate-900">{diffResult.months}</p>
           </div>
           <div className="rounded-lg bg-slate-100 p-4 text-center">
-            <p className="text-xs text-slate-500">Years</p>
+            <p className="text-xs text-slate-500">{t("common.years")}</p>
             <p className="mt-1 text-lg font-bold text-slate-900">{diffResult.years}</p>
           </div>
         </div>

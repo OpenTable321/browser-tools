@@ -1,8 +1,10 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslation } from "@/i18n/LanguageProvider";
 
 export function DiscountCalculator() {
+  const { t } = useTranslation();
   const [originalPrice, setOriginalPrice] = useState("");
   const [discountPercent, setDiscountPercent] = useState("");
   const [result, setResult] = useState<{
@@ -21,19 +23,19 @@ export function DiscountCalculator() {
     const discount = parseFloat(discountPercent);
 
     if (isNaN(price)) {
-      setError("Please enter a valid original price.");
+      setError(t("common.pleaseEnterValidOriginalPrice"));
       return;
     }
     if (isNaN(discount)) {
-      setError("Please enter a valid discount percentage.");
+      setError(t("common.pleaseEnterValidDiscount"));
       return;
     }
     if (price < 0) {
-      setError("Original price cannot be negative.");
+      setError(t("common.originalPriceCannotBeNegative"));
       return;
     }
     if (discount < 0 || discount > 100) {
-      setError("Discount percentage must be between 0 and 100.");
+      setError(t("common.discountMustBeBetween0And100"));
       return;
     }
 
@@ -56,7 +58,7 @@ export function DiscountCalculator() {
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
           <div>
             <label htmlFor="discount-price" className="mb-2 block text-sm font-medium text-slate-600">
-              Original Price
+              {t("common.originalPrice")}
             </label>
             <input
               id="discount-price"
@@ -71,7 +73,7 @@ export function DiscountCalculator() {
           </div>
           <div>
             <label htmlFor="discount-percent" className="mb-2 block text-sm font-medium text-slate-600">
-              Discount (%)
+              {t("common.discountPercent")}
             </label>
             <input
               id="discount-percent"
@@ -89,7 +91,7 @@ export function DiscountCalculator() {
 
         <div className="mt-6 flex flex-wrap gap-3">
           <button onClick={calculate} className="btn-primary">
-            Calculate
+            {t("common.calculate")}
           </button>
           <button
             onClick={() => {
@@ -100,7 +102,7 @@ export function DiscountCalculator() {
             }}
             className="btn-secondary"
           >
-            Clear
+            {t("common.clear")}
           </button>
         </div>
       </div>
@@ -114,22 +116,22 @@ export function DiscountCalculator() {
       {result && (
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
           <div className="rounded-lg bg-slate-100 p-6 text-center">
-            <p className="text-xs text-slate-500">Original Price</p>
+            <p className="text-xs text-slate-500">{t("common.originalPrice")}</p>
             <p className="mt-1 text-2xl font-bold text-slate-900">
               {result.originalPrice.toFixed(2)}
             </p>
           </div>
           <div className="rounded-lg bg-green-50 p-6 text-center">
-            <p className="text-xs text-green-600">You Save</p>
+            <p className="text-xs text-green-600">{t("common.youSave")}</p>
             <p className="mt-1 text-2xl font-bold text-green-700">
               {result.savings.toFixed(2)}
             </p>
             <p className="mt-1 text-xs text-green-600">
-              {result.discountPercent}% off
+              {result.discountPercent}{t("common.offLabel")}
             </p>
           </div>
           <div className="rounded-lg bg-brand-50 p-6 text-center">
-            <p className="text-xs text-brand-600">Final Price</p>
+            <p className="text-xs text-brand-600">{t("common.finalPrice")}</p>
             <p className="mt-1 text-2xl font-bold text-brand-700">
               {result.finalPrice.toFixed(2)}
             </p>

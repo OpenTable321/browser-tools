@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
+import { useTranslation } from "@/i18n/LanguageProvider";
 import { ImageDropZone } from "@/components/ImageDropZone";
 import {
   formatBytes,
@@ -37,6 +38,7 @@ interface ImageFormatConverterProps {
 }
 
 export function ImageFormatConverter({ config }: ImageFormatConverterProps) {
+  const { t } = useTranslation();
   const [originalUrl, setOriginalUrl] = useState<string | null>(null);
   const [originalSize, setOriginalSize] = useState(0);
   const [fileName, setFileName] = useState("");
@@ -91,7 +93,7 @@ export function ImageFormatConverter({ config }: ImageFormatConverterProps) {
         };
       });
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Failed to process image.");
+      setError(err instanceof Error ? err.message : t("common.failedToProcessImage"));
     } finally {
       setIsProcessing(false);
     }
@@ -122,7 +124,7 @@ export function ImageFormatConverter({ config }: ImageFormatConverterProps) {
         };
       });
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Failed to process image.");
+      setError(err instanceof Error ? err.message : t("common.failedToProcessImage"));
     } finally {
       setIsProcessing(false);
     }
@@ -180,14 +182,14 @@ export function ImageFormatConverter({ config }: ImageFormatConverterProps) {
               onClick={handleReset}
               className="text-sm font-medium text-slate-500 transition hover:text-slate-700"
             >
-              ← Choose different image
+              {t("common.chooseDifferentImage")}
             </button>
           </div>
 
           <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
             <div className="rounded-xl border border-slate-200 bg-white p-4">
               <h3 className="mb-3 text-sm font-semibold text-slate-700">
-                Original
+                {t("common.original")}
               </h3>
               <div
                 className="flex items-center justify-center overflow-hidden rounded-lg bg-slate-50"
@@ -221,7 +223,7 @@ export function ImageFormatConverter({ config }: ImageFormatConverterProps) {
                     className="max-h-64 object-contain"
                   />
                 ) : (
-                  <p className="text-sm text-slate-400">Processing…</p>
+                  <p className="text-sm text-slate-400">{t("common.processing")}</p>
                 )}
               </div>
               <p className="mt-3 text-center text-sm text-slate-600">
@@ -245,12 +247,12 @@ export function ImageFormatConverter({ config }: ImageFormatConverterProps) {
           {config.supportsQuality && (
             <div className="rounded-xl border border-slate-200 bg-white p-6">
               <h3 className="mb-4 text-sm font-semibold text-slate-700">
-                Quality Settings
+                {t("common.qualitySettings")}
               </h3>
 
               <div>
                 <label className="mb-2 block text-sm font-medium text-slate-600">
-                  Quality:{" "}
+                  {t("common.quality")}: {" "}
                   <span className="font-bold text-brand-600">
                     {Math.round(quality * 100)}%
                   </span>
@@ -265,8 +267,8 @@ export function ImageFormatConverter({ config }: ImageFormatConverterProps) {
                   className="w-full accent-brand-600"
                 />
                 <div className="mt-1 flex justify-between text-xs text-slate-400">
-                  <span>Smaller file</span>
-                  <span>Better quality</span>
+                  <span>{t("common.smallerFile")}</span>
+                  <span>{t("common.betterQuality")}</span>
                 </div>
               </div>
             </div>
@@ -278,11 +280,11 @@ export function ImageFormatConverter({ config }: ImageFormatConverterProps) {
               disabled={isProcessing}
               className="btn-primary"
             >
-              {isProcessing ? "Processing…" : "Convert Again"}
+              {isProcessing ? t("common.processing") : t("common.convertAgain")}
             </button>
             {result && (
               <button onClick={handleDownload} className="btn-secondary">
-                Download {config.outputExtension.toUpperCase()}
+                {t("common.download")} {config.outputExtension.toUpperCase()}
               </button>
             )}
           </div>
@@ -290,13 +292,13 @@ export function ImageFormatConverter({ config }: ImageFormatConverterProps) {
           {result && (
             <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
               <div className="rounded-lg bg-slate-100 p-4 text-center">
-                <p className="text-xs text-slate-500">Original</p>
+                <p className="text-xs text-slate-500">{t("common.original")}</p>
                 <p className="mt-1 text-lg font-bold text-slate-900">
                   {formatBytes(result.originalSize)}
                 </p>
               </div>
               <div className="rounded-lg bg-slate-100 p-4 text-center">
-                <p className="text-xs text-slate-500">Converted</p>
+                <p className="text-xs text-slate-500">{t("common.converted")}</p>
                 <p className="mt-1 text-lg font-bold text-slate-900">
                   {formatBytes(result.convertedSize)}
                 </p>
@@ -311,7 +313,7 @@ export function ImageFormatConverter({ config }: ImageFormatConverterProps) {
                     sizeDiff < 0 ? "text-green-600" : "text-amber-600"
                   }`}
                 >
-                  Change
+                  {t("common.change")}
                 </p>
                 <p
                   className={`mt-1 text-lg font-bold ${
@@ -323,7 +325,7 @@ export function ImageFormatConverter({ config }: ImageFormatConverterProps) {
                 </p>
               </div>
               <div className="rounded-lg bg-slate-100 p-4 text-center">
-                <p className="text-xs text-slate-500">Dimensions</p>
+                <p className="text-xs text-slate-500">{t("common.dimensions")}</p>
                 <p className="mt-1 text-lg font-bold text-slate-900">
                   {result.width}×{result.height}
                 </p>

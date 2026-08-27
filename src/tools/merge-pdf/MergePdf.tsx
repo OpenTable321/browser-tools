@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslation } from "@/i18n/LanguageProvider";
 import { MultiFileDropZone } from "@/components/MultiFileDropZone";
 import {
   formatBytes,
@@ -18,6 +19,7 @@ interface PdfItem {
 }
 
 export function MergePdf() {
+  const { t } = useTranslation();
   const [pdfs, setPdfs] = useState<PdfItem[]>([]);
   const [isProcessing, setIsProcessing] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -28,7 +30,7 @@ export function MergePdf() {
     setError(null);
 
     if (pdfs.length + files.length > MAX_MERGE_FILES) {
-      setError(`Maximum ${MAX_MERGE_FILES} PDF files allowed.`);
+      setError(t("common.maxPdfsAllowed", { count: MAX_MERGE_FILES }));
       return;
     }
 
@@ -44,7 +46,7 @@ export function MergePdf() {
       pdfs.reduce((sum, p) => sum + p.file.size, 0) +
       files.reduce((sum, f) => sum + f.size, 0);
     if (totalSize > MAX_TOTAL_MERGE_SIZE) {
-      setError(`Total file size exceeds ${formatBytes(MAX_TOTAL_MERGE_SIZE)}.`);
+      setError(t("common.totalSizeExceeds", { size: formatBytes(MAX_TOTAL_MERGE_SIZE) }));
       return;
     }
 
@@ -62,7 +64,7 @@ export function MergePdf() {
       }
       setPdfs((prev) => [...prev, ...newItems]);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Failed to load PDF files.");
+      setError(err instanceof Error ? err.message : t("common.failedToLoadPdfFiles"));
     } finally {
       setIsLoading(false);
     }
@@ -96,7 +98,7 @@ export function MergePdf() {
       });
       downloadPdfBytes(merged, "merged.pdf");
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Failed to merge PDFs.");
+      setError(err instanceof Error ? err.message : t("common.failedToMergePdfs"));
     } finally {
       setIsProcessing(false);
     }
@@ -115,8 +117,8 @@ export function MergePdf() {
         <MultiFileDropZone
           onFilesSelected={handleFilesSelected}
           accept="application/pdf,.pdf"
-          label="Drop PDF files here or click to upload"
-          hint="Multiple PDFs merged into one file in your browser"
+          label={t("common.dropPdfsHere")}
+          hint={t("common.mergedInBrowser")}
           maxFiles={MAX_MERGE_FILES}
         />
       )}
@@ -129,7 +131,7 @@ export function MergePdf() {
 
       {isLoading && (
         <div className="rounded-lg border border-brand-200 bg-brand-50 px-4 py-3 text-sm text-brand-700">
-          Loading PDF files…
+          {t("common.loadingPdfFiles")}
         </div>
       )}
 
@@ -137,16 +139,16 @@ export function MergePdf() {
         <div className="space-y-6">
           <div className="flex items-center justify-between">
             <p className="text-sm font-medium text-slate-700">
-              {pdfs.length} PDF{pdfs.length > 1 ? "s" : ""} selected
+              {t("common.pdfsSelected", { count: pdfs.length })}
               {totalPages > 0 && (
-                <span className="text-slate-400"> ({totalPages} pages total)</span>
+                <span className="text-slate-400"> ({t("common.pagesTotal", { count: totalPages })})</span>
               )}
             </p>
             <button
               onClick={handleReset}
               className="text-sm font-medium text-slate-500 transition hover:text-slate-700"
             >
-              ← Start over
+              {t("common.startOver")}
             </button>
           </div>
 
@@ -165,7 +167,7 @@ export function MergePdf() {
                   </p>
                   <p className="text-xs text-slate-400">
                     {formatBytes(pdf.file.size)}
-                    {pdf.pageCount !== null && ` · ${pdf.pageCount} pages`}
+                    {pdf.pageCount !== null && ` · ${t("common.pagesLabel", { count: pdf.pageCount })}`}
                   </p>
                 </div>
                 <div className="flex flex-shrink-0 gap-1">
@@ -207,8 +209,8 @@ export function MergePdf() {
             <MultiFileDropZone
               onFilesSelected={handleFilesSelected}
               accept="application/pdf,.pdf"
-              label="Add more PDFs"
-              hint="Click or drop to add"
+              label={t("common.addMorePdfs")}
+              hint={t("common.clickOrDropToAdd")}
               maxFiles={MAX_MERGE_FILES}
             />
           </div>
@@ -216,7 +218,7 @@ export function MergePdf() {
           {isProcessing && (
             <div className="rounded-lg border border-brand-200 bg-brand-50 px-4 py-3">
               <div className="flex items-center justify-between text-sm font-medium text-brand-700">
-                <span>Merging PDFs…</span>
+                <span>{t("common.mergingPdfs")}</span>
                 <span>{progress.current}/{progress.total}</span>
               </div>
               <div className="mt-2 h-2 overflow-hidden rounded-full bg-brand-100">
@@ -234,11 +236,11 @@ export function MergePdf() {
               disabled={isProcessing || pdfs.length < 2}
               className="btn-primary"
             >
-              {isProcessing ? "Merging…" : `Merge ${pdfs.length} PDFs`}
+              {isProcessing ? t("common.merging") : t("common.mergePdfs", { count: pdfs.length })}
             </button>
             {pdfs.length < 2 && (
               <p className="self-center text-sm text-slate-400">
-                Add at least 2 PDFs to merge
+                {t("common.addAtLeast2")}
               </p>
             )}
           </div>

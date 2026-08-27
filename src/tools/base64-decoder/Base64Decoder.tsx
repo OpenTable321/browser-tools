@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { CopyButton } from "@/components/CopyButton";
+import { useTranslation } from "@/i18n/LanguageProvider";
 
 function decodeBase64(base64: string): string {
   const binary = atob(base64.trim());
@@ -13,6 +14,7 @@ function decodeBase64(base64: string): string {
 }
 
 export function Base64Decoder() {
+  const { t } = useTranslation();
   const [input, setInput] = useState("");
   const [output, setOutput] = useState("");
   const [error, setError] = useState<string | null>(null);
@@ -20,14 +22,14 @@ export function Base64Decoder() {
   function decode() {
     setError(null);
     if (!input.trim()) {
-      setError("Please enter Base64 text to decode.");
+      setError(t("common.pleaseEnterBase64"));
       setOutput("");
       return;
     }
     try {
       setOutput(decodeBase64(input));
     } catch {
-      setError("Invalid Base64 input. Please check your text and try again.");
+      setError(t("common.invalidBase64"));
       setOutput("");
     }
   }
@@ -36,13 +38,13 @@ export function Base64Decoder() {
     <div className="space-y-6">
       <div>
         <label htmlFor="b64-dec-input" className="mb-2 block text-sm font-medium text-slate-600">
-          Base64 Text to Decode
+          {t("common.textToDecode")}
         </label>
         <textarea
           id="b64-dec-input"
           value={input}
           onChange={(e) => { setInput(e.target.value); setOutput(""); setError(null); }}
-          placeholder="Enter Base64 encoded text…"
+          placeholder={t("common.enterBase64ToDecode")}
           className="input-field min-h-[150px] resize-y font-mono text-sm"
           spellCheck={false}
         />
@@ -50,15 +52,15 @@ export function Base64Decoder() {
 
       <div className="flex flex-wrap gap-3">
         <button onClick={decode} className="btn-primary">
-          Decode from Base64
+          {t("common.decodeFromBase64")}
         </button>
-        {output && <CopyButton text={output} label="Text" />}
+        {output && <CopyButton text={output} label={t("common.text")} />}
         <button
           onClick={() => { setInput(""); setOutput(""); setError(null); }}
           disabled={!input}
           className="btn-secondary"
         >
-          Clear
+          {t("common.clear")}
         </button>
       </div>
 
@@ -71,7 +73,7 @@ export function Base64Decoder() {
       {output && (
         <div>
           <label htmlFor="b64-dec-output" className="mb-2 block text-sm font-medium text-slate-600">
-            Decoded Text
+            {t("common.decodedText")}
           </label>
           <textarea
             id="b64-dec-output"

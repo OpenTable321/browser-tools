@@ -2,8 +2,10 @@
 
 import { useMemo, useState } from "react";
 import { CopyButton } from "@/components/CopyButton";
+import { useTranslation } from "@/i18n/LanguageProvider";
 
 export function WordCounter() {
+  const { t } = useTranslation();
   const [text, setText] = useState("");
 
   const stats = useMemo(() => {
@@ -19,25 +21,25 @@ export function WordCounter() {
   }, [text]);
 
   const statCards = [
-    { label: "Words", value: stats.words },
-    { label: "Characters", value: stats.characters },
-    { label: "Characters (no spaces)", value: stats.charactersNoSpaces },
-    { label: "Sentences", value: stats.sentences },
-    { label: "Paragraphs", value: stats.paragraphs },
-    { label: "Reading Time", value: `${stats.readingTime} min` },
+    { label: t("common.words"), value: stats.words },
+    { label: t("common.characters"), value: stats.characters },
+    { label: t("common.charactersNoSpaces"), value: stats.charactersNoSpaces },
+    { label: t("common.sentences"), value: stats.sentences },
+    { label: t("common.paragraphs"), value: stats.paragraphs },
+    { label: t("common.readingTime"), value: `${stats.readingTime} ${t("common.min")}` },
   ];
 
   return (
     <div className="space-y-6">
       <div>
         <label htmlFor="word-counter-input" className="mb-2 block text-sm font-medium text-slate-600">
-          Enter or paste your text
+          {t("common.enterOrPasteText")}
         </label>
         <textarea
           id="word-counter-input"
           value={text}
           onChange={(e) => setText(e.target.value)}
-          placeholder="Start typing or paste text here…"
+          placeholder={t("common.startTypingPlaceholder")}
           className="input-field min-h-[200px] resize-y font-mono text-sm"
           aria-describedby="word-counter-stats"
         />
@@ -53,13 +55,13 @@ export function WordCounter() {
       </div>
 
       <div className="flex flex-wrap gap-3">
-        <CopyButton text={text} label="Text" />
+        <CopyButton text={text} label={t("common.text")} />
         <button
           onClick={() => setText("")}
           disabled={!text}
           className="btn-secondary"
         >
-          Clear
+          {t("common.clear")}
         </button>
       </div>
     </div>

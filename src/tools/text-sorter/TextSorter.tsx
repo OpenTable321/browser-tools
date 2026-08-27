@@ -2,11 +2,13 @@
 
 import { useMemo, useState } from "react";
 import { CopyButton } from "@/components/CopyButton";
+import { useTranslation } from "@/i18n/LanguageProvider";
 
 type SortOrder = "asc" | "desc";
 type SortMode = "alphabetical" | "numeric";
 
 export function TextSorter() {
+  const { t } = useTranslation();
   const [text, setText] = useState("");
   const [order, setOrder] = useState<SortOrder>("asc");
   const [mode, setMode] = useState<SortMode>("alphabetical");
@@ -60,23 +62,23 @@ export function TextSorter() {
     <div className="space-y-6">
       <div>
         <label htmlFor="sorter-input" className="mb-2 block text-sm font-medium text-slate-600">
-          Enter or paste lines to sort
+          {t("common.enterLinesToSort")}
         </label>
         <textarea
           id="sorter-input"
           value={text}
           onChange={(e) => setText(e.target.value)}
-          placeholder="Paste one item per line…"
+          placeholder={t("common.pasteOneItemPerLine")}
           className="input-field min-h-[150px] resize-y font-mono text-sm"
         />
       </div>
 
       <div className="rounded-xl border border-slate-200 bg-white p-6">
-        <h3 className="mb-4 text-sm font-semibold text-slate-700">Sort Settings</h3>
+        <h3 className="mb-4 text-sm font-semibold text-slate-700">{t("common.sortSettings")}</h3>
 
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
           <div>
-            <label className="mb-2 block text-sm font-medium text-slate-600">Sort Mode</label>
+            <label className="mb-2 block text-sm font-medium text-slate-600">{t("common.sortMode")}</label>
             <div className="flex flex-wrap gap-2">
               <button
                 onClick={() => setMode("alphabetical")}
@@ -84,7 +86,7 @@ export function TextSorter() {
                   mode === "alphabetical" ? "bg-brand-600 text-white" : "bg-slate-100 text-slate-700 hover:bg-slate-200"
                 }`}
               >
-                Alphabetical
+                {t("common.sortAlphabetical")}
               </button>
               <button
                 onClick={() => setMode("numeric")}
@@ -92,13 +94,13 @@ export function TextSorter() {
                   mode === "numeric" ? "bg-brand-600 text-white" : "bg-slate-100 text-slate-700 hover:bg-slate-200"
                 }`}
               >
-                Numeric
+                {t("common.sortNumerical")}
               </button>
             </div>
           </div>
 
           <div>
-            <label className="mb-2 block text-sm font-medium text-slate-600">Order</label>
+            <label className="mb-2 block text-sm font-medium text-slate-600">{t("common.orderLabel")}</label>
             <div className="flex gap-2">
               <button
                 onClick={() => setOrder("asc")}
@@ -106,7 +108,7 @@ export function TextSorter() {
                   order === "asc" ? "bg-brand-600 text-white" : "bg-slate-100 text-slate-700 hover:bg-slate-200"
                 }`}
               >
-                {mode === "alphabetical" ? "A–Z" : "Ascending"}
+                {mode === "alphabetical" ? "A–Z" : t("common.sortAscending")}
               </button>
               <button
                 onClick={() => setOrder("desc")}
@@ -114,7 +116,7 @@ export function TextSorter() {
                   order === "desc" ? "bg-brand-600 text-white" : "bg-slate-100 text-slate-700 hover:bg-slate-200"
                 }`}
               >
-                {mode === "alphabetical" ? "Z–A" : "Descending"}
+                {mode === "alphabetical" ? "Z–A" : t("common.sortDescending")}
               </button>
             </div>
           </div>
@@ -128,7 +130,7 @@ export function TextSorter() {
               onChange={(e) => setCaseSensitive(e.target.checked)}
               className="h-4 w-4 rounded border-slate-300 accent-brand-600"
             />
-            Case sensitive
+            {t("common.caseSensitive")}
           </label>
           <label className="flex items-center gap-2 text-sm text-slate-600">
             <input
@@ -137,7 +139,7 @@ export function TextSorter() {
               onChange={(e) => setTrimLines(e.target.checked)}
               className="h-4 w-4 rounded border-slate-300 accent-brand-600"
             />
-            Trim lines
+            {t("common.trimLines")}
           </label>
           <label className="flex items-center gap-2 text-sm text-slate-600">
             <input
@@ -146,7 +148,7 @@ export function TextSorter() {
               onChange={(e) => setRemoveEmpty(e.target.checked)}
               className="h-4 w-4 rounded border-slate-300 accent-brand-600"
             />
-            Remove empty lines
+            {t("common.removeEmptyLines")}
           </label>
           <label className="flex items-center gap-2 text-sm text-slate-600">
             <input
@@ -155,14 +157,14 @@ export function TextSorter() {
               onChange={(e) => setRemoveDuplicates(e.target.checked)}
               className="h-4 w-4 rounded border-slate-300 accent-brand-600"
             />
-            Remove duplicates
+            {t("common.removeDuplicates")}
           </label>
         </div>
       </div>
 
       <div>
         <label htmlFor="sorter-output" className="mb-2 block text-sm font-medium text-slate-600">
-          Sorted Result
+          {t("common.sortedResult")}
         </label>
         <textarea
           id="sorter-output"
@@ -173,13 +175,13 @@ export function TextSorter() {
       </div>
 
       <div className="flex flex-wrap gap-3">
-        {result && <CopyButton text={result} label="Result" />}
+        {result && <CopyButton text={result} label={t("common.result")} />}
         <button
           onClick={() => setText("")}
           disabled={!text}
           className="btn-secondary"
         >
-          Clear
+          {t("common.clear")}
         </button>
       </div>
     </div>

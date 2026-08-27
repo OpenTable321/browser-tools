@@ -1,10 +1,12 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useTranslation } from "@/i18n/LanguageProvider";
 
 type QrMode = "text" | "url" | "wifi" | "email";
 
 export function QrCodeGenerator() {
+  const { t } = useTranslation();
   const [mode, setMode] = useState<QrMode>("text");
   const [text, setText] = useState("");
   const [url, setUrl] = useState("");
@@ -83,7 +85,7 @@ export function QrCodeGenerator() {
         }
       } catch (err) {
         if (!cancelled) {
-          setError(err instanceof Error ? err.message : "Failed to generate QR code.");
+          setError(err instanceof Error ? err.message : t("common.error"));
           setDataUrl(null);
           setSvgString(null);
         }
@@ -131,13 +133,13 @@ export function QrCodeGenerator() {
   return (
     <div className="space-y-6">
       <div className="rounded-xl border border-slate-200 bg-white p-6">
-        <h3 className="mb-4 text-sm font-semibold text-slate-700">QR Code Type</h3>
+        <h3 className="mb-4 text-sm font-semibold text-slate-700">{t("common.qrCodeType")}</h3>
         <div className="flex flex-wrap gap-2">
           {([
-            { m: "text" as QrMode, label: "Text" },
-            { m: "url" as QrMode, label: "URL" },
-            { m: "wifi" as QrMode, label: "WiFi" },
-            { m: "email" as QrMode, label: "Email" },
+            { m: "text" as QrMode, label: t("common.textLabel") },
+            { m: "url" as QrMode, label: t("common.urlLabel") },
+            { m: "wifi" as QrMode, label: t("common.wifiLabel") },
+            { m: "email" as QrMode, label: t("common.emailLabel") },
           ]).map(({ m, label }) => (
             <button
               key={m}
@@ -155,13 +157,13 @@ export function QrCodeGenerator() {
       {mode === "text" && (
         <div>
           <label htmlFor="qr-text" className="mb-2 block text-sm font-medium text-slate-600">
-            Text to encode
+            {t("common.textToEncode")}
           </label>
           <textarea
             id="qr-text"
             value={text}
             onChange={(e) => setText(e.target.value)}
-            placeholder="Enter any text…"
+            placeholder={t("common.enterAnyText")}
             className="input-field min-h-[100px] resize-y text-sm"
           />
         </div>
@@ -170,7 +172,7 @@ export function QrCodeGenerator() {
       {mode === "url" && (
         <div>
           <label htmlFor="qr-url" className="mb-2 block text-sm font-medium text-slate-600">
-            URL to encode
+            {t("common.urlToEncode")}
           </label>
           <input
             id="qr-url"
@@ -187,7 +189,7 @@ export function QrCodeGenerator() {
         <div className="space-y-4">
           <div>
             <label htmlFor="qr-wifi-ssid" className="mb-2 block text-sm font-medium text-slate-600">
-              Network Name (SSID)
+              {t("common.networkName")}
             </label>
             <input
               id="qr-wifi-ssid"
@@ -200,20 +202,20 @@ export function QrCodeGenerator() {
           </div>
           <div>
             <label htmlFor="qr-wifi-pass" className="mb-2 block text-sm font-medium text-slate-600">
-              Password
+              {t("common.password")}
             </label>
             <input
               id="qr-wifi-pass"
               type="text"
               value={wifiPassword}
               onChange={(e) => setWifiPassword(e.target.value)}
-              placeholder="WiFi password"
+              placeholder={t("common.wifiPasswordPlaceholder")}
               className="input-field"
             />
           </div>
           <div>
             <label htmlFor="qr-wifi-enc" className="mb-2 block text-sm font-medium text-slate-600">
-              Encryption
+              {t("common.encryption")}
             </label>
             <select
               id="qr-wifi-enc"
@@ -223,7 +225,7 @@ export function QrCodeGenerator() {
             >
               <option value="WPA">WPA/WPA2</option>
               <option value="WEP">WEP</option>
-              <option value="nopass">No password</option>
+              <option value="nopass">{t("common.noPassword")}</option>
             </select>
           </div>
         </div>
@@ -233,7 +235,7 @@ export function QrCodeGenerator() {
         <div className="space-y-4">
           <div>
             <label htmlFor="qr-email-addr" className="mb-2 block text-sm font-medium text-slate-600">
-              Email Address
+              {t("common.emailAddress")}
             </label>
             <input
               id="qr-email-addr"
@@ -246,26 +248,26 @@ export function QrCodeGenerator() {
           </div>
           <div>
             <label htmlFor="qr-email-subject" className="mb-2 block text-sm font-medium text-slate-600">
-              Subject (optional)
+              {t("common.subjectOptional")}
             </label>
             <input
               id="qr-email-subject"
               type="text"
               value={emailSubject}
               onChange={(e) => setEmailSubject(e.target.value)}
-              placeholder="Email subject"
+              placeholder={t("common.emailSubjectPlaceholder")}
               className="input-field"
             />
           </div>
           <div>
             <label htmlFor="qr-email-body" className="mb-2 block text-sm font-medium text-slate-600">
-              Body (optional)
+              {t("common.bodyOptional")}
             </label>
             <textarea
               id="qr-email-body"
               value={emailBody}
               onChange={(e) => setEmailBody(e.target.value)}
-              placeholder="Email body…"
+              placeholder={t("common.emailBodyPlaceholder")}
               className="input-field min-h-[80px] resize-y text-sm"
             />
           </div>
@@ -275,7 +277,7 @@ export function QrCodeGenerator() {
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
         <div>
           <label htmlFor="qr-size" className="mb-2 block text-sm font-medium text-slate-600">
-            Size: <span className="font-bold text-brand-600">{size}px</span>
+            {t("common.qrSize")}: <span className="font-bold text-brand-600">{size}px</span>
           </label>
           <input
             id="qr-size"
@@ -291,18 +293,18 @@ export function QrCodeGenerator() {
 
         <div>
           <label htmlFor="qr-error" className="mb-2 block text-sm font-medium text-slate-600">
-            Error Correction
+            {t("common.errorCorrection")}
           </label>
-          <select
-            id="qr-error"
-            value={errorLevel}
-            onChange={(e) => setErrorLevel(e.target.value as "L" | "M" | "Q" | "H")}
-            className="input-field"
-          >
-            <option value="L">Low (7%)</option>
-            <option value="M">Medium (15%)</option>
-            <option value="Q">Quartile (25%)</option>
-            <option value="H">High (30%)</option>
+        <select
+          id="qr-error"
+          value={errorLevel}
+          onChange={(e) => setErrorLevel(e.target.value as "L" | "M" | "Q" | "H")}
+          className="input-field"
+        >
+            <option value="L">{t("common.levelL")}</option>
+            <option value="M">{t("common.levelM")}</option>
+            <option value="Q">{t("common.levelQ")}</option>
+            <option value="H">{t("common.levelH")}</option>
           </select>
         </div>
       </div>
@@ -325,14 +327,14 @@ export function QrCodeGenerator() {
         {!isGenerating && dataUrl && (
           <div className="overflow-hidden rounded-lg border border-slate-200 bg-white p-4">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={dataUrl} alt="Generated QR code" className="h-64 w-64" />
+            <img src={dataUrl} alt={t("common.generateQr")} className="h-64 w-64" />
           </div>
         )}
 
         {!isGenerating && !dataUrl && !error && (
           <div className="flex h-64 w-64 items-center justify-center rounded-lg border-2 border-dashed border-slate-300 bg-slate-50">
             <p className="text-center text-sm text-slate-400">
-              Enter content above to generate a QR code
+              {t("common.enterContentToGenerate")}
             </p>
           </div>
         )}
@@ -340,10 +342,10 @@ export function QrCodeGenerator() {
         {dataUrl && (
           <div className="flex flex-wrap gap-3">
             <button onClick={handleDownloadPng} className="btn-primary">
-              Download PNG
+              {t("common.downloadPng")}
             </button>
             <button onClick={handleDownloadSvg} className="btn-secondary">
-              Download SVG
+              {t("common.downloadSvg")}
             </button>
           </div>
         )}
@@ -351,7 +353,7 @@ export function QrCodeGenerator() {
 
       {hasContent && (
         <button onClick={handleClear} className="btn-secondary">
-          Clear
+          {t("common.clear")}
         </button>
       )}
     </div>

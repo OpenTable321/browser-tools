@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
+import { useTranslation } from "@/i18n/LanguageProvider";
 import { ImageDropZone } from "@/components/ImageDropZone";
 import {
   formatBytes,
@@ -21,6 +22,7 @@ interface ConvertResult {
 }
 
 export function PngToJpg() {
+  const { t } = useTranslation();
   const [originalUrl, setOriginalUrl] = useState<string | null>(null);
   const [originalSize, setOriginalSize] = useState(0);
   const [fileName, setFileName] = useState("");
@@ -50,7 +52,7 @@ export function PngToJpg() {
       setOriginalUrl(dataUrl);
       await convert(img, file.size);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Failed to process image.");
+      setError(err instanceof Error ? err.message : t("common.failedToProcessImage"));
     } finally {
       setIsProcessing(false);
     }
@@ -89,7 +91,7 @@ export function PngToJpg() {
     try {
       await convert(imageRef.current, originalSize);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Failed to process image.");
+      setError(err instanceof Error ? err.message : t("common.failedToProcessImage"));
     } finally {
       setIsProcessing(false);
     }
@@ -125,8 +127,8 @@ export function PngToJpg() {
         <ImageDropZone
           onFileSelect={processImage}
           accept=".png"
-          label="Drop a PNG image here or click to upload"
-          hint="Converted to JPG entirely in your browser — no uploads"
+          label={t("common.dropPngHere")}
+          hint={t("common.convertedToJpg")}
         />
       )}
 
@@ -146,13 +148,13 @@ export function PngToJpg() {
               onClick={handleReset}
               className="text-sm font-medium text-slate-500 transition hover:text-slate-700"
             >
-              ← Choose different image
+              {t("common.chooseDifferentImage")}
             </button>
           </div>
 
           <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
             <div className="rounded-xl border border-slate-200 bg-white p-4">
-              <h3 className="mb-3 text-sm font-semibold text-slate-700">Original (PNG)</h3>
+              <h3 className="mb-3 text-sm font-semibold text-slate-700">{t("common.original")} (PNG)</h3>
               <div
                 className="flex items-center justify-center overflow-hidden rounded-lg bg-slate-50"
                 style={{ minHeight: "200px" }}
@@ -175,7 +177,7 @@ export function PngToJpg() {
                   /* eslint-disable-next-line @next/next/no-img-element */
                   <img src={result.url} alt="Converted JPG" className="max-h-64 object-contain" />
                 ) : (
-                  <p className="text-sm text-slate-400">Processing…</p>
+                  <p className="text-sm text-slate-400">{t("common.processing")}</p>
                 )}
               </div>
               <p className="mt-3 text-center text-sm text-slate-600">
@@ -195,12 +197,12 @@ export function PngToJpg() {
           </div>
 
           <div className="rounded-xl border border-slate-200 bg-white p-6">
-            <h3 className="mb-4 text-sm font-semibold text-slate-700">Quality Settings</h3>
+            <h3 className="mb-4 text-sm font-semibold text-slate-700">{t("common.qualitySettings")}</h3>
 
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
               <div>
                 <label htmlFor="png-jpg-quality" className="mb-2 block text-sm font-medium text-slate-600">
-                  Quality:{" "}
+                  {t("common.quality")}: {" "}
                   <span className="font-bold text-brand-600">{Math.round(quality * 100)}%</span>
                 </label>
                 <input
@@ -214,14 +216,14 @@ export function PngToJpg() {
                   className="w-full accent-brand-600"
                 />
                 <div className="mt-1 flex justify-between text-xs text-slate-400">
-                  <span>Smaller file</span>
-                  <span>Better quality</span>
+                  <span>{t("common.smallerFile")}</span>
+                  <span>{t("common.betterQuality")}</span>
                 </div>
               </div>
 
               <div>
                 <label htmlFor="png-jpg-bg" className="mb-2 block text-sm font-medium text-slate-600">
-                  Background Color (for transparency)
+                  {t("common.backgroundFillColor")}
                 </label>
                 <div className="flex items-center gap-3">
                   <input
@@ -240,7 +242,7 @@ export function PngToJpg() {
                   />
                 </div>
                 <p className="mt-1 text-xs text-slate-400">
-                  JPG does not support transparency — transparent areas will be filled with this color.
+                  {t("common.jpgNoTransparency")}
                 </p>
               </div>
             </div>
@@ -248,11 +250,11 @@ export function PngToJpg() {
 
           <div className="flex flex-wrap gap-3">
             <button onClick={handleReconvert} disabled={isProcessing} className="btn-primary">
-              {isProcessing ? "Processing…" : "Convert Again"}
+              {isProcessing ? t("common.processing") : t("common.convertAgain")}
             </button>
             {result && (
               <button onClick={handleDownload} className="btn-secondary">
-                Download JPG
+                {t("common.download")} JPG
               </button>
             )}
           </div>
@@ -260,13 +262,13 @@ export function PngToJpg() {
           {result && (
             <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
               <div className="rounded-lg bg-slate-100 p-4 text-center">
-                <p className="text-xs text-slate-500">Original</p>
+                <p className="text-xs text-slate-500">{t("common.original")}</p>
                 <p className="mt-1 text-lg font-bold text-slate-900">
                   {formatBytes(result.originalSize)}
                 </p>
               </div>
               <div className="rounded-lg bg-slate-100 p-4 text-center">
-                <p className="text-xs text-slate-500">Converted</p>
+                <p className="text-xs text-slate-500">{t("common.converted")}</p>
                 <p className="mt-1 text-lg font-bold text-slate-900">
                   {formatBytes(result.convertedSize)}
                 </p>
@@ -279,7 +281,7 @@ export function PngToJpg() {
                 <p
                   className={`text-xs ${sizeDiff < 0 ? "text-green-600" : "text-amber-600"}`}
                 >
-                  Change
+                  {t("common.change")}
                 </p>
                 <p
                   className={`mt-1 text-lg font-bold ${
@@ -291,7 +293,7 @@ export function PngToJpg() {
                 </p>
               </div>
               <div className="rounded-lg bg-slate-100 p-4 text-center">
-                <p className="text-xs text-slate-500">Dimensions</p>
+                <p className="text-xs text-slate-500">{t("common.dimensions")}</p>
                 <p className="mt-1 text-lg font-bold text-slate-900">
                   {result.width}×{result.height}
                 </p>

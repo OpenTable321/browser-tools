@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { CopyButton } from "@/components/CopyButton";
+import { useTranslation } from "@/i18n/LanguageProvider";
 
 function encodeBase64(text: string): string {
   const bytes = new TextEncoder().encode(text);
@@ -13,6 +14,7 @@ function encodeBase64(text: string): string {
 }
 
 export function Base64Encoder() {
+  const { t } = useTranslation();
   const [input, setInput] = useState("");
   const [output, setOutput] = useState("");
   const [error, setError] = useState<string | null>(null);
@@ -20,14 +22,14 @@ export function Base64Encoder() {
   function encode() {
     setError(null);
     if (!input) {
-      setError("Please enter text to encode.");
+      setError(t("common.pleaseEnterText"));
       setOutput("");
       return;
     }
     try {
       setOutput(encodeBase64(input));
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Failed to encode text.");
+      setError(err instanceof Error ? err.message : t("common.error"));
     }
   }
 
@@ -35,13 +37,13 @@ export function Base64Encoder() {
     <div className="space-y-6">
       <div>
         <label htmlFor="b64-enc-input" className="mb-2 block text-sm font-medium text-slate-600">
-          Text to Encode
+          {t("common.textToEncode")}
         </label>
         <textarea
           id="b64-enc-input"
           value={input}
           onChange={(e) => { setInput(e.target.value); setOutput(""); setError(null); }}
-          placeholder="Enter text to encode to Base64…"
+          placeholder={t("common.enterTextToEncodeB64")}
           className="input-field min-h-[150px] resize-y font-mono text-sm"
           spellCheck={false}
         />
@@ -49,7 +51,7 @@ export function Base64Encoder() {
 
       <div className="flex flex-wrap gap-3">
         <button onClick={encode} className="btn-primary">
-          Encode to Base64
+          {t("common.encodeToBase64")}
         </button>
         {output && <CopyButton text={output} label="Base64" />}
         <button
@@ -57,7 +59,7 @@ export function Base64Encoder() {
           disabled={!input}
           className="btn-secondary"
         >
-          Clear
+          {t("common.clear")}
         </button>
       </div>
 
@@ -70,7 +72,7 @@ export function Base64Encoder() {
       {output && (
         <div>
           <label htmlFor="b64-enc-output" className="mb-2 block text-sm font-medium text-slate-600">
-            Base64 Result
+            {t("common.base64Result")}
           </label>
           <textarea
             id="b64-enc-output"

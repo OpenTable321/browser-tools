@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { CopyButton } from "@/components/CopyButton";
+import { useTranslation } from "@/i18n/LanguageProvider";
 
 const UPPER = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const LOWER = "abcdefghijklmnopqrstuvwxyz";
@@ -43,6 +44,7 @@ function generatePassword(
 }
 
 export function PasswordGenerator() {
+  const { t } = useTranslation();
   const [length, setLength] = useState(16);
   const [useUpper, setUseUpper] = useState(true);
   const [useLower, setUseLower] = useState(true);
@@ -68,10 +70,10 @@ export function PasswordGenerator() {
     if (useUpper && useLower) score++;
     if (useNumbers) score++;
     if (useSymbols) score++;
-    if (score <= 2) return { label: "Weak", color: "text-red-600", bg: "bg-red-50" };
-    if (score <= 3) return { label: "Fair", color: "text-amber-600", bg: "bg-amber-50" };
-    if (score <= 4) return { label: "Good", color: "text-blue-600", bg: "bg-blue-50" };
-    return { label: "Strong", color: "text-green-600", bg: "bg-green-50" };
+    if (score <= 2) return { label: t("common.weak"), color: "text-red-600", bg: "bg-red-50" };
+    if (score <= 3) return { label: t("common.fair"), color: "text-amber-600", bg: "bg-amber-50" };
+    if (score <= 4) return { label: t("common.good"), color: "text-blue-600", bg: "bg-blue-50" };
+    return { label: t("common.strong"), color: "text-green-600", bg: "bg-green-50" };
   })();
 
   return (
@@ -88,18 +90,18 @@ export function PasswordGenerator() {
 
         <div className="mt-4 flex flex-wrap gap-3">
           <button onClick={generate} className="btn-primary">
-            Regenerate
+            {t("common.regenerate")}
           </button>
-          {password && <CopyButton text={password} label="Password" />}
+          {password && <CopyButton text={password} label={t("common.password")} />}
         </div>
       </div>
 
       <div className="rounded-xl border border-slate-200 bg-white p-6">
-        <h3 className="mb-4 text-sm font-semibold text-slate-700">Settings</h3>
+        <h3 className="mb-4 text-sm font-semibold text-slate-700">{t("common.settings")}</h3>
 
         <div>
           <label htmlFor="pw-length" className="mb-2 block text-sm font-medium text-slate-600">
-            Length: <span className="font-bold text-brand-600">{length}</span>
+            {t("common.length")}: <span className="font-bold text-brand-600">{length}</span>
           </label>
           <input
             id="pw-length"
@@ -116,29 +118,29 @@ export function PasswordGenerator() {
         <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
           <label className="flex items-center gap-2 text-sm text-slate-600">
             <input type="checkbox" checked={useUpper} onChange={(e) => setUseUpper(e.target.checked)} className="h-4 w-4 rounded border-slate-300 accent-brand-600" />
-            Uppercase (A–Z)
+            {t("common.includeUppercase")} (A–Z)
           </label>
           <label className="flex items-center gap-2 text-sm text-slate-600">
             <input type="checkbox" checked={useLower} onChange={(e) => setUseLower(e.target.checked)} className="h-4 w-4 rounded border-slate-300 accent-brand-600" />
-            Lowercase (a–z)
+            {t("common.includeLowercase")} (a–z)
           </label>
           <label className="flex items-center gap-2 text-sm text-slate-600">
             <input type="checkbox" checked={useNumbers} onChange={(e) => setUseNumbers(e.target.checked)} className="h-4 w-4 rounded border-slate-300 accent-brand-600" />
-            Numbers (0–9)
+            {t("common.includeNumbers")} (0–9)
           </label>
           <label className="flex items-center gap-2 text-sm text-slate-600">
             <input type="checkbox" checked={useSymbols} onChange={(e) => setUseSymbols(e.target.checked)} className="h-4 w-4 rounded border-slate-300 accent-brand-600" />
-            Symbols (!@#$…)
+            {t("common.includeSymbols")} (!@#$…)
           </label>
           <label className="flex items-center gap-2 text-sm text-slate-600">
             <input type="checkbox" checked={excludeAmbiguous} onChange={(e) => setExcludeAmbiguous(e.target.checked)} className="h-4 w-4 rounded border-slate-300 accent-brand-600" />
-            Exclude ambiguous (Il1O0o)
+            {t("common.excludeAmbiguous")}
           </label>
         </div>
 
         {!useUpper && !useLower && !useNumbers && !useSymbols && (
           <div className="mt-4 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
-            Select at least one character type.
+            {t("common.selectAtLeastOne")}
           </div>
         )}
       </div>

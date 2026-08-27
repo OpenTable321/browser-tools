@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
+import { useTranslation } from "@/i18n/LanguageProvider";
 
 interface MultiFileDropZoneProps {
   onFilesSelected: (files: File[]) => void;
@@ -17,6 +18,7 @@ export function MultiFileDropZone({
   hint,
   maxFiles,
 }: MultiFileDropZoneProps) {
+  const { t } = useTranslation();
   const [isDragging, setIsDragging] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -69,7 +71,7 @@ export function MultiFileDropZone({
       <p className="mt-4 text-lg font-medium text-slate-700">{label}</p>
       <p className="mt-1 text-center text-sm text-slate-500">
         {hint}
-        {maxFiles && ` (max ${maxFiles} files)`}
+        {maxFiles && ` (${t("common.maxFiles", { count: maxFiles })})`}
       </p>
       <input
         ref={fileInputRef}

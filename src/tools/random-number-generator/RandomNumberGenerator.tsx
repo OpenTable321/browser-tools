@@ -2,6 +2,7 @@
 
 import { useState, useCallback } from "react";
 import { CopyButton } from "@/components/CopyButton";
+import { useTranslation } from "@/i18n/LanguageProvider";
 
 function secureRandomFloat(): number {
   const array = new Uint32Array(1);
@@ -23,6 +24,7 @@ function generateNumber(min: number, max: number, isInteger: boolean): number {
 }
 
 export function RandomNumberGenerator() {
+  const { t } = useTranslation();
   const [min, setMin] = useState("1");
   const [max, setMax] = useState("100");
   const [isInteger, setIsInteger] = useState(true);
@@ -38,19 +40,19 @@ export function RandomNumberGenerator() {
     const maxNum = parseFloat(max);
 
     if (isNaN(minNum) || isNaN(maxNum)) {
-      setError("Please enter valid numbers for both min and max.");
+      setError(t("common.pleaseEnterValidNumbers"));
       return;
     }
 
     if (minNum === maxNum) {
-      setError("Min and max must be different values.");
+      setError(t("common.minMaxMustDiffer"));
       return;
     }
 
     if (!allowDuplicates && isInteger) {
       const range = Math.abs(maxNum - minNum) + 1;
       if (count > range) {
-        setError(`Cannot generate ${count} unique numbers in a range of ${range} values. Increase the range or reduce the quantity.`);
+        setError(t("common.cannotGenerateUnique", { count, range }));
         return;
       }
     }
@@ -79,12 +81,12 @@ export function RandomNumberGenerator() {
   return (
     <div className="space-y-6">
       <div className="rounded-xl border border-slate-200 bg-white p-6">
-        <h3 className="mb-4 text-sm font-semibold text-slate-700">Settings</h3>
+        <h3 className="mb-4 text-sm font-semibold text-slate-700">{t("common.settings")}</h3>
 
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
           <div>
             <label htmlFor="rng-min" className="mb-2 block text-sm font-medium text-slate-600">
-              Minimum
+              {t("common.minimum")}
             </label>
             <input
               id="rng-min"
@@ -96,7 +98,7 @@ export function RandomNumberGenerator() {
           </div>
           <div>
             <label htmlFor="rng-max" className="mb-2 block text-sm font-medium text-slate-600">
-              Maximum
+              {t("common.maximum")}
             </label>
             <input
               id="rng-max"
@@ -111,7 +113,7 @@ export function RandomNumberGenerator() {
         <div className="mt-4 grid grid-cols-1 gap-6 sm:grid-cols-2">
           <div>
             <label htmlFor="rng-count" className="mb-2 block text-sm font-medium text-slate-600">
-              Quantity: <span className="font-bold text-brand-600">{count}</span>
+              {t("common.quantity")}: <span className="font-bold text-brand-600">{count}</span>
             </label>
             <input
               id="rng-count"
@@ -126,7 +128,7 @@ export function RandomNumberGenerator() {
           </div>
 
           <div>
-            <label className="mb-2 block text-sm font-medium text-slate-600">Number Type</label>
+            <label className="mb-2 block text-sm font-medium text-slate-600">{t("common.numberType")}</label>
             <div className="flex gap-2">
               <button
                 onClick={() => setIsInteger(true)}
@@ -134,7 +136,7 @@ export function RandomNumberGenerator() {
                   isInteger ? "bg-brand-600 text-white" : "bg-slate-100 text-slate-700 hover:bg-slate-200"
                 }`}
               >
-                Integer
+                {t("common.integer")}
               </button>
               <button
                 onClick={() => setIsInteger(false)}
@@ -142,7 +144,7 @@ export function RandomNumberGenerator() {
                   !isInteger ? "bg-brand-600 text-white" : "bg-slate-100 text-slate-700 hover:bg-slate-200"
                 }`}
               >
-                Decimal
+                {t("common.decimal")}
               </button>
             </div>
           </div>
@@ -156,16 +158,16 @@ export function RandomNumberGenerator() {
               onChange={(e) => setAllowDuplicates(e.target.checked)}
               className="h-4 w-4 rounded border-slate-300 accent-brand-600"
             />
-            Allow duplicate numbers
+            {t("common.allowDuplicates")}
           </label>
         </div>
 
         <div className="mt-6 flex flex-wrap gap-3">
           <button onClick={generate} className="btn-primary">
-            Generate
+            {t("common.generate")}
           </button>
           {results.length > 0 && (
-            <CopyButton text={results.join(", ")} label="Numbers" />
+            <CopyButton text={results.join(", ")} label={t("common.numbers")} />
           )}
         </div>
       </div>

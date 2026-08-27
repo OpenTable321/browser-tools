@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useRef, useState } from "react";
+import { useTranslation } from "@/i18n/LanguageProvider";
 import { formatBytes } from "@/lib/image-utils";
 
 interface CompressedResult {
@@ -13,6 +14,7 @@ interface CompressedResult {
 }
 
 export function ImageCompressor() {
+  const { t } = useTranslation();
   const [originalUrl, setOriginalUrl] = useState<string | null>(null);
   const [originalSize, setOriginalSize] = useState(0);
   const [fileName, setFileName] = useState("");
@@ -30,12 +32,12 @@ export function ImageCompressor() {
   const processImage = useCallback(
     (file: File) => {
       if (!file.type.startsWith("image/")) {
-        setError("Please select an image file (JPG, PNG, or WebP).");
+        setError(t("common.pleaseSelectImage"));
         return;
       }
 
       if (file.size > 50 * 1024 * 1024) {
-        setError("File too large. Please select an image under 50 MB.");
+        setError(t("common.fileTooLarge"));
         return;
       }
 
@@ -65,7 +67,7 @@ export function ImageCompressor() {
           canvas.toBlob(
             (blob) => {
               if (!blob) {
-                setError("Failed to compress image. Try a different format.");
+                setError(t("common.failedToCompress"));
                 setIsProcessing(false);
                 return;
               }
@@ -89,13 +91,13 @@ export function ImageCompressor() {
           );
         };
         img.onerror = () => {
-          setError("Failed to load image. The file may be corrupted.");
+          setError(t("common.failedToLoadImage"));
           setIsProcessing(false);
         };
         img.src = e.target?.result as string;
       };
       reader.onerror = () => {
-        setError("Failed to read file.");
+        setError(t("common.failedToReadFile"));
         setIsProcessing(false);
       };
       reader.readAsDataURL(file);
@@ -124,7 +126,7 @@ export function ImageCompressor() {
     canvas.toBlob(
       (blob) => {
         if (!blob) {
-          setError("Failed to compress image.");
+          setError(t("common.failedToCompressShort"));
           setIsProcessing(false);
           return;
         }
@@ -218,10 +220,10 @@ export function ImageCompressor() {
             />
           </svg>
           <p className="mt-4 text-lg font-medium text-slate-700">
-            Drop an image here or click to upload
+            {t("common.dropImageHere")}
           </p>
           <p className="mt-1 text-sm text-slate-500">
-            Supports JPG, PNG, and WebP — processed entirely in your browser
+            {t("common.supportsJpgPngWebp")}
           </p>
           <input
             ref={fileInputRef}
@@ -249,14 +251,14 @@ export function ImageCompressor() {
               onClick={handleReset}
               className="text-sm font-medium text-slate-500 transition hover:text-slate-700"
             >
-              ← Choose different image
+              {t("common.chooseDifferentImage")}
             </button>
           </div>
 
           <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
             <div className="rounded-xl border border-slate-200 bg-white p-4">
               <h3 className="mb-3 text-sm font-semibold text-slate-700">
-                Original
+                {t("common.original")}
               </h3>
               <div className="flex items-center justify-center overflow-hidden rounded-lg bg-slate-50" style={{ minHeight: "200px" }}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -273,7 +275,7 @@ export function ImageCompressor() {
 
             <div className="rounded-xl border border-slate-200 bg-white p-4">
               <h3 className="mb-3 text-sm font-semibold text-slate-700">
-                Compressed
+                {t("common.compressed")}
               </h3>
               <div className="flex items-center justify-center overflow-hidden rounded-lg bg-slate-50" style={{ minHeight: "200px" }}>
                 {result ? (
@@ -284,7 +286,7 @@ export function ImageCompressor() {
                     className="max-h-64 object-contain"
                   />
                 ) : (
-                  <p className="text-sm text-slate-400">Processing…</p>
+                  <p className="text-sm text-slate-400">{t("common.processing")}</p>
                 )}
               </div>
               <p className="mt-3 text-center text-sm text-slate-600">
@@ -300,13 +302,13 @@ export function ImageCompressor() {
 
           <div className="rounded-xl border border-slate-200 bg-white p-6">
             <h3 className="mb-4 text-sm font-semibold text-slate-700">
-              Compression Settings
+              {t("common.compressionSettings")}
             </h3>
 
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
               <div>
                 <label className="mb-2 block text-sm font-medium text-slate-600">
-                  Output Format
+                  {t("common.outputFormat")}
                 </label>
                 <div className="flex gap-2">
                   <button
@@ -334,7 +336,7 @@ export function ImageCompressor() {
 
               <div>
                 <label className="mb-2 block text-sm font-medium text-slate-600">
-                  Quality:{" "}
+                  {t("common.quality")}: {" "}
                   <span className="font-bold text-brand-600">
                     {Math.round(quality * 100)}%
                   </span>
@@ -349,8 +351,8 @@ export function ImageCompressor() {
                   className="w-full accent-brand-600"
                 />
                 <div className="mt-1 flex justify-between text-xs text-slate-400">
-                  <span>Smaller file</span>
-                  <span>Better quality</span>
+                  <span>{t("common.smallerFile")}</span>
+                  <span>{t("common.betterQuality")}</span>
                 </div>
               </div>
             </div>
@@ -361,14 +363,14 @@ export function ImageCompressor() {
                 disabled={isProcessing}
                 className="btn-primary"
               >
-                {isProcessing ? "Processing…" : "Re-compress"}
+                {isProcessing ? t("common.processing") : t("common.recompress")}
               </button>
               {result && (
                 <button
                   onClick={handleDownload}
                   className="btn-secondary"
                 >
-                  Download
+                  {t("common.download")}
                 </button>
               )}
             </div>
@@ -377,25 +379,25 @@ export function ImageCompressor() {
           {result && (
             <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
               <div className="rounded-lg bg-slate-100 p-4 text-center">
-                <p className="text-xs text-slate-500">Original</p>
+                <p className="text-xs text-slate-500">{t("common.original")}</p>
                 <p className="mt-1 text-lg font-bold text-slate-900">
                   {formatBytes(result.originalSize)}
                 </p>
               </div>
               <div className="rounded-lg bg-slate-100 p-4 text-center">
-                <p className="text-xs text-slate-500">Compressed</p>
+                <p className="text-xs text-slate-500">{t("common.compressed")}</p>
                 <p className="mt-1 text-lg font-bold text-slate-900">
                   {formatBytes(result.compressedSize)}
                 </p>
               </div>
               <div className="rounded-lg bg-green-50 p-4 text-center">
-                <p className="text-xs text-green-600">Saved</p>
+                <p className="text-xs text-green-600">{t("common.saved")}</p>
                 <p className="mt-1 text-lg font-bold text-green-700">
                   {savings > 0 ? `${savings}%` : "—"}
                 </p>
               </div>
               <div className="rounded-lg bg-slate-100 p-4 text-center">
-                <p className="text-xs text-slate-500">Dimensions</p>
+                <p className="text-xs text-slate-500">{t("common.dimensions")}</p>
                 <p className="mt-1 text-lg font-bold text-slate-900">
                   {result.width}×{result.height}
                 </p>

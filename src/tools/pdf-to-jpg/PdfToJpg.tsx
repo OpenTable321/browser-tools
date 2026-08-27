@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslation } from "@/i18n/LanguageProvider";
 import { ImageDropZone } from "@/components/ImageDropZone";
 import {
   formatBytes,
@@ -28,6 +29,7 @@ interface ConvertedImage {
 }
 
 export function PdfToJpg() {
+  const { t } = useTranslation();
   const [pdfFile, setPdfFile] = useState<File | null>(null);
   const [pdfDoc, setPdfDoc] = useState<pdfjsDocumentProxy | null>(null);
   const [pageCount, setPageCount] = useState(0);
@@ -63,7 +65,7 @@ export function PdfToJpg() {
       setPageCount(count);
 
       if (count > MAX_PDF_PAGES) {
-        setError(`This PDF has ${count} pages. Maximum supported is ${MAX_PDF_PAGES} pages.`);
+        setError(t("common.pdfHasMaxPages", { count: count, max: MAX_PDF_PAGES }));
         setIsProcessing(false);
         return;
       }
@@ -85,7 +87,7 @@ export function PdfToJpg() {
       for (let i = 1; i <= count; i++) allPages.add(i);
       setSelectedPages(allPages);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Failed to load PDF.");
+      setError(err instanceof Error ? err.message : t("common.failedToLoadPdf"));
     } finally {
       setIsProcessing(false);
     }
@@ -131,7 +133,7 @@ export function PdfToJpg() {
         const canvas = await renderPageToCanvas(pdfDoc, pageNum, scale);
         const blob = await new Promise<Blob>((resolve, reject) => {
           canvas.toBlob(
-            (b) => (b ? resolve(b) : reject(new Error("Failed to convert page."))),
+            (b) => (b ? resolve(b) : reject(new Error(t("common.failedToConvertPage")))),
             "image/jpeg",
             quality,
           );
@@ -152,7 +154,7 @@ export function PdfToJpg() {
         return results;
       });
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Failed to convert pages.");
+      setError(err instanceof Error ? err.message : t("common.failedToConvertPages"));
     } finally {
       setIsConverting(false);
     }
@@ -185,8 +187,8 @@ export function PdfToJpg() {
         <ImageDropZone
           onFileSelect={handleFileSelect}
           accept="application/pdf,.pdf"
-          label="Drop a PDF here or click to upload"
-          hint="Pages rendered to JPG images entirely in your browser — no uploads"
+          label={t("common.dropPdfHere")}
+          hint={t("common.pdfToJpgInBrowser")}
         />
       )}
 
@@ -200,7 +202,7 @@ export function PdfToJpg() {
         <div className="flex items-center justify-center rounded-lg border border-brand-200 bg-brand-50 py-8">
           <div className="flex flex-col items-center gap-3">
             <div className="h-8 w-8 animate-spin rounded-full border-2 border-brand-200 border-t-brand-600" />
-            <p className="text-sm font-medium text-brand-700">Loading PDF…</p>
+            <p className="text-sm font-medium text-brand-700">{t("common.loadingPdf")}</p>
           </div>
         </div>
       )}
@@ -218,20 +220,20 @@ export function PdfToJpg() {
               onClick={handleReset}
               className="text-sm font-medium text-slate-500 transition hover:text-slate-700"
             >
-              ← Choose different PDF
+              {t("common.chooseDifferentPdf")}
             </button>
           </div>
 
           <div className="rounded-xl border border-slate-200 bg-white p-4">
             <div className="mb-3 flex items-center justify-between">
               <h3 className="text-sm font-semibold text-slate-700">
-                Select Pages ({selectedPages.size}/{pageCount} selected)
+                {t("common.selectPages", { selected: selectedPages.size, total: pageCount })}
               </h3>
               <button
                 onClick={toggleAll}
                 className="text-sm font-medium text-brand-600 transition hover:text-brand-700"
               >
-                {selectedPages.size === pageCount ? "Deselect all" : "Select all"}
+                {selectedPages.size === pageCount ? t("common.deselectAll") : t("common.selectAll")}
               </button>
             </div>
 
@@ -271,13 +273,13 @@ export function PdfToJpg() {
 
           <div className="rounded-xl border border-slate-200 bg-white p-6">
             <h3 className="mb-4 text-sm font-semibold text-slate-700">
-              Conversion Settings
+              {t("common.conversionSettings")}
             </h3>
 
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
               <div>
                 <label className="mb-2 block text-sm font-medium text-slate-600">
-                  Quality:{" "}
+                  {t("common.quality")}: {" "}
                   <span className="font-bold text-brand-600">
                     {Math.round(quality * 100)}%
                   </span>
@@ -295,7 +297,7 @@ export function PdfToJpg() {
 
               <div>
                 <label className="mb-2 block text-sm font-medium text-slate-600">
-                  Resolution:{" "}
+                  {t("common.resolution")}: {" "}
                   <span className="font-bold text-brand-600">{scale}×</span>
                 </label>
                 <input
@@ -308,8 +310,8 @@ export function PdfToJpg() {
                   className="w-full accent-brand-600"
                 />
                 <div className="mt-1 flex justify-between text-xs text-slate-400">
-                  <span>Faster</span>
-                  <span>Higher quality</span>
+                  <span>{t("common.faster")}</span>
+                  <span>{t("common.higherQuality")}</span>
                 </div>
               </div>
             </div>
@@ -321,8 +323,8 @@ export function PdfToJpg() {
                 className="btn-primary"
               >
                 {isConverting
-                  ? `Converting… (${progress.current}/${progress.total})`
-                  : `Convert ${selectedPages.size} page${selectedPages.size > 1 ? "s" : ""} to JPG`}
+                  ? t("common.converting", { current: progress.current, total: progress.total })
+                  : t("common.convertPagesToJpg", { count: selectedPages.size })}
               </button>
             </div>
           </div>
@@ -330,7 +332,7 @@ export function PdfToJpg() {
           {isConverting && (
             <div className="rounded-lg border border-brand-200 bg-brand-50 px-4 py-3">
               <div className="flex items-center justify-between text-sm font-medium text-brand-700">
-                <span>Converting pages…</span>
+                <span>{t("common.convertingPages")}</span>
                 <span>{progress.current}/{progress.total}</span>
               </div>
               <div className="mt-2 h-2 overflow-hidden rounded-full bg-brand-100">
@@ -346,13 +348,13 @@ export function PdfToJpg() {
             <div className="space-y-4">
               <div className="flex items-center justify-between">
                 <h3 className="text-sm font-semibold text-slate-700">
-                  {convertedImages.length} image{convertedImages.length > 1 ? "s" : ""} ready
+                  {t("common.imagesReady", { count: convertedImages.length })}
                 </h3>
                 <button
                   onClick={handleDownloadAll}
                   className="btn-secondary"
                 >
-                  Download All (ZIP)
+                  {t("common.downloadAllZip")}
                 </button>
               </div>
 
@@ -372,7 +374,7 @@ export function PdfToJpg() {
                     </div>
                     <div className="flex items-center justify-between border-t border-slate-200 bg-white px-2 py-1.5">
                       <span className="text-xs font-medium text-slate-600">
-                        Page {img.pageNumber}
+                        {t("common.pageLabel", { num: img.pageNumber })}
                       </span>
                       <span className="text-xs text-slate-400">
                         {formatBytes(img.blob.size)}

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslation } from "@/i18n/LanguageProvider";
 import { ImageDropZone } from "@/components/ImageDropZone";
 import {
   formatBytes,
@@ -17,6 +18,7 @@ import {
 type SplitMode = "range" | "every-page";
 
 export function SplitPdf() {
+  const { t } = useTranslation();
   const [pdfFile, setPdfFile] = useState<File | null>(null);
   const [pageCount, setPageCount] = useState(0);
   const [splitMode, setSplitMode] = useState<SplitMode>("range");
@@ -46,7 +48,7 @@ export function SplitPdf() {
       setPageCount(count);
 
       if (count > MAX_PDF_PAGES) {
-        setError(`This PDF has ${count} pages. Maximum supported is ${MAX_PDF_PAGES} pages.`);
+        setError(t("common.pdfHasMaxPages", { count: count, max: MAX_PDF_PAGES }));
         setIsLoading(false);
         return;
       }
@@ -55,8 +57,8 @@ export function SplitPdf() {
     } catch (err) {
       setError(
         err instanceof Error
-          ? `Failed to read PDF: ${err.message}`
-          : "Failed to read PDF. The file may be corrupted or encrypted.",
+          ? t("common.failedToReadPdf", { message: err.message })
+          : t("common.failedToReadPdfGeneric"),
       );
     } finally {
       setIsLoading(false);
@@ -74,12 +76,12 @@ export function SplitPdf() {
       try {
         pageIndices = parsePageRanges(rangeInput, pageCount);
       } catch (err) {
-        setError(err instanceof Error ? err.message : "Invalid page range.");
+        setError(err instanceof Error ? err.message : t("common.invalidPageRange"));
         return;
       }
 
       if (pageIndices.length === 0) {
-        setError("Please specify at least one page to extract.");
+        setError(t("common.specifyAtLeastOnePage"));
         return;
       }
 
@@ -96,7 +98,7 @@ export function SplitPdf() {
         downloadPdfBytes(data, `${baseName}-${pagesStr}.pdf`);
         setResultCount(1);
       } catch (err) {
-        setError(err instanceof Error ? err.message : "Failed to extract pages.");
+        setError(err instanceof Error ? err.message : t("common.failedToExtractPages"));
       } finally {
         setIsProcessing(false);
       }
@@ -116,7 +118,7 @@ export function SplitPdf() {
         );
         setResultCount(results.length);
       } catch (err) {
-        setError(err instanceof Error ? err.message : "Failed to split PDF.");
+        setError(err instanceof Error ? err.message : t("common.failedToSplitPdf"));
       } finally {
         setIsProcessing(false);
       }
@@ -137,8 +139,8 @@ export function SplitPdf() {
         <ImageDropZone
           onFileSelect={handleFileSelect}
           accept="application/pdf,.pdf"
-          label="Drop a PDF here or click to upload"
-          hint="Split or extract pages entirely in your browser — no uploads"
+          label={t("common.dropPdfHere")}
+          hint={t("common.splitInBrowser")}
         />
       )}
 
@@ -152,7 +154,7 @@ export function SplitPdf() {
         <div className="flex items-center justify-center rounded-lg border border-brand-200 bg-brand-50 py-8">
           <div className="flex flex-col items-center gap-3">
             <div className="h-8 w-8 animate-spin rounded-full border-2 border-brand-200 border-t-brand-600" />
-            <p className="text-sm font-medium text-brand-700">Loading PDF…</p>
+            <p className="text-sm font-medium text-brand-700">{t("common.loadingPdf")}</p>
           </div>
         </div>
       )}
@@ -170,13 +172,13 @@ export function SplitPdf() {
               onClick={handleReset}
               className="text-sm font-medium text-slate-500 transition hover:text-slate-700"
             >
-              ← Choose different PDF
+              {t("common.chooseDifferentPdf")}
             </button>
           </div>
 
           <div className="rounded-xl border border-slate-200 bg-white p-6">
             <h3 className="mb-4 text-sm font-semibold text-slate-700">
-              Split Mode
+              {t("common.splitMode")}
             </h3>
 
             <div className="flex flex-wrap gap-2">
@@ -188,7 +190,7 @@ export function SplitPdf() {
                     : "bg-slate-100 text-slate-700 hover:bg-slate-200"
                 }`}
               >
-                Extract page range
+                {t("common.extractPageRange")}
               </button>
               <button
                 onClick={() => setSplitMode("every-page")}
@@ -198,14 +200,14 @@ export function SplitPdf() {
                     : "bg-slate-100 text-slate-700 hover:bg-slate-200"
                 }`}
               >
-                Split every page
+                {t("common.splitEveryPage")}
               </button>
             </div>
 
             {splitMode === "range" && (
               <div className="mt-6">
                 <label className="mb-2 block text-sm font-medium text-slate-600">
-                  Pages to extract
+                  {t("common.pagesToExtract")}
                 </label>
                 <input
                   type="text"
@@ -215,8 +217,7 @@ export function SplitPdf() {
                   className="input-field"
                 />
                 <p className="mt-2 text-xs text-slate-400">
-                  Enter page numbers separated by commas. Use hyphens for ranges.
-                  This PDF has {pageCount} pages.
+                  {t("common.enterPageNumbers", { count: pageCount })}
                 </p>
               </div>
             )}
@@ -224,8 +225,7 @@ export function SplitPdf() {
             {splitMode === "every-page" && (
               <div className="mt-6 rounded-lg bg-slate-50 p-4">
                 <p className="text-sm text-slate-600">
-                  This will create <strong>{pageCount}</strong> individual PDF files,
-                  one per page. They will be downloaded as a ZIP archive.
+                  {t("common.splitEveryPageInfo", { count: pageCount })}
                 </p>
               </div>
             )}
@@ -234,7 +234,7 @@ export function SplitPdf() {
               <div className="mt-6 rounded-lg border border-brand-200 bg-brand-50 px-4 py-3">
                 <div className="flex items-center justify-between text-sm font-medium text-brand-700">
                   <span>
-                    {splitMode === "range" ? "Extracting pages…" : "Splitting PDF…"}
+                    {splitMode === "range" ? t("common.extractingPages") : t("common.splittingPdf")}
                   </span>
                   {splitMode === "every-page" && (
                     <span>{progress.current}/{progress.total}</span>
@@ -258,10 +258,10 @@ export function SplitPdf() {
                 className="btn-primary"
               >
                 {isProcessing
-                  ? "Processing…"
+                  ? t("common.processing")
                   : splitMode === "range"
-                    ? "Extract Pages"
-                    : `Split into ${pageCount} PDFs`}
+                    ? t("common.extractPages")
+                    : t("common.splitInto", { count: pageCount })}
               </button>
             </div>
           </div>
@@ -269,8 +269,8 @@ export function SplitPdf() {
           {resultCount > 0 && !isProcessing && (
             <div className="rounded-lg border border-green-200 bg-green-50 px-4 py-3 text-sm text-green-700">
               {splitMode === "range"
-                ? "PDF extracted successfully. Check your downloads."
-                : `${resultCount} PDF files created. Check your downloads for the ZIP file.`}
+                ? t("common.pdfExtractedSuccess")
+                : t("common.pdfSplitSuccess", { count: resultCount })}
             </div>
           )}
         </div>

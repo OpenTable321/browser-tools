@@ -2,11 +2,13 @@
 
 import { useState } from "react";
 import { CopyButton } from "@/components/CopyButton";
+import { useTranslation } from "@/i18n/LanguageProvider";
 
 type IndentSize = 2 | 4;
 type ActionMode = "format" | "minify" | "validate" | null;
 
 export function JsonFormatter() {
+  const { t } = useTranslation();
   const [input, setInput] = useState("");
   const [output, setOutput] = useState("");
   const [indent, setIndent] = useState<IndentSize>(2);
@@ -21,7 +23,7 @@ export function JsonFormatter() {
     setActionMode("format");
 
     if (!input.trim()) {
-      setError("Please enter JSON to format.");
+      setError(t("common.pleaseEnterJson", { action: t("common.formatJson").toLowerCase() }));
       return;
     }
 
@@ -30,7 +32,7 @@ export function JsonFormatter() {
       setOutput(JSON.stringify(parsed, null, indent));
       setIsValid(true);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Invalid JSON.");
+      setError(err instanceof Error ? err.message : t("common.invalidJson"));
     }
   }
 
@@ -41,7 +43,7 @@ export function JsonFormatter() {
     setActionMode("minify");
 
     if (!input.trim()) {
-      setError("Please enter JSON to minify.");
+      setError(t("common.pleaseEnterJson", { action: t("common.minifyJson").toLowerCase() }));
       return;
     }
 
@@ -50,7 +52,7 @@ export function JsonFormatter() {
       setOutput(JSON.stringify(parsed));
       setIsValid(true);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Invalid JSON.");
+      setError(err instanceof Error ? err.message : t("common.invalidJson"));
     }
   }
 
@@ -61,16 +63,16 @@ export function JsonFormatter() {
     setActionMode("validate");
 
     if (!input.trim()) {
-      setError("Please enter JSON to validate.");
+      setError(t("common.pleaseEnterJson", { action: t("common.validateJson").toLowerCase() }));
       return;
     }
 
     try {
       JSON.parse(input);
       setIsValid(true);
-      setOutput("Valid JSON ✓");
+      setOutput(t("common.validJsonCheck"));
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Invalid JSON.");
+      setError(err instanceof Error ? err.message : t("common.invalidJson"));
     }
   }
 
@@ -78,7 +80,7 @@ export function JsonFormatter() {
     <div className="space-y-6">
       <div>
         <label htmlFor="json-input" className="mb-2 block text-sm font-medium text-slate-600">
-          JSON Input
+          {t("common.jsonInput")}
         </label>
         <textarea
           id="json-input"
@@ -99,7 +101,7 @@ export function JsonFormatter() {
       <div className="rounded-xl border border-slate-200 bg-white p-6">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <label className="mb-2 block text-sm font-medium text-slate-600">Indentation</label>
+            <label className="mb-2 block text-sm font-medium text-slate-600">{t("common.indentation")}</label>
             <div className="flex gap-2">
               <button
                 onClick={() => setIndent(2)}
@@ -107,7 +109,7 @@ export function JsonFormatter() {
                   indent === 2 ? "bg-brand-600 text-white" : "bg-slate-100 text-slate-700 hover:bg-slate-200"
                 }`}
               >
-                2 Spaces
+                {t("common.twoSpaces")}
               </button>
               <button
                 onClick={() => setIndent(4)}
@@ -115,20 +117,20 @@ export function JsonFormatter() {
                   indent === 4 ? "bg-brand-600 text-white" : "bg-slate-100 text-slate-700 hover:bg-slate-200"
                 }`}
               >
-                4 Spaces
+                {t("common.fourSpaces")}
               </button>
             </div>
           </div>
 
           <div className="flex flex-wrap gap-3">
             <button onClick={format} className="btn-primary">
-              Format
+              {t("common.formatJson")}
             </button>
             <button onClick={minify} className="btn-secondary">
-              Minify
+              {t("common.minifyJson")}
             </button>
             <button onClick={validate} className="btn-secondary">
-              Validate
+              {t("common.validateJson")}
             </button>
           </div>
         </div>
@@ -136,7 +138,7 @@ export function JsonFormatter() {
 
       {error && (
         <div className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
-          <strong>JSON Error:</strong> {error}
+          <strong>{t("common.jsonError")}</strong> {error}
         </div>
       )}
 
@@ -150,7 +152,7 @@ export function JsonFormatter() {
         <div>
           <div className="mb-2 flex items-center justify-between">
             <label htmlFor="json-output" className="text-sm font-medium text-slate-600">
-              Result
+              {t("common.result")}
             </label>
             <CopyButton text={output} label="JSON" />
           </div>
@@ -170,7 +172,7 @@ export function JsonFormatter() {
           disabled={!input}
           className="btn-secondary"
         >
-          Clear
+          {t("common.clear")}
         </button>
       </div>
     </div>

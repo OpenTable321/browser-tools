@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState, useCallback } from "react";
+import { useTranslation } from "@/i18n/LanguageProvider";
 import { ImageDropZone } from "@/components/ImageDropZone";
 import {
   formatBytes,
@@ -14,13 +15,13 @@ import {
 type OutputFormat = "image/png" | "image/jpeg";
 type AspectPreset = "free" | "1:1" | "4:3" | "16:9" | "3:4" | "9:16";
 
-const PRESETS: { label: string; value: AspectPreset; ratio: number | null }[] = [
-  { label: "Free", value: "free", ratio: null },
-  { label: "1:1", value: "1:1", ratio: 1 },
-  { label: "4:3", value: "4:3", ratio: 4 / 3 },
-  { label: "3:4", value: "3:4", ratio: 3 / 4 },
-  { label: "16:9", value: "16:9", ratio: 16 / 9 },
-  { label: "9:16", value: "9:16", ratio: 9 / 16 },
+const PRESETS: { labelKey: string | null; label: string; value: AspectPreset; ratio: number | null }[] = [
+  { labelKey: "common.free", label: "", value: "free", ratio: null },
+  { labelKey: null, label: "1:1", value: "1:1", ratio: 1 },
+  { labelKey: null, label: "4:3", value: "4:3", ratio: 4 / 3 },
+  { labelKey: null, label: "3:4", value: "3:4", ratio: 3 / 4 },
+  { labelKey: null, label: "16:9", value: "16:9", ratio: 16 / 9 },
+  { labelKey: null, label: "9:16", value: "9:16", ratio: 9 / 16 },
 ];
 
 interface CropRect {
@@ -31,6 +32,7 @@ interface CropRect {
 }
 
 export function ImageCropper() {
+  const { t } = useTranslation();
   const [originalUrl, setOriginalUrl] = useState<string | null>(null);
   const [fileName, setFileName] = useState("");
   const [originalSize, setOriginalSize] = useState(0);
@@ -74,7 +76,7 @@ export function ImageCropper() {
       setCrop({ x: 0, y: 0, w: img.naturalWidth, h: img.naturalHeight });
       setResult(null);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Failed to load image.");
+      setError(err instanceof Error ? err.message : t("common.failedToLoadImage"));
     } finally {
       setIsProcessing(false);
     }
@@ -162,7 +164,7 @@ export function ImageCropper() {
     const canvas = canvasRef.current;
     if (!img || !canvas) return;
     if (crop.w < 1 || crop.h < 1) {
-      setError("Crop area is too small.");
+      setError(t("common.cropAreaTooSmall"));
       return;
     }
 
@@ -187,7 +189,7 @@ export function ImageCropper() {
         return { blob, url };
       });
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Failed to crop image.");
+      setError(err instanceof Error ? err.message : t("common.failedToCrop"));
     } finally {
       setIsProcessing(false);
     }
@@ -219,8 +221,8 @@ export function ImageCropper() {
         <ImageDropZone
           onFileSelect={handleFileSelect}
           accept="image/jpeg,image/png,image/webp"
-          label="Drop an image here or click to upload"
-          hint="Supports JPG, PNG, and WebP — cropped entirely in your browser"
+          label={t("common.dropImageHere")}
+          hint={t("common.croppedInBrowser")}
         />
       )}
 
@@ -243,12 +245,12 @@ export function ImageCropper() {
               onClick={handleReset}
               className="text-sm font-medium text-slate-500 transition hover:text-slate-700"
             >
-              ← Choose different image
+              {t("common.chooseDifferentImage")}
             </button>
           </div>
 
           <div className="rounded-xl border border-slate-200 bg-white p-6">
-            <h3 className="mb-4 text-sm font-semibold text-slate-700">Aspect Ratio Presets</h3>
+            <h3 className="mb-4 text-sm font-semibold text-slate-700">{t("common.aspectRatioPresets")}</h3>
             <div className="mb-4 flex flex-wrap gap-2">
               {PRESETS.map((p) => (
                 <button
@@ -260,7 +262,7 @@ export function ImageCropper() {
                       : "bg-slate-100 text-slate-700 hover:bg-slate-200"
                   }`}
                 >
-                  {p.label}
+                  {p.labelKey ? t(p.labelKey) : p.label}
                 </button>
               ))}
             </div>
@@ -300,12 +302,12 @@ export function ImageCropper() {
             </div>
 
             <p className="mt-2 text-xs text-slate-500">
-              Drag the crop area to move. Drag the bottom-right handle to resize.
+              {t("common.dragCropArea")}
             </p>
           </div>
 
           <div className="rounded-xl border border-slate-200 bg-white p-6">
-            <h3 className="mb-4 text-sm font-semibold text-slate-700">Output Settings</h3>
+            <h3 className="mb-4 text-sm font-semibold text-slate-700">{t("common.outputSettings")}</h3>
             <div className="flex flex-wrap gap-2">
               {(["image/png", "image/jpeg"] as OutputFormat[]).map((fmt) => (
                 <button
@@ -325,7 +327,7 @@ export function ImageCropper() {
             {format === "image/jpeg" && (
               <div className="mt-4">
                 <label htmlFor="crop-quality" className="mb-2 block text-sm font-medium text-slate-600">
-                  Quality:{" "}
+                  {t("common.quality")}:{" "}
                   <span className="font-bold text-brand-600">{Math.round(quality * 100)}%</span>
                 </label>
                 <input
@@ -342,16 +344,16 @@ export function ImageCropper() {
             )}
 
             <div className="mt-4 text-sm text-slate-600">
-              Crop area: {crop.w}×{crop.h}px at ({crop.x}, {crop.y})
+              {t("common.cropArea", { w: crop.w, h: crop.h, x: crop.x, y: crop.y })}
             </div>
 
             <div className="mt-6 flex flex-wrap gap-3">
               <button onClick={handleCrop} disabled={isProcessing} className="btn-primary">
-                {isProcessing ? "Processing…" : "Crop Image"}
+                {isProcessing ? t("common.processing") : t("common.cropImage")}
               </button>
               {result && (
                 <button onClick={handleDownload} className="btn-secondary">
-                  Download
+                  {t("common.download")}
                 </button>
               )}
             </div>
@@ -359,7 +361,7 @@ export function ImageCropper() {
 
           {result && (
             <div className="rounded-xl border border-slate-200 bg-white p-4">
-              <h3 className="mb-3 text-sm font-semibold text-slate-700">Cropped Result</h3>
+              <h3 className="mb-3 text-sm font-semibold text-slate-700">{t("common.croppedResult")}</h3>
               <div
                 className="flex items-center justify-center overflow-hidden rounded-lg bg-slate-50"
                 style={{ minHeight: "200px" }}

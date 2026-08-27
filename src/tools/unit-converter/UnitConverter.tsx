@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useMemo } from "react";
+import { useTranslation } from "@/i18n/LanguageProvider";
 
 type Category = "length" | "weight" | "temperature" | "area" | "volume" | "speed" | "time";
 
@@ -89,6 +90,7 @@ const CATEGORY_LABELS: Record<Category, string> = {
 };
 
 export function UnitConverter() {
+  const { t } = useTranslation();
   const [category, setCategory] = useState<Category>("length");
   const [fromUnit, setFromUnit] = useState(0);
   const [toUnit, setToUnit] = useState(1);
@@ -102,7 +104,7 @@ export function UnitConverter() {
     const val = parseFloat(inputValue);
     if (isNaN(val)) {
       if (inputValue.trim()) {
-        setError("Please enter a valid number.");
+        setError(t("common.pleaseEnterValidNumber"));
       }
       return null;
     }
@@ -130,7 +132,7 @@ export function UnitConverter() {
   return (
     <div className="space-y-6">
       <div className="rounded-xl border border-slate-200 bg-white p-6">
-        <h3 className="mb-4 text-sm font-semibold text-slate-700">Category</h3>
+        <h3 className="mb-4 text-sm font-semibold text-slate-700">{t("common.category")}</h3>
         <div className="flex flex-wrap gap-2">
           {(Object.keys(UNITS) as Category[]).map((cat) => (
             <button
@@ -142,7 +144,7 @@ export function UnitConverter() {
                   : "bg-slate-100 text-slate-700 hover:bg-slate-200"
               }`}
             >
-              {CATEGORY_LABELS[cat]}
+              {cat === "length" ? t("common.unitLength") : cat === "weight" ? t("common.unitWeight") : cat === "temperature" ? t("common.unitTemperature") : cat === "area" ? t("common.unitArea") : cat === "volume" ? t("common.unitVolume") : cat === "speed" ? t("common.unitSpeed") : t("common.unitTime")}
             </button>
           ))}
         </div>
@@ -152,7 +154,7 @@ export function UnitConverter() {
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
           <div>
             <label htmlFor="uc-from" className="mb-2 block text-sm font-medium text-slate-600">
-              From
+              {t("common.fromUnit")}
             </label>
             <select
               id="uc-from"
@@ -170,15 +172,15 @@ export function UnitConverter() {
               type="number"
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
-              placeholder="Enter value…"
+              placeholder={t("common.enterValue")}
               className="input-field"
-              aria-label="Value to convert from"
+              aria-label={t("common.swapUnits")}
             />
           </div>
 
           <div>
             <label htmlFor="uc-to" className="mb-2 block text-sm font-medium text-slate-600">
-              To
+              {t("common.toUnit")}
             </label>
             <select
               id="uc-to"
@@ -202,9 +204,9 @@ export function UnitConverter() {
           <button
             onClick={swap}
             className="rounded-lg bg-slate-100 px-4 py-2 text-sm font-medium text-slate-700 transition hover:bg-slate-200"
-            aria-label="Swap units"
+            aria-label={t("common.swapUnits")}
           >
-            ⇅ Swap
+            {t("common.swap")}
           </button>
         </div>
       </div>

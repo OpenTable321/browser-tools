@@ -2,19 +2,20 @@
 
 import { ImageFormatConverter } from "@/components/ImageFormatConverter";
 import type { ConverterConfig } from "@/components/ImageFormatConverter";
-
-const config: ConverterConfig = {
-  acceptedTypes: ["image/webp"],
-  acceptedExtensions: ".webp",
-  outputFormat: "image/png",
-  outputExtension: "png",
-  outputLabel: "PNG",
-  supportsQuality: false,
-  defaultQuality: 1,
-  dropLabel: "Drop a WebP image here or click to upload",
-  dropHint: "Converted to PNG entirely in your browser — no uploads",
-};
+import { useTranslation } from "@/i18n/LanguageProvider";
 
 export function WebpToPng() {
+  const { t } = useTranslation();
+  const config: ConverterConfig = {
+    acceptedTypes: ["image/webp"],
+    acceptedExtensions: ".webp",
+    outputFormat: "image/png",
+    outputExtension: "png",
+    outputLabel: "PNG",
+    supportsQuality: false,
+    defaultQuality: 1,
+    dropLabel: t("common.dropWebpHere"),
+    dropHint: t("common.convertedToPng"),
+  };
   return <ImageFormatConverter config={config} />;
 }

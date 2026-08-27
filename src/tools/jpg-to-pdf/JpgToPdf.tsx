@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslation } from "@/i18n/LanguageProvider";
 import { MultiFileDropZone } from "@/components/MultiFileDropZone";
 import {
   formatBytes,
@@ -26,6 +27,7 @@ const PAGE_DIMENSIONS: Record<PageSize, { width: number; height: number }> = {
 };
 
 export function JpgToPdf() {
+  const { t } = useTranslation();
   const [images, setImages] = useState<ImageItem[]>([]);
   const [pageSize, setPageSize] = useState<PageSize>("a4");
   const [orientation, setOrientation] = useState<Orientation>("portrait");
@@ -37,7 +39,7 @@ export function JpgToPdf() {
     setError(null);
 
     if (images.length + files.length > MAX_JPG_TO_PDF_IMAGES) {
-      setError(`Maximum ${MAX_JPG_TO_PDF_IMAGES} images allowed.`);
+      setError(t("common.maxImagesAllowed", { count: MAX_JPG_TO_PDF_IMAGES }));
       return;
     }
 
@@ -63,7 +65,7 @@ export function JpgToPdf() {
       }
       setImages((prev) => [...prev, ...newItems]);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Failed to load images.");
+      setError(err instanceof Error ? err.message : t("common.failedToLoadImages"));
     } finally {
       setIsLoading(false);
     }
@@ -155,7 +157,7 @@ export function JpgToPdf() {
 
       pdf.save("images.pdf");
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Failed to generate PDF.");
+      setError(err instanceof Error ? err.message : t("common.failedToGeneratePdf"));
     } finally {
       setIsProcessing(false);
     }
@@ -172,8 +174,8 @@ export function JpgToPdf() {
         <MultiFileDropZone
           onFilesSelected={handleFilesSelected}
           accept="image/jpeg,image/png,image/webp"
-          label="Drop images here or click to upload"
-          hint="JPG, PNG, or WebP — combined into a single PDF in your browser"
+          label={t("common.dropImagesHere")}
+          hint={t("common.combinedIntoPdf")}
           maxFiles={MAX_JPG_TO_PDF_IMAGES}
         />
       )}
@@ -186,7 +188,7 @@ export function JpgToPdf() {
 
       {isLoading && (
         <div className="rounded-lg border border-brand-200 bg-brand-50 px-4 py-3 text-sm text-brand-700">
-          Loading images…
+          {t("common.loadingImages")}
         </div>
       )}
 
@@ -194,13 +196,13 @@ export function JpgToPdf() {
         <div className="space-y-6">
           <div className="flex items-center justify-between">
             <p className="text-sm font-medium text-slate-700">
-              {images.length} image{images.length > 1 ? "s" : ""} selected
+              {t("common.imagesSelected", { count: images.length })}
             </p>
             <button
               onClick={handleReset}
               className="text-sm font-medium text-slate-500 transition hover:text-slate-700"
             >
-              ← Start over
+              {t("common.startOver")}
             </button>
           </div>
 
@@ -265,21 +267,21 @@ export function JpgToPdf() {
             <MultiFileDropZone
               onFilesSelected={handleFilesSelected}
               accept="image/jpeg,image/png,image/webp"
-              label="Add more images"
-              hint="Click or drop to add"
+              label={t("common.addMoreImages")}
+              hint={t("common.clickOrDropToAdd")}
               maxFiles={MAX_JPG_TO_PDF_IMAGES}
             />
           </div>
 
           <div className="rounded-xl border border-slate-200 bg-white p-6">
             <h3 className="mb-4 text-sm font-semibold text-slate-700">
-              PDF Settings
+              {t("common.pdfSettings")}
             </h3>
 
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
               <div>
                 <label className="mb-2 block text-sm font-medium text-slate-600">
-                  Page Size
+                  {t("common.pageSize")}
                 </label>
                 <div className="flex flex-wrap gap-2">
                   {(["a4", "letter", "original"] as PageSize[]).map((size) => (
@@ -292,7 +294,7 @@ export function JpgToPdf() {
                           : "bg-slate-100 text-slate-700 hover:bg-slate-200"
                       }`}
                     >
-                      {size === "a4" ? "A4" : size === "letter" ? "Letter" : "Original"}
+                      {size === "a4" ? "A4" : size === "letter" ? "Letter" : t("common.original")}
                     </button>
                   ))}
                 </div>
@@ -301,7 +303,7 @@ export function JpgToPdf() {
               {pageSize !== "original" && (
                 <div>
                   <label className="mb-2 block text-sm font-medium text-slate-600">
-                    Orientation
+                    {t("common.orientation")}
                   </label>
                   <div className="flex gap-2">
                     <button
@@ -312,7 +314,7 @@ export function JpgToPdf() {
                           : "bg-slate-100 text-slate-700 hover:bg-slate-200"
                       }`}
                     >
-                      Portrait
+                      {t("common.portrait")}
                     </button>
                     <button
                       onClick={() => setOrientation("landscape")}
@@ -322,7 +324,7 @@ export function JpgToPdf() {
                           : "bg-slate-100 text-slate-700 hover:bg-slate-200"
                       }`}
                     >
-                      Landscape
+                      {t("common.landscape")}
                     </button>
                   </div>
                 </div>
@@ -335,7 +337,7 @@ export function JpgToPdf() {
                 disabled={isProcessing || images.length === 0}
                 className="btn-primary"
               >
-                {isProcessing ? "Generating PDF…" : `Generate PDF (${images.length} page${images.length > 1 ? "s" : ""})`}
+                {isProcessing ? t("common.generatingPdf") : `${t("common.generatePdf")} (${images.length} ${images.length > 1 ? t("common.pagesLabel", { count: images.length }) : t("common.page")})`}
               </button>
             </div>
           </div>
