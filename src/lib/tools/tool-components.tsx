@@ -74,6 +74,17 @@ import { HexBase64Converter } from "@/tools/hex-base64-converter/HexBase64Conver
 import { UnicodeInspector } from "@/tools/unicode-inspector/UnicodeInspector";
 import { RandomStringGenerator } from "@/tools/random-string-generator/RandomStringGenerator";
 import { AsciiArtGenerator } from "@/tools/ascii-art-generator/AsciiArtGenerator";
+import { TextAnonymizer } from "@/tools/text-anonymizer/TextAnonymizer";
+import { MarkdownTableGenerator } from "@/tools/markdown-table-generator/MarkdownTableGenerator";
+import { JsonPathFinder } from "@/tools/json-path-finder/JsonPathFinder";
+import { CssGlassmorphismStudio } from "@/tools/css-glassmorphism-studio/CssGlassmorphismStudio";
+import { CssClipPathMaker } from "@/tools/css-clip-path-maker/CssClipPathMaker";
+import { ColorblindSimulator } from "@/tools/colorblind-simulator/ColorblindSimulator";
+import { SocialMetaPreviewer } from "@/tools/social-meta-previewer/SocialMetaPreviewer";
+import { NginxFormatter } from "@/tools/nginx-formatter/NginxFormatter";
+import { CsvToSqlConverter } from "@/tools/csv-to-sql-converter/CsvToSqlConverter";
+import { HomoglyphDetector } from "@/tools/homoglyph-detector/HomoglyphDetector";
+import { JwtSpoofingSimulator } from "@/tools/jwt-spoofing-simulator/JwtSpoofingSimulator";
 
 const JpgToPdf = dynamic(() =>
   import("@/tools/jpg-to-pdf/JpgToPdf").then((m) => m.JpgToPdf),
@@ -176,6 +187,17 @@ const toolComponents: Record<string, ComponentType> = {
   "unicode-inspector": UnicodeInspector,
   "random-string-generator": RandomStringGenerator,
   "ascii-art-generator": AsciiArtGenerator,
+  "text-anonymizer": TextAnonymizer,
+  "markdown-table-generator": MarkdownTableGenerator,
+  "json-path-finder": JsonPathFinder,
+  "css-glassmorphism-studio": CssGlassmorphismStudio,
+  "css-clip-path-maker": CssClipPathMaker,
+  "colorblind-simulator": ColorblindSimulator,
+  "social-meta-previewer": SocialMetaPreviewer,
+  "nginx-formatter": NginxFormatter,
+  "csv-to-sql-converter": CsvToSqlConverter,
+  "homoglyph-detector": HomoglyphDetector,
+  "jwt-spoofing-simulator": JwtSpoofingSimulator,
 };
 
 export function getToolComponent(slug: string): ComponentType | undefined {

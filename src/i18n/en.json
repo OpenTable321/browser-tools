@@ -278,6 +278,63 @@
     "asciiInput": "Enter text (A-Z, 0-9)",
     "asciiFont": "Font",
     "asciiOutput": "ASCII Art",
+    "anonEmail": "Emails",
+    "anonPhone": "Phone numbers",
+    "anonIP": "IP addresses",
+    "anonInput": "Enter text to anonymize",
+    "anonPlaceholder": "Contact john@example.com or call +1-555-123-4567. Server IP: 192.168.1.1",
+    "anonOutput": "Anonymized text",
+    "mdTableRows": "Rows",
+    "mdTableCols": "Columns",
+    "mdTableOutput": "Markdown table",
+    "jsonPathInput": "Paste JSON",
+    "jsonPathError": "Invalid JSON",
+    "jsonPathTree": "Tree view",
+    "jsonPathCopy": "copy path",
+    "jsonPathSelected": "Selected path",
+    "glassBlur": "Blur",
+    "glassOpacity": "Opacity",
+    "glassRadius": "Border radius",
+    "glassShadow": "Shadow spread",
+    "glassTint": "Tint color",
+    "glassPreview": "Glass effect",
+    "glassOutput": "CSS code",
+    "clipAddPoint": "Add point",
+    "clipRemovePoint": "Remove point",
+    "clipOutput": "CSS code",
+    "cbForeground": "Foreground",
+    "cbBackground": "Background",
+    "cbProtanopia": "Protanopia (red-blind)",
+    "cbDeuteranopia": "Deuteranopia (green-blind)",
+    "cbTritanopia": "Tritanopia (blue-blind)",
+    "cbNormalRatio": "Normal contrast",
+    "cbRatio": "Contrast",
+    "socialTitle": "Title",
+    "socialSiteName": "Site name",
+    "socialDescription": "Description",
+    "socialURL": "URL",
+    "socialImage": "Image URL",
+    "socialGoogle": "Google SERP",
+    "socialFacebook": "Facebook",
+    "socialTwitter": "Twitter / X",
+    "socialDiscord": "Discord",
+    "socialImagePreview": "Image preview",
+    "nginxInput": "Paste Nginx config",
+    "nginxOutput": "Formatted config",
+    "csvSqlTable": "Table name",
+    "csvSqlSeparator": "Separator",
+    "csvSqlInput": "Paste CSV data",
+    "csvSqlOutput": "SQL INSERT statements",
+    "homoglyphInput": "Enter text or URL",
+    "homoglyphHighlighted": "Highlighted",
+    "homoglyphDetected": "Detected homoglyphs",
+    "homoglyphClean": "No homoglyphs detected — text looks clean.",
+    "jwtSpoofWarning": "Educational tool — do not use to attack real systems",
+    "jwtSpoofWarningDesc": "The modified token will fail signature verification. A properly implemented server will reject it.",
+    "jwtSpoofInput": "Paste JWT token",
+    "jwtSpoofHeader": "Header",
+    "jwtSpoofPayload": "Payload (editable)",
+    "jwtSpoofModified": "Modified token",
     "removeDuplicates": "Remove Duplicates",
     "duplicatesRemoved": "{count} duplicates removed",
     "caseSensitive": "Case sensitive",
@@ -1753,6 +1810,116 @@
       "faq": [
         { "question": "What characters are supported?", "answer": "The block font supports A-Z (uppercase), 0-9, and space. Lowercase is converted to uppercase." },
         { "question": "Can I use different fonts?", "answer": "The current version includes one block font. Additional fonts may be added in future updates." }
+      ]
+    },
+    "text-anonymizer": {
+      "name": "Text Anonymizer & PII Masker",
+      "description": "Mask emails, phone numbers, and IP addresses in text. Privacy protection with toggleable redaction rules.",
+      "longDescription": "Protect sensitive information in logs and text. The tool scans for emails, phone numbers, and IP addresses using regex and replaces them with redaction markers.",
+      "limitations": { "0": "Phone number detection uses pattern matching — some formats may be missed", "1": "Email regex covers standard formats but not all edge cases" },
+      "faq": [
+        { "question": "What PII does the tool detect?", "answer": "Emails, phone numbers (international and US formats), and IPv4 addresses. Each type can be toggled on or off." },
+        { "question": "Is the redaction accurate?", "answer": "The tool uses regex patterns. While it covers common formats, no regex is perfect. Verify for critical compliance use cases." }
+      ]
+    },
+    "markdown-table-generator": {
+      "name": "Markdown Table Generator",
+      "description": "Create Markdown tables visually with an interactive grid editor. Adjustable rows, columns, and per-column alignment.",
+      "longDescription": "Build Markdown tables with an Excel-style grid editor. Set rows and columns, type content, choose alignment per column.",
+      "limitations": { "0": "Maximum 20 rows and 10 columns", "1": "Does not support cell merging or complex formatting" },
+      "faq": [
+        { "question": "How do I set column alignment?", "answer": "Each column header has a dropdown selector. Choose Left, Center, or Right." },
+        { "question": "Can I add more rows or columns?", "answer": "Yes. Use the Rows and Columns number inputs to resize. Existing data is preserved." }
+      ]
+    },
+    "json-path-finder": {
+      "name": "JSON Path Finder",
+      "description": "Paste JSON and explore a searchable tree. Click any node to get its dot-notation path for easy access.",
+      "longDescription": "Navigate complex nested JSON structures with an interactive tree view. Click any leaf node to see and copy its dot-notation path.",
+      "limitations": { "0": "Does not support JSONPath or jq-style queries", "1": "Very large JSON files may render slowly" },
+      "faq": [
+        { "question": "What format are paths in?", "answer": "Paths use dot notation for object keys and bracket notation for array indices. Example: $.users[0].profile.name" },
+        { "question": "Can I copy the path?", "answer": "Yes. Click any leaf node and the path appears with a copy button." }
+      ]
+    },
+    "css-glassmorphism-studio": {
+      "name": "CSS Glassmorphism Studio",
+      "description": "Create glassmorphism effects with backdrop-filter. Adjust blur, opacity, radius, tint, and shadow with live preview.",
+      "longDescription": "Design modern glassmorphism (frosted glass) UI effects with an interactive editor. Control backdrop blur, opacity, radius, tint, and shadow.",
+      "limitations": { "0": "backdrop-filter requires modern browser support", "1": "Effect may not render without content behind the element" },
+      "faq": [
+        { "question": "What is glassmorphism?", "answer": "Glassmorphism uses backdrop-filter blur with semi-transparent backgrounds to create a frosted glass effect." },
+        { "question": "Does backdrop-filter work in all browsers?", "answer": "Most modern browsers support it. Safari requires the -webkit- prefix (included automatically)." }
+      ]
+    },
+    "css-clip-path-maker": {
+      "name": "CSS Clip-Path Maker",
+      "description": "Create CSS clip-path polygons visually. Drag nodes, add points, and copy clip-path code with live preview.",
+      "longDescription": "Design CSS clip-path polygons with an interactive visual editor. Drag nodes, add or remove points, and see the clipped result in real time.",
+      "limitations": { "0": "Only supports polygon clip-path", "1": "Maximum 12 polygon points", "2": "Drag-and-drop may not work on touch devices" },
+      "faq": [
+        { "question": "What is clip-path?", "answer": "The clip-path CSS property creates a clipping region that determines which parts of an element are visible." },
+        { "question": "Can I use circle or ellipse clip-paths?", "answer": "The current version only supports polygon clip-paths. Circle and ellipse may be added later." }
+      ]
+    },
+    "colorblind-simulator": {
+      "name": "Colorblind Vision Simulator",
+      "description": "Simulate how colors appear to people with Protanopia, Deuteranopia, and Tritanopia. Includes WCAG contrast scores.",
+      "longDescription": "Test color combinations for accessibility. Pick foreground and background colors, then see how they appear under three types of color blindness.",
+      "limitations": { "0": "Simulation is an approximation — actual perception varies", "1": "Does not cover anomalous trichromacy (partial color blindness)" },
+      "faq": [
+        { "question": "What are the three color blindness types?", "answer": "Protanopia (red-blind), Deuteranopia (green-blind), and Tritanopia (blue-blind)." },
+        { "question": "Is the simulation accurate?", "answer": "The simulation uses established transformation matrices. It provides a good approximation but cannot perfectly replicate individual perception." }
+      ]
+    },
+    "social-meta-previewer": {
+      "name": "Social Media Meta Tags Previewer",
+      "description": "Preview how your website looks on Google, Facebook, Twitter/X, and Discord. Real-time social card mockups.",
+      "longDescription": "Enter your page title, description, site name, URL, and image URL to see real-time visual previews of how your link will appear when shared.",
+      "limitations": { "0": "Previews are approximations — actual rendering may vary", "1": "Image is not loaded — only the URL is shown" },
+      "faq": [
+        { "question": "What meta tags do these previews correspond to?", "answer": "Google uses title and meta description. Facebook uses og: tags. Twitter uses twitter: tags. Discord uses og: tags." },
+        { "question": "Why doesn't the image show?", "answer": "The tool shows a placeholder. In production, the actual image would be loaded from your og:image URL." }
+      ]
+    },
+    "nginx-formatter": {
+      "name": "Nginx Config Beautifier",
+      "description": "Format and beautify Nginx configuration files. Proper indentation for server, location, and proxy directives.",
+      "longDescription": "Clean up messy Nginx config files with proper indentation. The formatter parses directives and aligns brackets for server, location, and other blocks.",
+      "limitations": { "0": "Uses simple bracket-based indentation — does not validate syntax", "1": "Does not support inline comments within directives" },
+      "faq": [
+        { "question": "Does the formatter validate my Nginx config?", "answer": "No. The tool only formats indentation. Use nginx -t to validate your config." },
+        { "question": "Are comments preserved?", "answer": "Yes. Lines starting with # are preserved without indentation changes." }
+      ]
+    },
+    "csv-to-sql-converter": {
+      "name": "CSV to SQL INSERT Generator",
+      "description": "Convert CSV data into SQL INSERT statements. Custom table name, separator selection, and auto number detection.",
+      "longDescription": "Transform CSV data into ready-to-use SQL INSERT statements. Enter a table name, choose separator, paste CSV, and get formatted INSERT statements.",
+      "limitations": { "0": "Auto-detects numbers using Number() — locale-specific formats may not work", "1": "Does not handle CSV values containing newlines within quoted fields" },
+      "faq": [
+        { "question": "How are numbers detected?", "answer": "The tool uses Number() conversion. If a value converts to a valid number, it is inserted without quotes." },
+        { "question": "Can I use a custom table name?", "answer": "Yes. Enter the table name in the input field. The first row of your CSV is used as column names." }
+      ]
+    },
+    "homoglyph-detector": {
+      "name": "Unicode Homoglyph Detector",
+      "description": "Detect lookalike Unicode characters in text. Phishing defense tool for identifying Cyrillic, Greek, and IPA homoglyphs.",
+      "longDescription": "Protect against phishing and punycode attacks. Paste a URL or text and the tool highlights hidden homoglyphs from different scripts.",
+      "limitations": { "0": "Covers common Cyrillic, Greek, and IPA homoglyphs — not exhaustive", "1": "Does not check domain registration or SSL certificates" },
+      "faq": [
+        { "question": "What is a homoglyph?", "answer": "A homoglyph is a character from one script that looks identical to a character from another script, like Cyrillic 'а' and Latin 'a'." },
+        { "question": "How do homoglyph attacks work?", "answer": "Attackers register domains using homoglyphs (e.g., 'аpple.com' with Cyrillic 'а'). The domain looks legitimate but resolves to a different server." }
+      ]
+    },
+    "jwt-spoofing-simulator": {
+      "name": "JWT Payload Spoofing Simulator",
+      "description": "Educational tool: decode a JWT, edit its payload, and re-encode it. Includes security warning about signature verification.",
+      "longDescription": "An educational security tool for understanding JWT vulnerabilities. Paste a JWT, decode it, edit the payload, and see the re-encoded token with a security warning.",
+      "limitations": { "0": "Only modifies the payload — the signature remains unchanged", "1": "Educational use only — do not use to attack real systems" },
+      "faq": [
+        { "question": "Will the modified token work?", "answer": "No. The JWT signature is computed using the header and payload with a secret key. Changing the payload invalidates the signature." },
+        { "question": "Why is this tool useful?", "answer": "It demonstrates why JWT signature verification is critical. If a server fails to verify signatures, an attacker could escalate privileges." }
       ]
     }
   }
