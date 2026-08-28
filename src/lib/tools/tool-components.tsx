@@ -61,6 +61,19 @@ import { CssMinifier } from "@/tools/css-minifier/CssMinifier";
 import { ContrastChecker } from "@/tools/contrast-checker/ContrastChecker";
 import { LoanCalculator } from "@/tools/loan-calculator/LoanCalculator";
 import { TextLineCounter } from "@/tools/text-line-counter/TextLineCounter";
+import { CronExpressionGenerator } from "@/tools/cron-expression-generator/CronExpressionGenerator";
+import { CssGradientGenerator } from "@/tools/css-gradient-generator/CssGradientGenerator";
+import { SalesTaxCalculator } from "@/tools/sales-tax-calculator/SalesTaxCalculator";
+import { RandomChoicePicker } from "@/tools/random-choice-picker/RandomChoicePicker";
+import { CssBoxShadowGenerator } from "@/tools/css-box-shadow-generator/CssBoxShadowGenerator";
+import { DataSizeConverter } from "@/tools/data-size-converter/DataSizeConverter";
+import { TemperatureConverter } from "@/tools/temperature-converter/TemperatureConverter";
+import { LengthConverter } from "@/tools/length-converter/LengthConverter";
+import { WeightConverter } from "@/tools/weight-converter/WeightConverter";
+import { HexBase64Converter } from "@/tools/hex-base64-converter/HexBase64Converter";
+import { UnicodeInspector } from "@/tools/unicode-inspector/UnicodeInspector";
+import { RandomStringGenerator } from "@/tools/random-string-generator/RandomStringGenerator";
+import { AsciiArtGenerator } from "@/tools/ascii-art-generator/AsciiArtGenerator";
 
 const JpgToPdf = dynamic(() =>
   import("@/tools/jpg-to-pdf/JpgToPdf").then((m) => m.JpgToPdf),
@@ -150,6 +163,19 @@ const toolComponents: Record<string, ComponentType> = {
   "contrast-checker": ContrastChecker,
   "loan-calculator": LoanCalculator,
   "text-line-counter": TextLineCounter,
+  "cron-expression-generator": CronExpressionGenerator,
+  "css-gradient-generator": CssGradientGenerator,
+  "sales-tax-calculator": SalesTaxCalculator,
+  "random-choice-picker": RandomChoicePicker,
+  "css-box-shadow-generator": CssBoxShadowGenerator,
+  "data-size-converter": DataSizeConverter,
+  "temperature-converter": TemperatureConverter,
+  "length-converter": LengthConverter,
+  "weight-converter": WeightConverter,
+  "hex-base64-converter": HexBase64Converter,
+  "unicode-inspector": UnicodeInspector,
+  "random-string-generator": RandomStringGenerator,
+  "ascii-art-generator": AsciiArtGenerator,
 };
 
 export function getToolComponent(slug: string): ComponentType | undefined {
