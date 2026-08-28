@@ -1667,6 +1667,45 @@ export const toolRegistry: ToolMeta[] = [
       },
     ],
   },
+  {
+    slug: "json-validator",
+    name: "JSON Validator & Linter",
+    description:
+      "Validate and lint JSON in real time. Get precise error locations with line numbers, or format valid JSON with 2 or 4 space indentation — all in your browser.",
+    longDescription:
+      "Validate and beautify JSON data instantly. Paste your JSON and the tool checks syntax in real time. If valid, it formats the JSON with clean indentation (2 or 4 spaces) and shows key count and nesting depth. If invalid, it displays the exact error message, line number, column position, and highlights the problematic line with context — making it easy to find and fix syntax errors. All processing happens locally in your browser — your data never leaves your device.",
+    category: "developers",
+    keywords: [
+      "json validator",
+      "json linter",
+      "validate json",
+      "json checker",
+      "json syntax error",
+      "json formatter",
+      "json lint online",
+    ],
+    icon: "✅",
+    isClientSide: true,
+    relatedSlugs: ["json-formatter", "json-xml-converter", "sql-formatter"],
+    supportedFormats: ["JSON"],
+    limitations: [
+      "Uses JavaScript's native JSON.parse — does not support JSON5, JSONC, or comments",
+      "Error positions are extracted from the browser's error message and may vary slightly between browsers",
+      "Does not validate JSON Schema or data types — only syntax validation",
+    ],
+    faq: [
+      {
+        question: "How does the error location feature work?",
+        answer:
+          "When JSON.parse fails, the browser provides an error message with a character position. The tool converts this position to a line number and column, then displays the exact line where the error occurred along with surrounding context so you can quickly identify and fix the issue.",
+      },
+      {
+        question: "Can this tool validate JSON with comments (JSONC)?",
+        answer:
+          "No. This tool uses JavaScript's native JSON.parse, which strictly follows the JSON standard (RFC 8259). Comments, trailing commas, and unquoted keys are not valid JSON and will be reported as errors. Use a JSONC-aware tool if you need comment support.",
+      },
+    ],
+  },
 ];
 
 /* ---- Lookup helpers ---- */
