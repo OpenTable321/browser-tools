@@ -2771,6 +2771,40 @@ export const toolRegistry: ToolMeta[] = [
       { question: "How are next execution times calculated?", answer: "The tool iterates minute by minute from the current time, checking each field against the cron pattern. This is accurate but may be slow for very sparse schedules." },
     ],
   },
+  {
+    slug: "font-glyphs-analyzer",
+    name: "Font Glyphs Analyzer",
+    description: "Upload TTF, WOFF, or WOFF2 fonts to inspect glyph count, supported scripts (Latin, Cyrillic, Greek), and preview characters.",
+    longDescription: "A client-side font analysis tool. Drag and drop a .ttf, .otf, .woff, or .woff2 font file and the tool parses it in-browser using opentype.js. Displays glyph count, font family, units per em, ascender/descender, detected language scripts, and a visual grid of sample characters. All processing happens in your browser.",
+    category: "design",
+    keywords: ["font analyzer", "glyphs", "opentype", "ttf parser", "woff parser", "font inspector", "font subsetting", "character map"],
+    icon: "🔤",
+    isClientSide: true,
+    relatedSlugs: ["svg-path-editor", "css-animation-studio", "color-palette-generator"],
+    supportedFormats: ["TTF", "OTF", "WOFF", "WOFF2"],
+    limitations: ["WOFF2 support depends on browser opentype.js compatibility", "Does not perform actual font subsetting — analysis only", "Sample glyph grid shows up to 64 characters"],
+    faq: [
+      { question: "Does the tool upload my font files?", answer: "No. All font parsing happens in your browser using opentype.js. The file is never sent to a server." },
+      { question: "Can I subset fonts with this tool?", answer: "The current version analyzes and displays glyph information only. Font subsetting (creating a smaller font file) may be added in a future update." },
+    ],
+  },
+  {
+    slug: "qr-code-scanner",
+    name: "QR Code Scanner",
+    description: "Scan QR codes from uploaded images or live camera feed. Decodes entirely in-browser with copy support.",
+    longDescription: "A client-side QR code scanner with two modes. Upload an image file containing a QR code, or use your device camera for real-time scanning. The tool uses jsQR to decode QR codes entirely in your browser. Results can be copied instantly. No data is sent to any server.",
+    category: "developers",
+    keywords: ["qr scanner", "qr code reader", "qr decoder", "jsqr", "barcode scanner", "camera qr", "qr image scan"],
+    icon: "📷",
+    isClientSide: true,
+    relatedSlugs: ["qr-code-generator", "url-parser", "base64-image-coder"],
+    supportedFormats: ["PNG", "JPEG", "WebP", "Camera stream"],
+    limitations: ["Camera access requires HTTPS or localhost", "Low-quality or small QR codes may not be detected", "Camera mode requires user permission"],
+    faq: [
+      { question: "Does the tool work offline?", answer: "Yes. Once the page is loaded, all scanning happens in your browser. Camera access requires HTTPS or localhost for security." },
+      { question: "Why can't it detect my QR code?", answer: "Ensure the QR code is well-lit, centered, and fills a good portion of the image. Very small, blurry, or damaged QR codes may not be detected." },
+    ],
+  },
 ];
 
 /* ---- Lookup helpers ---- */

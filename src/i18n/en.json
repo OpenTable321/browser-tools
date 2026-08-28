@@ -433,6 +433,25 @@
     "cronSpecificDayOfWeek": "on {values}",
     "cronRangeDayOfWeek": "days {range}",
     "cronAtDayOfWeek": "on {value}",
+    "fontFile": "File",
+    "fontFamily": "Font family",
+    "fontGlyphs": "Total glyphs",
+    "fontUnitsPerEm": "Units per em",
+    "fontAscender": "Ascender",
+    "fontDescender": "Descender",
+    "fontScripts": "Supported scripts",
+    "fontGlyphGrid": "Sample glyphs",
+    "fontReadError": "Error reading font file",
+    "fontParseError": "Could not parse font — unsupported format or corrupted file",
+    "fontAnalyzing": "Analyzing font...",
+    "qrFileMode": "Upload image",
+    "qrCameraMode": "Camera scan",
+    "qrNotFound": "No QR code found in image",
+    "qrImgError": "Could not load image",
+    "qrCameraError": "Could not access camera. Please grant camera permission.",
+    "qrStartCamera": "Start camera",
+    "qrStopCamera": "Stop camera",
+    "qrResult": "Decoded result",
     "removeDuplicates": "Remove Duplicates",
     "duplicatesRemoved": "{count} duplicates removed",
     "caseSensitive": "Case sensitive",
@@ -2128,6 +2147,26 @@
       "faq": [
         { "question": "What format is supported?", "answer": "Standard 5-part cron: minute hour day-of-month month day-of-week." },
         { "question": "How are next execution times calculated?", "answer": "The tool iterates minute by minute from the current time, checking each field against the cron pattern." }
+      ]
+    },
+    "font-glyphs-analyzer": {
+      "name": "Font Glyphs Analyzer",
+      "description": "Upload TTF, WOFF, or WOFF2 fonts to inspect glyph count, supported scripts, and preview characters.",
+      "longDescription": "A client-side font analysis tool. Drag and drop a font file and the tool parses it in-browser using opentype.js.",
+      "limitations": { "0": "WOFF2 support depends on browser compatibility", "1": "Analysis only — does not perform font subsetting", "2": "Sample glyph grid shows up to 64 characters" },
+      "faq": [
+        { "question": "Does the tool upload my font files?", "answer": "No. All font parsing happens in your browser using opentype.js." },
+        { "question": "Can I subset fonts with this tool?", "answer": "The current version analyzes and displays glyph information only. Subsetting may be added later." }
+      ]
+    },
+    "qr-code-scanner": {
+      "name": "QR Code Scanner",
+      "description": "Scan QR codes from uploaded images or live camera feed. Decodes entirely in-browser with copy support.",
+      "longDescription": "A client-side QR code scanner with two modes. Upload an image or use your camera for real-time scanning using jsQR.",
+      "limitations": { "0": "Camera access requires HTTPS or localhost", "1": "Low-quality or small QR codes may not be detected", "2": "Camera mode requires user permission" },
+      "faq": [
+        { "question": "Does the tool work offline?", "answer": "Yes. All scanning happens in your browser. Camera requires HTTPS or localhost." },
+        { "question": "Why can't it detect my QR code?", "answer": "Ensure the QR code is well-lit, centered, and fills a good portion of the image." }
       ]
     }
   }

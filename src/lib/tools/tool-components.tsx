@@ -96,6 +96,8 @@ import { Base64ImageCoder } from "@/tools/base64-image-coder/Base64ImageCoder";
 import { HashGeneratorEngine } from "@/tools/hash-generator-engine/HashGeneratorEngine";
 import { RobotsTxtTester } from "@/tools/robots-txt-tester/RobotsTxtTester";
 import { CronExplainer } from "@/tools/cron-explainer/CronExplainer";
+import { FontGlyphsAnalyzer } from "@/tools/font-glyphs-analyzer/FontGlyphsAnalyzer";
+import { QrCodeScanner } from "@/tools/qr-code-scanner/QrCodeScanner";
 
 const JpgToPdf = dynamic(() =>
   import("@/tools/jpg-to-pdf/JpgToPdf").then((m) => m.JpgToPdf),
@@ -220,6 +222,8 @@ const toolComponents: Record<string, ComponentType> = {
   "hash-generator-engine": HashGeneratorEngine,
   "robots-txt-tester": RobotsTxtTester,
   "cron-explainer": CronExplainer,
+  "font-glyphs-analyzer": FontGlyphsAnalyzer,
+  "qr-code-scanner": QrCodeScanner,
 };
 
 export function getToolComponent(slug: string): ComponentType | undefined {
