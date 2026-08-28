@@ -1435,6 +1435,44 @@ export const toolRegistry: ToolMeta[] = [
       },
     ],
   },
+  {
+    slug: "markdown-to-html",
+    name: "Markdown to HTML Live Preview",
+    description:
+      "Write Markdown and see a live HTML preview side by side. Copy the generated HTML instantly — all in your browser, no uploads.",
+    longDescription:
+      "Convert Markdown to HTML in real time with a responsive split-screen editor. Type Markdown on the left and see the rendered preview on the right instantly. Switch between split view, preview-only, and raw HTML output modes. Supports headings, bold/italic, links, images, code blocks, inline code, lists, blockquotes, and horizontal rules. Copy the generated HTML with one click. All processing happens locally in your browser — your content never leaves your device.",
+    category: "text",
+    keywords: [
+      "markdown to html",
+      "markdown preview",
+      "markdown editor",
+      "md to html",
+      "live markdown preview",
+      "markdown converter",
+      "markdown renderer",
+    ],
+    icon: "📝",
+    isClientSide: true,
+    relatedSlugs: ["json-formatter", "text-diff-checker", "word-counter"],
+    supportedFormats: ["Markdown", "HTML"],
+    limitations: [
+      "Supports common Markdown features: headings, bold, italic, links, images, code blocks, lists, blockquotes, and horizontal rules",
+      "Tables and footnotes are not supported in this lightweight parser",
+    ],
+    faq: [
+      {
+        question: "What Markdown features are supported?",
+        answer:
+          "Headings (H1–H6), bold, italic, strikethrough, inline code, code blocks, links, images, unordered lists, ordered lists, blockquotes, and horizontal rules. Tables and footnotes are not supported.",
+      },
+      {
+        question: "Does this tool send my content to a server?",
+        answer:
+          "No. All Markdown parsing and HTML generation happens entirely in your browser. Your content is never transmitted to any server.",
+      },
+    ],
+  },
 ];
 
 /* ---- Lookup helpers ---- */
