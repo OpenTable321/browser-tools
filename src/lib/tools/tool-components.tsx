@@ -85,6 +85,12 @@ import { NginxFormatter } from "@/tools/nginx-formatter/NginxFormatter";
 import { CsvToSqlConverter } from "@/tools/csv-to-sql-converter/CsvToSqlConverter";
 import { HomoglyphDetector } from "@/tools/homoglyph-detector/HomoglyphDetector";
 import { JwtSpoofingSimulator } from "@/tools/jwt-spoofing-simulator/JwtSpoofingSimulator";
+import { SvgPathEditor } from "@/tools/svg-path-editor/SvgPathEditor";
+import { CanvasCodePainter } from "@/tools/canvas-code-painter/CanvasCodePainter";
+import { CssAnimationStudio } from "@/tools/css-animation-studio/CssAnimationStudio";
+import { CookieExplorer } from "@/tools/cookie-explorer/CookieExplorer";
+import { ExifLocationPlotter } from "@/tools/exif-location-plotter/ExifLocationPlotter";
+import { AudioTagReader } from "@/tools/audio-tag-reader/AudioTagReader";
 
 const JpgToPdf = dynamic(() =>
   import("@/tools/jpg-to-pdf/JpgToPdf").then((m) => m.JpgToPdf),
@@ -198,6 +204,12 @@ const toolComponents: Record<string, ComponentType> = {
   "csv-to-sql-converter": CsvToSqlConverter,
   "homoglyph-detector": HomoglyphDetector,
   "jwt-spoofing-simulator": JwtSpoofingSimulator,
+  "svg-path-editor": SvgPathEditor,
+  "canvas-code-painter": CanvasCodePainter,
+  "css-animation-studio": CssAnimationStudio,
+  "cookie-explorer": CookieExplorer,
+  "exif-location-plotter": ExifLocationPlotter,
+  "audio-tag-reader": AudioTagReader,
 };
 
 export function getToolComponent(slug: string): ComponentType | undefined {

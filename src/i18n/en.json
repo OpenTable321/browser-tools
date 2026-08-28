@@ -335,6 +335,50 @@
     "jwtSpoofHeader": "Header",
     "jwtSpoofPayload": "Payload (editable)",
     "jwtSpoofModified": "Modified token",
+    "svgPathInput": "SVG path data (d attribute)",
+    "svgPathNodes": "Detected nodes",
+    "svgPathOutput": "Path data",
+    "canvasRect": "Rect",
+    "canvasCircle": "Circle",
+    "canvasLine": "Line",
+    "canvasText": "Text",
+    "canvasFill": "Fill",
+    "canvasStroke": "Stroke",
+    "canvasClear": "Clear",
+    "canvasOutput": "Generated code",
+    "animProperty": "Property",
+    "animBgColor": "Background color",
+    "animTransform": "Transform scale",
+    "animDuration": "Duration",
+    "animAddKeyframe": "Add keyframe",
+    "animStop": "Stop",
+    "animRemove": "Remove",
+    "animOutput": "CSS code",
+    "cookieWarning": "This tool reads and writes to your browser's actual storage for the current domain only.",
+    "cookieTarget": "Storage target",
+    "cookieKey": "Key",
+    "cookieValue": "Value",
+    "cookieAdd": "Add",
+    "cookieRefresh": "Refresh",
+    "cookieClearAll": "Clear all",
+    "cookieDelete": "Delete",
+    "cookieEmpty": "No data stored",
+    "exifNotJpeg": "Only JPEG files with EXIF data are supported",
+    "exifReadError": "Error reading EXIF data",
+    "exifNoData": "No EXIF data found in this image",
+    "exifMetadata": "EXIF metadata",
+    "exifMap": "GPS location",
+    "exifOpenMap": "Open in OpenStreetMap",
+    "audioUnsupported": "Only MP3 and M4A files are supported",
+    "audioReadError": "Error reading audio metadata",
+    "audioNoTags": "No metadata tags found in this file",
+    "audioFile": "File",
+    "audioTitle": "Title",
+    "audioArtist": "Artist",
+    "audioAlbum": "Album",
+    "audioYear": "Year",
+    "audioGenre": "Genre",
+    "audioTrack": "Track",
     "removeDuplicates": "Remove Duplicates",
     "duplicatesRemoved": "{count} duplicates removed",
     "caseSensitive": "Case sensitive",
@@ -1920,6 +1964,66 @@
       "faq": [
         { "question": "Will the modified token work?", "answer": "No. The JWT signature is computed using the header and payload with a secret key. Changing the payload invalidates the signature." },
         { "question": "Why is this tool useful?", "answer": "It demonstrates why JWT signature verification is critical. If a server fails to verify signatures, an attacker could escalate privileges." }
+      ]
+    },
+    "svg-path-editor": {
+      "name": "SVG Path Visualizer & Editor",
+      "description": "Paste SVG path data, render it on canvas, and inspect node coordinates. Copy path data instantly.",
+      "longDescription": "Visualize and edit SVG path data interactively. Paste the d attribute of an SVG path, see it rendered on a canvas, inspect node coordinates.",
+      "limitations": { "0": "Supports M, L, and Z path commands only", "1": "Does not support curves or interactive node dragging yet" },
+      "faq": [
+        { "question": "What path commands are supported?", "answer": "Move (M), Line (L), and Close Path (Z). Curve commands are rendered but nodes are not parsed." },
+        { "question": "Can I drag nodes?", "answer": "The current version displays coordinates but does not support drag editing." }
+      ]
+    },
+    "canvas-code-painter": {
+      "name": "HTML Canvas Code Painter",
+      "description": "Draw shapes on canvas and generate JavaScript Canvas 2D Context API code automatically.",
+      "longDescription": "An interactive canvas drawing tool that generates clean JavaScript code using the Canvas 2D Context API.",
+      "limitations": { "0": "Rectangles are drawn by click-drag", "1": "Does not support gradients or complex paths in generated code" },
+      "faq": [
+        { "question": "How do I draw shapes?", "answer": "Select a shape type, then click on the canvas. For rectangles and lines, click and drag." },
+        { "question": "What code is generated?", "answer": "Vanilla JavaScript using the Canvas 2D Context API (ctx.fillRect, ctx.arc, etc.)." }
+      ]
+    },
+    "css-animation-studio": {
+      "name": "CSS Animation Keyframes Studio",
+      "description": "Create CSS @keyframes animations visually. Add color stops, set duration, preview live, and export code.",
+      "longDescription": "Design CSS animations with a visual timeline editor. Add keyframe stops, choose properties, set duration, preview live.",
+      "limitations": { "0": "Supports background-color and transform scale only", "1": "Maximum keyframe count is limited by UI" },
+      "faq": [
+        { "question": "What properties can I animate?", "answer": "Background-color transitions and transform scale. More properties may be added." },
+        { "question": "How do I add keyframe stops?", "answer": "Click 'Add Keyframe', set the percentage and color for each stop." }
+      ]
+    },
+    "cookie-explorer": {
+      "name": "Browser Cookie Explorer Sandbox",
+      "description": "Read, create, and delete LocalStorage, SessionStorage, and cookies. Includes capacity visualization.",
+      "longDescription": "A sandbox for exploring browser storage. View, add, and delete key-value pairs in LocalStorage, SessionStorage, and cookies.",
+      "limitations": { "0": "Only accesses storage for the current domain", "1": "Cookie deletion depends on path and domain settings" },
+      "faq": [
+        { "question": "Is it safe to use?", "answer": "Yes. The tool only reads and writes storage for the current website domain." },
+        { "question": "Why can't I delete some cookies?", "answer": "Cookies with specific path or domain restrictions may require matching attributes." }
+      ]
+    },
+    "exif-location-plotter": {
+      "name": "EXIF Image Location Map Plotter",
+      "description": "Extract GPS coordinates from JPEG EXIF data and plot the photo location on an OpenStreetMap.",
+      "longDescription": "Upload a JPEG photo and the tool reads EXIF metadata locally, including GPS coordinates. If found, displays the capture point on a map.",
+      "limitations": { "0": "Only supports JPEG files with EXIF data", "1": "Photos without GPS data show metadata only", "2": "HEIC and RAW are not supported" },
+      "faq": [
+        { "question": "Does the tool upload my photos?", "answer": "No. All EXIF parsing happens in your browser." },
+        { "question": "Why no GPS data?", "answer": "GPS data requires location services to be enabled. Some apps strip EXIF for privacy." }
+      ]
+    },
+    "audio-tag-reader": {
+      "name": "Audio ID3 Tag Reader",
+      "description": "Extract metadata from MP3 and M4A files. Read title, artist, album, year, genre, and track number.",
+      "longDescription": "Drag and drop an MP3 or M4A file to extract embedded metadata tags. Parses ID3v2 and M4A atoms locally.",
+      "limitations": { "0": "Only supports MP3 (ID3v2) and M4A", "1": "Does not extract album cover art", "2": "Large files may take a moment" },
+      "faq": [
+        { "question": "What audio formats are supported?", "answer": "MP3 with ID3v2 tags and M4A with iTunes-style atoms." },
+        { "question": "Can I extract album art?", "answer": "The current version extracts text metadata only. Album art may be added later." }
       ]
     }
   }
