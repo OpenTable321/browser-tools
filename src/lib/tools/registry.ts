@@ -1511,6 +1511,45 @@ export const toolRegistry: ToolMeta[] = [
       },
     ],
   },
+  {
+    slug: "json-xml-converter",
+    name: "JSON to XML / XML to JSON Converter",
+    description:
+      "Convert JSON to XML and XML to JSON instantly with proper indentation and syntax validation. Dual-mode, client-side, no uploads.",
+    longDescription:
+      "Transform data between JSON and XML formats with a single click. Switch between JSON-to-XML and XML-to-JSOn modes, paste your data, and get properly indented, pretty-printed output instantly. JSON-to-XML mode wraps objects in elements, arrays in repeated item tags, and escapes special characters. XML-to-JSON mode uses the browser's native DOMParser to build a clean JSON tree. Syntax errors are caught and displayed immediately. All processing happens locally in your browser — your data never leaves your device.",
+    category: "developers",
+    keywords: [
+      "json to xml",
+      "xml to json",
+      "json xml converter",
+      "convert json to xml",
+      "convert xml to json",
+      "json to xml online",
+      "xml to json online",
+    ],
+    icon: "🔄",
+    isClientSide: true,
+    relatedSlugs: ["json-formatter", "base64-encoder", "base64-decoder"],
+    supportedFormats: ["JSON", "XML"],
+    limitations: [
+      "JSON-to-XML: array items are wrapped in <item> tags; root element is always <root>",
+      "XML-to-JSON: attributes are not preserved — only element text and child elements are converted",
+      "XML comments and processing instructions are ignored",
+    ],
+    faq: [
+      {
+        question: "How are JSON arrays converted to XML?",
+        answer:
+          "Each element in a JSON array becomes an <item> element inside the parent element. For example, [1, 2] becomes <root><item>1</item><item>2</item></root>.",
+      },
+      {
+        question: "Are XML attributes preserved when converting to JSON?",
+        answer:
+          "No. This converter focuses on element content and structure. XML attributes are not preserved — only element text and child elements are converted to JSON properties.",
+      },
+    ],
+  },
 ];
 
 /* ---- Lookup helpers ---- */

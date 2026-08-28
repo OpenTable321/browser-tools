@@ -34,6 +34,7 @@ import { EpochTimestampConverter } from "@/tools/epoch-timestamp-converter/Epoch
 import { TextDiffChecker } from "@/tools/text-diff-checker/TextDiffChecker";
 import { MarkdownToHtml } from "@/tools/markdown-to-html/MarkdownToHtml";
 import { RegexTester } from "@/tools/regex-tester/RegexTester";
+import { JsonXmlConverter } from "@/tools/json-xml-converter/JsonXmlConverter";
 
 const JpgToPdf = dynamic(() =>
   import("@/tools/jpg-to-pdf/JpgToPdf").then((m) => m.JpgToPdf),
@@ -96,6 +97,7 @@ const toolComponents: Record<string, ComponentType> = {
   "text-diff-checker": TextDiffChecker,
   "markdown-to-html": MarkdownToHtml,
   "regex-tester": RegexTester,
+  "json-xml-converter": JsonXmlConverter,
 };
 
 export function getToolComponent(slug: string): ComponentType | undefined {
