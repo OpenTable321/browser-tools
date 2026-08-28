@@ -673,7 +673,9 @@
     "pwReport_fair": "This password is moderately strong but still crackable with dedicated resources. Consider adding more length or character variety.",
     "pwReport_good": "This password is strong and would take significant time to crack. Good choice for most accounts.",
     "pwReport_strong": "This password is excellent. It has high entropy and would take an impractical amount of time to brute-force. Ideal for sensitive accounts.",
-    "pwPrivacyNote": "Your password is processed entirely in your browser and never sent to any server."
+    "pwPrivacyNote": "Your password is processed entirely in your browser and never sent to any server.",
+    "listsMode": "Lists",
+    "startWithStandard": "Start with \"Lorem ipsum dolor sit amet…\""
   },
   "footer": {
     "categories": "Categories",

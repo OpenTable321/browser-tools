@@ -22,7 +22,9 @@ const WORDS = [
   "rerum", "necessitatibus", "saepe", "eveniet", "voluptates", "repudiandae",
 ];
 
-type GenMode = "paragraphs" | "sentences" | "words";
+type GenMode = "paragraphs" | "sentences" | "words" | "lists";
+
+const STANDARD_OPENING = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
 
 function randomWord(): string {
   return WORDS[Math.floor(Math.random() * WORDS.length)] ?? "lorem";
@@ -47,7 +49,27 @@ function generateParagraph(): string {
   return sentences.join(" ");
 }
 
-function generateText(mode: GenMode, count: number): string {
+function generateList(): string {
+  const itemCount = 3 + Math.floor(Math.random() * 5);
+  const items: string[] = [];
+  for (let i = 0; i < itemCount; i++) {
+    items.push(generateSentence());
+  }
+  return items.map((item) => `• ${item}`).join("\n");
+}
+
+function generateText(mode: GenMode, count: number, startStandard: boolean): string {
+  if (mode === "lists") {
+    const lists: string[] = [];
+    for (let i = 0; i < count; i++) {
+      lists.push(generateList());
+    }
+    let result = lists.join("\n\n");
+    if (startStandard) {
+      result = STANDARD_OPENING + "\n\n" + result;
+    }
+    return result;
+  }
   if (mode === "words") {
     const words: string[] = [];
     for (let i = 0; i < count; i++) {
@@ -58,14 +80,28 @@ function generateText(mode: GenMode, count: number): string {
   }
   if (mode === "sentences") {
     const sentences: string[] = [];
-    for (let i = 0; i < count; i++) {
-      sentences.push(generateSentence());
+    if (startStandard) {
+      sentences.push(STANDARD_OPENING);
+      for (let i = 1; i < count; i++) {
+        sentences.push(generateSentence());
+      }
+    } else {
+      for (let i = 0; i < count; i++) {
+        sentences.push(generateSentence());
+      }
     }
     return sentences.join(" ");
   }
   const paragraphs: string[] = [];
-  for (let i = 0; i < count; i++) {
-    paragraphs.push(generateParagraph());
+  if (startStandard) {
+    paragraphs.push(STANDARD_OPENING);
+    for (let i = 1; i < count; i++) {
+      paragraphs.push(generateParagraph());
+    }
+  } else {
+    for (let i = 0; i < count; i++) {
+      paragraphs.push(generateParagraph());
+    }
   }
   return paragraphs.join("\n\n");
 }
@@ -74,13 +110,14 @@ export function LoremIpsumGenerator() {
   const { t } = useTranslation();
   const [mode, setMode] = useState<GenMode>("paragraphs");
   const [count, setCount] = useState(3);
+  const [startStandard, setStartStandard] = useState(true);
   const [output, setOutput] = useState("");
   const [seed, setSeed] = useState(0);
 
   const generate = useCallback(() => {
-    setOutput(generateText(mode, count));
+    setOutput(generateText(mode, count, startStandard));
     setSeed((s) => s + 1);
-  }, [mode, count]);
+  }, [mode, count, startStandard]);
 
   function handleDownload() {
     if (!output) return;
@@ -102,7 +139,7 @@ export function LoremIpsumGenerator() {
           <div>
             <label className="mb-2 block text-sm font-medium text-slate-600">{t("common.generateLabel")}</label>
             <div className="flex flex-wrap gap-2">
-              {(["paragraphs", "sentences", "words"] as GenMode[]).map((m) => (
+              {(["paragraphs", "sentences", "words", "lists"] as GenMode[]).map((m) => (
                 <button
                   key={m}
                   onClick={() => setMode(m)}
@@ -112,7 +149,7 @@ export function LoremIpsumGenerator() {
                       : "bg-slate-100 text-slate-700 hover:bg-slate-200"
                   }`}
                 >
-                  {m === "paragraphs" ? t("common.paragraphsMode") : m === "sentences" ? t("common.sentencesMode") : t("common.wordsMode")}
+                  {m === "paragraphs" ? t("common.paragraphsMode") : m === "sentences" ? t("common.sentencesMode") : m === "words" ? t("common.wordsMode") : t("common.listsMode")}
                 </button>
               ))}
             </div>
@@ -133,6 +170,18 @@ export function LoremIpsumGenerator() {
               className="w-full accent-brand-600"
             />
           </div>
+        </div>
+
+        <div className="mt-6 flex items-center gap-4">
+          <label className="flex items-center gap-2 text-sm text-slate-600">
+            <input
+              type="checkbox"
+              checked={startStandard}
+              onChange={(e) => setStartStandard(e.target.checked)}
+              className="h-4 w-4 rounded border-slate-300 text-brand-600 focus:ring-brand-500"
+            />
+            {t("common.startWithStandard")}
+          </label>
         </div>
 
         <div className="mt-6 flex flex-wrap gap-3">
@@ -177,7 +226,7 @@ export function LoremIpsumGenerator() {
 
       {seed > 0 && (
         <p className="text-center text-xs text-slate-400">
-          {t("common.generatedCount", { count, mode: mode === "paragraphs" ? t("common.paragraphsMode").toLowerCase() : mode === "sentences" ? t("common.sentencesMode").toLowerCase() : t("common.wordsMode").toLowerCase() })}
+          {t("common.generatedCount", { count, mode: mode === "paragraphs" ? t("common.paragraphsMode").toLowerCase() : mode === "sentences" ? t("common.sentencesMode").toLowerCase() : mode === "words" ? t("common.wordsMode").toLowerCase() : t("common.listsMode").toLowerCase() })}
         </p>
       )}
     </div>
