@@ -1320,6 +1320,44 @@ export const toolRegistry: ToolMeta[] = [
       },
     ],
   },
+  {
+    slug: "html-entity-encoder-decoder",
+    name: "HTML Entity Encoder/Decoder",
+    description:
+      "Encode or decode HTML entities easily. Convert special characters like <, >, & to entities and back — all in your browser.",
+    longDescription:
+      "Convert special characters into HTML entities and vice versa directly in your browser. Encoding replaces characters like <, >, &, \", and ' with their entity equivalents (&lt;, &gt;, &amp;, &quot;, &#39;) so you can safely paste code or markup into HTML without it being interpreted as tags. Decoding reverses this, converting entities back to their original characters. All processing happens locally — your text never leaves your device.",
+    category: "developers",
+    keywords: [
+      "html entity encoder",
+      "html entity decoder",
+      "encode html entities",
+      "decode html entities",
+      "html escape",
+      "html unescape",
+      "special characters to html",
+    ],
+    icon: "🔗",
+    isClientSide: true,
+    relatedSlugs: ["url-encoder-decoder", "base64-encoder", "base64-decoder"],
+    supportedFormats: ["Plain text", "HTML"],
+    limitations: [
+      "Encoding covers the five core HTML entities: & < > \" '",
+      "Decoding uses the browser's native HTML parser — malformed entities may not decode correctly",
+    ],
+    faq: [
+      {
+        question: "What characters does the encoder convert?",
+        answer:
+          "It converts the five most important HTML special characters: & to &amp;, < to &lt;, > to &gt;, \" to &quot;, and ' to &#39;. These are the characters that have special meaning in HTML markup and must be escaped to display them as literal text.",
+      },
+      {
+        question: "Is my text sent to a server?",
+        answer:
+          "No. All encoding and decoding happens entirely in your browser. Your text is never transmitted to any server.",
+      },
+    ],
+  },
 ];
 
 /* ---- Lookup helpers ---- */
