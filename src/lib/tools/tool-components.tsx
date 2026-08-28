@@ -91,6 +91,11 @@ import { CssAnimationStudio } from "@/tools/css-animation-studio/CssAnimationStu
 import { CookieExplorer } from "@/tools/cookie-explorer/CookieExplorer";
 import { ExifLocationPlotter } from "@/tools/exif-location-plotter/ExifLocationPlotter";
 import { AudioTagReader } from "@/tools/audio-tag-reader/AudioTagReader";
+import { UnixTimestampConverter } from "@/tools/unix-timestamp-converter/UnixTimestampConverter";
+import { Base64ImageCoder } from "@/tools/base64-image-coder/Base64ImageCoder";
+import { HashGeneratorEngine } from "@/tools/hash-generator-engine/HashGeneratorEngine";
+import { RobotsTxtTester } from "@/tools/robots-txt-tester/RobotsTxtTester";
+import { CronExplainer } from "@/tools/cron-explainer/CronExplainer";
 
 const JpgToPdf = dynamic(() =>
   import("@/tools/jpg-to-pdf/JpgToPdf").then((m) => m.JpgToPdf),
@@ -210,6 +215,11 @@ const toolComponents: Record<string, ComponentType> = {
   "cookie-explorer": CookieExplorer,
   "exif-location-plotter": ExifLocationPlotter,
   "audio-tag-reader": AudioTagReader,
+  "unix-timestamp-converter": UnixTimestampConverter,
+  "base64-image-coder": Base64ImageCoder,
+  "hash-generator-engine": HashGeneratorEngine,
+  "robots-txt-tester": RobotsTxtTester,
+  "cron-explainer": CronExplainer,
 };
 
 export function getToolComponent(slug: string): ComponentType | undefined {

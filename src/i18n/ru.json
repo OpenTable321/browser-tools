@@ -379,6 +379,60 @@
     "audioYear": "Год",
     "audioGenre": "Жанр",
     "audioTrack": "Трек",
+    "unixCurrent": "Текущая Unix-метка времени",
+    "unixToHuman": "Метка времени в дату",
+    "unixFromHuman": "Дату в метку времени",
+    "unixLocal": "Локальное время",
+    "unixResult": "Unix-метка времени",
+    "unixUseCurrent": "Использовать текущую",
+    "b64ImgEncode": "Кодировать изображение",
+    "b64ImgDecode": "Декодировать Base64",
+    "b64ImgFile": "Файл",
+    "b64ImgOutput": "Base64 data URI",
+    "b64ImgDecodeInput": "Вставьте Base64 data URI",
+    "b64ImgDecodeBtn": "Декодировать",
+    "b64ImgInvalid": "Неверные данные Base64",
+    "b64ImgDownload": "Скачать изображение",
+    "hashInput": "Введите текст для хеширования",
+    "hashUppercase": "Верхний регистр",
+    "robotsInput": "Вставьте содержимое robots.txt",
+    "robotsUrls": "URL для проверки (по одному на строку)",
+    "robotsRun": "Проверить",
+    "robotsSitemap": "Директива Sitemap",
+    "robotsResults": "Отчёт",
+    "robotsStatus": "Статус",
+    "robotsRule": "Совпавшее правило",
+    "robotsBlocked": "Заблокировано",
+    "robotsAllowed": "Разрешено",
+    "cronExpInput": "Cron-выражение",
+    "cronExplanation": "Человекочитаемое объяснение",
+    "cronNext5": "Следующие 5 запусков",
+    "cronFormat": "Формат",
+    "cronEveryMinute": "каждую минуту",
+    "cronEveryNMinute": "каждые {n} минут",
+    "cronSpecificMinute": "в минуту {values}",
+    "cronRangeMinute": "минуты {range}",
+    "cronAtMinute": "в минуту {value}",
+    "cronEveryHour": "каждый час",
+    "cronEveryNHour": "каждые {n} часов",
+    "cronSpecificHour": "в час {values}",
+    "cronRangeHour": "часы {range}",
+    "cronAtHour": "в час {value}",
+    "cronEveryDayOfMonth": "каждый день месяца",
+    "cronEveryNDayOfMonth": "каждые {n} дней месяца",
+    "cronSpecificDayOfMonth": "в день {values} месяца",
+    "cronRangeDayOfMonth": "дни {range} месяца",
+    "cronAtDayOfMonth": "в день {value} месяца",
+    "cronEveryMonth": "каждый месяц",
+    "cronEveryNMonth": "каждые {n} месяцев",
+    "cronSpecificMonth": "в месяце {values}",
+    "cronRangeMonth": "месяцы {range}",
+    "cronAtMonth": "в месяце {value}",
+    "cronEveryDayOfWeek": "каждый день недели",
+    "cronEveryNDayOfWeek": "каждые {n} дней недели",
+    "cronSpecificDayOfWeek": "в {values}",
+    "cronRangeDayOfWeek": "дни {range}",
+    "cronAtDayOfWeek": "в {value}",
     "removeDuplicates": "Удалить дубликаты",
     "duplicatesRemoved": "{count} дубликатов удалено",
     "caseSensitive": "С учётом регистра",
@@ -2024,6 +2078,56 @@
       "faq": [
         { "question": "Какие форматы поддерживаются?", "answer": "MP3 с ID3v2-тегами и M4A с iTunes-атомами." },
         { "question": "Можно ли извлечь обложку?", "answer": "Текущая версия извлекает только текстовые метаданные. Обложки могут быть добавлены позже." }
+      ]
+    },
+    "unix-timestamp-converter": {
+      "name": "Конвертер Unix-метки времени",
+      "description": "Конвертация Unix-меток в человекочитаемые даты и обратно. Часы в реальном времени с UTC, локальным временем и ISO 8601.",
+      "longDescription": "Двунаправленный конвертер Unix-меток времени. Введите числовую метку для получения UTC, локального времени и ISO 8601.",
+      "limitations": { "0": "Отрицательные метки могут отображаться некорректно", "1": "Максимальная дата ограничена объектом Date JavaScript" },
+      "faq": [
+        { "question": "Что такое Unix-метка времени?", "answer": "Количество секунд с 1 января 1970 UTC (Unix-эпоха)." },
+        { "question": "Поддерживаются ли миллисекунды?", "answer": "Инструмент работает с секундными метками. Для миллисекунд разделите на 1000." }
+      ]
+    },
+    "base64-image-coder": {
+      "name": "Base64 кодировщик/декодировщик изображений",
+      "description": "Кодирование изображений в Base64 data URI или декодирование Base64 обратно в изображения. Всё на стороне клиента.",
+      "longDescription": "Двухрежимный инструмент. Загрузите изображение для получения Base64 data URI или вставьте Base64 для превью и скачивания.",
+      "limitations": { "0": "Большие изображения дают очень длинные строки Base64", "1": "Для декодирования нужна валидная строка Base64" },
+      "faq": [
+        { "question": "Что такое Base64 data URI?", "answer": "Строка, встраивающая данные изображения inline в формате data:image/png;base64,...." },
+        { "question": "Есть ли ограничение размера?", "answer": "Инструмент работает с файлами до предела памяти браузера. Очень большие изображения могут вызвать проблемы." }
+      ]
+    },
+    "hash-generator-engine": {
+      "name": "Генератор хешей (MD5/SHA-1/SHA-256/SHA-512)",
+      "description": "Генерация MD5, SHA-1, SHA-256 и SHA-512 хешей одновременно из текста. Верхний регистр и копирование.",
+      "longDescription": "Единый генератор криптографических хешей. Введите текст и получите MD5, SHA-1, SHA-256 и SHA-512.",
+      "limitations": { "0": "MD5 реализован на JavaScript для совместимости", "1": "MD5 и SHA-1 криптографически взломаны — используйте SHA-256 или SHA-512" },
+      "faq": [
+        { "question": "Почему все четыре хеша показаны сразу?", "answer": "Удобство. Каждый хеш можно скопировать независимо." },
+        { "question": "Безопасен ли MD5?", "answer": "Нет. MD5 криптографически взломан. Используйте SHA-256 или SHA-512 для безопасности." }
+      ]
+    },
+    "robots-txt-tester": {
+      "name": "Тестер robots.txt и Sitemap",
+      "description": "Вставьте robots.txt и URL для проверки блокировки правилами Disallow. Включает обнаружение Sitemap.",
+      "longDescription": "Анализ robots.txt для проверки блокировки URL. Вставьте содержимое и URL для тестирования правил Disallow и Allow.",
+      "limitations": { "0": "Использует упрощённое сопоставление шаблонов", "1": "Не загружает удалённые robots.txt" },
+      "faq": [
+        { "question": "Как работает приоритет Allow/Disallow?", "answer": "Более конкретные правила Allow могут перекрывать общие Disallow." },
+        { "question": "Можно тестировать удалённые robots.txt?", "answer": "Нет. Вставьте содержимое вручную из-за CORS и приватности." }
+      ]
+    },
+    "cron-explainer": {
+      "name": "Объяснитель cron-расписаний",
+      "description": "Вставьте cron-выражение и получите человекочитаемое объяснение плюс следующие 5 запусков.",
+      "longDescription": "Декодирование cron-выражений в понятное описание. Введите 5-частное cron-выражение для получения объяснения.",
+      "limitations": { "0": "Поддерживаются стандартные 5-частные cron-выражения", "1": "Не поддерживаются @reboot и именованные расписания", "2": "Время следующего запуска приблизительно для сложных выражений" },
+      "faq": [
+        { "question": "Какой формат поддерживается?", "answer": "Стандартный 5-частный cron: минута час день-месяца месяц день-недели." },
+        { "question": "Как вычисляется время следующего запуска?", "answer": "Инструмент перебирает минуты от текущего времени, проверяя каждое поле против cron-шаблона." }
       ]
     }
   }

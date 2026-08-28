@@ -379,6 +379,60 @@
     "audioYear": "Year",
     "audioGenre": "Genre",
     "audioTrack": "Track",
+    "unixCurrent": "Current Unix timestamp",
+    "unixToHuman": "Timestamp to date",
+    "unixFromHuman": "Date to timestamp",
+    "unixLocal": "Local time",
+    "unixResult": "Unix timestamp",
+    "unixUseCurrent": "Use current timestamp",
+    "b64ImgEncode": "Encode image",
+    "b64ImgDecode": "Decode Base64",
+    "b64ImgFile": "File",
+    "b64ImgOutput": "Base64 data URI",
+    "b64ImgDecodeInput": "Paste Base64 data URI",
+    "b64ImgDecodeBtn": "Decode",
+    "b64ImgInvalid": "Invalid Base64 image data",
+    "b64ImgDownload": "Download image",
+    "hashInput": "Enter text to hash",
+    "hashUppercase": "Uppercase output",
+    "robotsInput": "Paste robots.txt content",
+    "robotsUrls": "URLs to test (one per line)",
+    "robotsRun": "Run test",
+    "robotsSitemap": "Sitemap directive",
+    "robotsResults": "Compliance report",
+    "robotsStatus": "Status",
+    "robotsRule": "Matched rule",
+    "robotsBlocked": "Blocked",
+    "robotsAllowed": "Allowed",
+    "cronExpInput": "Cron expression",
+    "cronExplanation": "Human-readable explanation",
+    "cronNext5": "Next 5 executions",
+    "cronFormat": "Format",
+    "cronEveryMinute": "every minute",
+    "cronEveryNMinute": "every {n} minutes",
+    "cronSpecificMinute": "at minute {values}",
+    "cronRangeMinute": "minutes {range}",
+    "cronAtMinute": "at minute {value}",
+    "cronEveryHour": "every hour",
+    "cronEveryNHour": "every {n} hours",
+    "cronSpecificHour": "at hour {values}",
+    "cronRangeHour": "hours {range}",
+    "cronAtHour": "at hour {value}",
+    "cronEveryDayOfMonth": "every day of month",
+    "cronEveryNDayOfMonth": "every {n} days of month",
+    "cronSpecificDayOfMonth": "on day {values} of the month",
+    "cronRangeDayOfMonth": "days {range} of the month",
+    "cronAtDayOfMonth": "on day {value} of the month",
+    "cronEveryMonth": "every month",
+    "cronEveryNMonth": "every {n} months",
+    "cronSpecificMonth": "in month {values}",
+    "cronRangeMonth": "months {range}",
+    "cronAtMonth": "in month {value}",
+    "cronEveryDayOfWeek": "every day of week",
+    "cronEveryNDayOfWeek": "every {n} days of week",
+    "cronSpecificDayOfWeek": "on {values}",
+    "cronRangeDayOfWeek": "days {range}",
+    "cronAtDayOfWeek": "on {value}",
     "removeDuplicates": "Remove Duplicates",
     "duplicatesRemoved": "{count} duplicates removed",
     "caseSensitive": "Case sensitive",
@@ -2024,6 +2078,56 @@
       "faq": [
         { "question": "What audio formats are supported?", "answer": "MP3 with ID3v2 tags and M4A with iTunes-style atoms." },
         { "question": "Can I extract album art?", "answer": "The current version extracts text metadata only. Album art may be added later." }
+      ]
+    },
+    "unix-timestamp-converter": {
+      "name": "Unix Timestamp Converter",
+      "description": "Convert Unix epoch timestamps to human-readable dates and vice versa. Live clock with UTC, local, and ISO 8601 output.",
+      "longDescription": "A dual-directional Unix timestamp converter. Enter a numeric epoch timestamp to see UTC, local, and ISO 8601 representations.",
+      "limitations": { "0": "Negative epochs may not display correctly in all browsers", "1": "Maximum date limited by JavaScript Date object" },
+      "faq": [
+        { "question": "What is a Unix timestamp?", "answer": "The number of seconds since January 1, 1970 UTC (the Unix epoch)." },
+        { "question": "Does the tool support milliseconds?", "answer": "The tool works with second-based timestamps. Divide by 1000 for millisecond timestamps." }
+      ]
+    },
+    "base64-image-coder": {
+      "name": "Base64 Image Encoder & Decoder",
+      "description": "Encode images to Base64 data URIs or decode Base64 strings back to downloadable images. All client-side.",
+      "longDescription": "Dual-mode image Base64 tool. Upload an image to get its Base64 data URI, or paste Base64 to preview and download.",
+      "limitations": { "0": "Large images produce very long Base64 strings", "1": "Decoding requires a valid Base64 string" },
+      "faq": [
+        { "question": "What is a Base64 data URI?", "answer": "A string that embeds image data inline, formatted as data:image/png;base64,...." },
+        { "question": "Is there a file size limit?", "answer": "The tool handles files up to your browser's memory limit. Very large images may cause performance issues." }
+      ]
+    },
+    "hash-generator-engine": {
+      "name": "Hash Generator Engine (MD5/SHA-1/SHA-256/SHA-512)",
+      "description": "Generate MD5, SHA-1, SHA-256, and SHA-512 hashes simultaneously from text input. Uppercase toggle and one-click copy.",
+      "longDescription": "A unified cryptographic hash generator. Type or paste text and instantly get MD5, SHA-1, SHA-256, and SHA-512 hash values.",
+      "limitations": { "0": "MD5 is implemented in JavaScript for compatibility", "1": "MD5 and SHA-1 are cryptographically broken — use SHA-256 or SHA-512 for security" },
+      "faq": [
+        { "question": "Why are all four hashes shown at once?", "answer": "Convenience. Each hash can be copied independently without switching tools." },
+        { "question": "Is MD5 secure?", "answer": "No. MD5 is cryptographically broken. Use SHA-256 or SHA-512 for security purposes." }
+      ]
+    },
+    "robots-txt-tester": {
+      "name": "Robots.txt & Sitemap Tester",
+      "description": "Paste a robots.txt file and URLs to check which are blocked by Disallow rules. Includes sitemap detection.",
+      "longDescription": "Analyze robots.txt files for URL blocking rules. Paste content and URLs to test against Disallow and Allow rules.",
+      "limitations": { "0": "Uses simplified pattern matching", "1": "Does not fetch remote robots.txt files" },
+      "faq": [
+        { "question": "How does Allow/Disallow precedence work?", "answer": "More specific Allow rules can override broader Disallow rules." },
+        { "question": "Can I test remote robots.txt files?", "answer": "No. Paste the content manually for privacy and CORS reasons." }
+      ]
+    },
+    "cron-explainer": {
+      "name": "Cron Schedule Explainer",
+      "description": "Paste a cron expression and get a human-readable explanation plus the next 5 execution times.",
+      "longDescription": "Decode cron expressions into plain language descriptions. Enter a 5-part cron expression and get a fluent explanation.",
+      "limitations": { "0": "Supports standard 5-part cron expressions", "1": "Does not support @reboot or named schedules", "2": "Next execution times are approximate for complex expressions" },
+      "faq": [
+        { "question": "What format is supported?", "answer": "Standard 5-part cron: minute hour day-of-month month day-of-week." },
+        { "question": "How are next execution times calculated?", "answer": "The tool iterates minute by minute from the current time, checking each field against the cron pattern." }
       ]
     }
   }
