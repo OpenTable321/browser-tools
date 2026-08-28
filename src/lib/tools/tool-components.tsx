@@ -31,6 +31,7 @@ import { UrlEncoderDecoder } from "@/tools/url-encoder-decoder/UrlEncoderDecoder
 import { ImageToBase64 } from "@/tools/image-to-base64/ImageToBase64";
 import { HtmlEntityEncoderDecoder } from "@/tools/html-entity-encoder-decoder/HtmlEntityEncoderDecoder";
 import { EpochTimestampConverter } from "@/tools/epoch-timestamp-converter/EpochTimestampConverter";
+import { TextDiffChecker } from "@/tools/text-diff-checker/TextDiffChecker";
 
 const JpgToPdf = dynamic(() =>
   import("@/tools/jpg-to-pdf/JpgToPdf").then((m) => m.JpgToPdf),
@@ -90,6 +91,7 @@ const toolComponents: Record<string, ComponentType> = {
   "image-to-base64": ImageToBase64,
   "html-entity-encoder-decoder": HtmlEntityEncoderDecoder,
   "epoch-timestamp-converter": EpochTimestampConverter,
+  "text-diff-checker": TextDiffChecker,
 };
 
 export function getToolComponent(slug: string): ComponentType | undefined {

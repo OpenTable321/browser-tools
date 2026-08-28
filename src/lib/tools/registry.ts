@@ -1397,6 +1397,44 @@ export const toolRegistry: ToolMeta[] = [
       },
     ],
   },
+  {
+    slug: "text-diff-checker",
+    name: "Text Diff Checker",
+    description:
+      "Compare two text inputs side by side and highlight added, removed, and unchanged content. Lightweight client-side diff — no uploads.",
+    longDescription:
+      "Compare two pieces of text and instantly see the differences highlighted inline. Paste your original and modified text, click Compare, and the tool uses a longest common subsequence (LCS) algorithm to identify added, removed, and unchanged tokens. Added content is highlighted in green, removed content in red with strikethrough, and unchanged content appears as normal text. A summary shows the character counts for each category. All processing happens locally in your browser — your text never leaves your device.",
+    category: "text",
+    keywords: [
+      "text diff checker",
+      "compare text",
+      "text comparison",
+      "diff tool",
+      "find differences in text",
+      "text diff online",
+      "compare two texts",
+    ],
+    icon: "🔍",
+    isClientSide: true,
+    relatedSlugs: ["word-counter", "character-counter", "case-converter"],
+    supportedFormats: ["Plain text", "Any text input"],
+    limitations: [
+      "Comparison is token-based (words and whitespace) — very long texts may be slow due to O(n×m) LCS algorithm",
+      "Does not support line-by-line diff mode — differences are shown inline",
+    ],
+    faq: [
+      {
+        question: "How does the diff algorithm work?",
+        answer:
+          "The tool tokenizes both inputs into words and punctuation, then uses a longest common subsequence (LCS) algorithm to identify matching and differing tokens. Added tokens are highlighted in green, removed tokens in red with strikethrough, and unchanged tokens appear as normal text.",
+      },
+      {
+        question: "Is my text sent to a server?",
+        answer:
+          "No. All comparison happens entirely in your browser. Your text is never transmitted to any server.",
+      },
+    ],
+  },
 ];
 
 /* ---- Lookup helpers ---- */
