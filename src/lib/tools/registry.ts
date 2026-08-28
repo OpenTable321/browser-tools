@@ -1784,6 +1784,45 @@ export const toolRegistry: ToolMeta[] = [
       },
     ],
   },
+  {
+    slug: "password-strength-meter",
+    name: "Password Strength Meter & Validator",
+    description:
+      "Evaluate password strength with entropy scoring, security checklist, estimated crack time, and visual strength bars — all client-side, your password never leaves your device.",
+    longDescription:
+      "Analyze your password's strength in real time without ever transmitting it anywhere. The tool calculates Shannon entropy based on character set size and password length, checks against a database of common passwords, and provides a detailed security checklist (length ≥ 12, uppercase, lowercase, numbers, symbols, not commonly used). It estimates brute-force crack time assuming 10 billion guesses per second, displays a visual 5-bar strength meter, and provides a threat-level report. All processing happens locally in your browser — your password is never sent to any server.",
+    category: "security",
+    keywords: [
+      "password strength meter",
+      "password validator",
+      "password checker",
+      "test password strength",
+      "password entropy",
+      "password security check",
+      "how strong is my password",
+    ],
+    icon: "🔒",
+    isClientSide: true,
+    relatedSlugs: ["password-generator", "md5-hash-generator", "sha256-hash-generator"],
+    supportedFormats: ["Plain text"],
+    limitations: [
+      "Entropy estimation is based on character set size and length — does not detect dictionary words or patterns",
+      "Crack time assumes 10 billion guesses per second (offline attack) — actual time varies by attacker resources",
+      "Common password list is limited to ~40 entries — not a comprehensive dictionary attack simulation",
+    ],
+    faq: [
+      {
+        question: "Is it safe to type my real password into this tool?",
+        answer:
+          "Yes. The tool runs entirely in your browser using client-side JavaScript. Your password is never transmitted to any server, stored, or logged. You can also verify this by checking your browser's network tab — no requests are made when you type.",
+      },
+      {
+        question: "How is the entropy score calculated?",
+        answer:
+          "Entropy is calculated as password length × log2(character set size). The character set includes lowercase (26), uppercase (26), digits (10), and symbols (33). For example, a 12-character password using all four sets has entropy of 12 × log2(95) ≈ 78.8 bits.",
+      },
+    ],
+  },
 ];
 
 /* ---- Lookup helpers ---- */

@@ -5,7 +5,8 @@ export type CategorySlug =
   | "developers"
   | "calculators"
   | "unit"
-  | "pdf";
+  | "pdf"
+  | "security";
 
 export interface Category {
   slug: CategorySlug;
@@ -62,6 +63,13 @@ export const categories: Category[] = [
     description:
       "Convert, merge, split, and manipulate PDF files entirely in your browser. No uploads required.",
     icon: "📄",
+  },
+  {
+    slug: "security",
+    name: "Security Tools",
+    description:
+      "Evaluate password strength, generate hashes, and audit security — all client-side, your data never leaves your device.",
+    icon: "🔒",
   },
 ];
 
