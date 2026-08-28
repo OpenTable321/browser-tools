@@ -41,7 +41,8 @@
     "calculators": { "name": "Calculators", "description": "Quick calculations for everyday tasks — no spreadsheet needed." },
     "unit": { "name": "Unit Converters", "description": "Convert between units of length, weight, temperature, area, volume, speed, and time — all in your browser." },
     "pdf": { "name": "PDF Tools", "description": "Convert, merge, split, and manipulate PDF files entirely in your browser. No uploads required." },
-    "security": { "name": "Security", "description": "Evaluate password strength, generate hashes, and audit security — all client-side, your data never leaves your device." }
+    "security": { "name": "Security", "description": "Evaluate password strength, generate hashes, and audit security — all client-side, your data never leaves your device." },
+    "design": { "name": "Design Tools", "description": "Generate CSS gradients, shadows, glassmorphism, clip-paths, and check color contrast — all in your browser." }
   },
   "common": {
     "clientSide": "Client-side",
@@ -91,6 +92,18 @@
     "inverseCase": "iNVERSE cASE",
     "camelCase": "camelCase",
     "snakeCase": "snake_case",
+    "urlParserInput": "Enter a URL to parse",
+    "urlParserPlaceholder": "https://example.com/path?query=value#hash",
+    "urlParserError": "Invalid URL. Please include the protocol (e.g., https://)",
+    "urlParserProtocol": "Protocol",
+    "urlParserHostname": "Hostname",
+    "urlParserPort": "Port",
+    "urlParserPath": "Path",
+    "urlParserHash": "Hash",
+    "urlParserSearch": "Search String",
+    "urlParserQueryParams": "Query Parameters",
+    "urlParserDelete": "Delete",
+    "urlParserFullUrl": "Full URL",
     "removeDuplicates": "Remove Duplicates",
     "duplicatesRemoved": "{count} duplicates removed",
     "caseSensitive": "Case sensitive",
@@ -1246,6 +1259,16 @@
       "faq": [
         { "question": "Is it safe to type my real password into this tool?", "answer": "Yes. The tool runs entirely in your browser using client-side JavaScript. Your password is never transmitted to any server, stored, or logged. You can also verify this by checking your browser's network tab — no requests are made when you type." },
         { "question": "How is the entropy score calculated?", "answer": "Entropy is calculated as password length × log2(character set size). The character set includes lowercase (26), uppercase (26), digits (10), and symbols (33). For example, a 12-character password using all four sets has entropy of 12 × log2(95) ≈ 78.8 bits." }
+      ]
+    },
+    "url-parser": {
+      "name": "URL Parser & Decoder",
+      "description": "Break down any URL into protocol, hostname, path, port, hash, and query parameters. Edit and delete query pairs instantly in your browser.",
+      "longDescription": "Paste any URL and instantly see its components: protocol, hostname, port, path, hash, and all query parameters as editable key-value pairs. Delete individual query parameters with one click. All parsing happens locally in your browser — no data is sent to any server.",
+      "limitations": { "0": "Only valid URLs with protocol (http://, https://, etc.) can be parsed", "1": "Query parameters are decoded but not re-encoded when deleted" },
+      "faq": [
+        { "question": "What URL formats are supported?", "answer": "Any valid URL with a protocol (http://, https://, ftp://, etc.) can be parsed. The tool uses the browser's native URL API for accurate parsing." },
+        { "question": "Can I edit query parameters?", "answer": "Yes. You can delete individual query parameters by clicking the delete button next to each pair. The tool shows all parameters as editable key-value pairs." }
       ]
     }
   }

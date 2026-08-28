@@ -42,6 +42,7 @@ import { JsonValidator } from "@/tools/json-validator/JsonValidator";
 import { Md5HashGenerator } from "@/tools/md5-hash-generator/Md5HashGenerator";
 import { Sha256HashGenerator } from "@/tools/sha256-hash-generator/Sha256HashGenerator";
 import { PasswordStrengthMeter } from "@/tools/password-strength-meter/PasswordStrengthMeter";
+import { UrlParser } from "@/tools/url-parser/UrlParser";
 
 const JpgToPdf = dynamic(() =>
   import("@/tools/jpg-to-pdf/JpgToPdf").then((m) => m.JpgToPdf),
@@ -112,6 +113,7 @@ const toolComponents: Record<string, ComponentType> = {
   "md5-hash-generator": Md5HashGenerator,
   "sha256-hash-generator": Sha256HashGenerator,
   "password-strength-meter": PasswordStrengthMeter,
+  "url-parser": UrlParser,
 };
 
 export function getToolComponent(slug: string): ComponentType | undefined {

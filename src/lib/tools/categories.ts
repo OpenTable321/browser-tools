@@ -6,7 +6,8 @@ export type CategorySlug =
   | "calculators"
   | "unit"
   | "pdf"
-  | "security";
+  | "security"
+  | "design";
 
 export interface Category {
   slug: CategorySlug;
@@ -70,6 +71,13 @@ export const categories: Category[] = [
     description:
       "Evaluate password strength, generate hashes, and audit security — all client-side, your data never leaves your device.",
     icon: "🔒",
+  },
+  {
+    slug: "design",
+    name: "Design Tools",
+    description:
+      "Generate CSS gradients, shadows, glassmorphism, clip-paths, and check color contrast — all in your browser.",
+    icon: "🎨",
   },
 ];
 

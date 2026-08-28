@@ -1832,6 +1832,44 @@ export const toolRegistry: ToolMeta[] = [
       },
     ],
   },
+  {
+    slug: "url-parser",
+    name: "URL Parser & Decoder",
+    description:
+      "Break down any URL into protocol, hostname, path, port, hash, and query parameters. Edit and delete query pairs instantly in your browser.",
+    longDescription:
+      "Paste any URL and instantly see its components: protocol, hostname, port, path, hash, and all query parameters as editable key-value pairs. Delete individual query parameters with one click. All parsing happens locally in your browser — no data is sent to any server.",
+    category: "developers",
+    keywords: [
+      "url parser",
+      "url decoder",
+      "query string parser",
+      "url breakdown",
+      "url inspector",
+      "query parameters",
+      "url components",
+    ],
+    icon: "🔗",
+    isClientSide: true,
+    relatedSlugs: ["url-encoder-decoder", "base64-encoder", "base64-decoder"],
+    supportedFormats: ["Any valid URL"],
+    limitations: [
+      "Only valid URLs with protocol (http://, https://, etc.) can be parsed",
+      "Query parameters are decoded but not re-encoded when deleted",
+    ],
+    faq: [
+      {
+        question: "What URL formats are supported?",
+        answer:
+          "Any valid URL with a protocol (http://, https://, ftp://, etc.) can be parsed. The tool uses the browser's native URL API for accurate parsing.",
+      },
+      {
+        question: "Can I edit query parameters?",
+        answer:
+          "Yes. You can delete individual query parameters by clicking the delete button next to each pair. The tool shows all parameters as editable key-value pairs.",
+      },
+    ],
+  },
 ];
 
 /* ---- Lookup helpers ---- */
