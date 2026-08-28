@@ -30,6 +30,7 @@ import { LoremIpsumGenerator } from "@/tools/lorem-ipsum-generator/LoremIpsumGen
 import { UrlEncoderDecoder } from "@/tools/url-encoder-decoder/UrlEncoderDecoder";
 import { ImageToBase64 } from "@/tools/image-to-base64/ImageToBase64";
 import { HtmlEntityEncoderDecoder } from "@/tools/html-entity-encoder-decoder/HtmlEntityEncoderDecoder";
+import { EpochTimestampConverter } from "@/tools/epoch-timestamp-converter/EpochTimestampConverter";
 
 const JpgToPdf = dynamic(() =>
   import("@/tools/jpg-to-pdf/JpgToPdf").then((m) => m.JpgToPdf),
@@ -88,6 +89,7 @@ const toolComponents: Record<string, ComponentType> = {
   "url-encoder-decoder": UrlEncoderDecoder,
   "image-to-base64": ImageToBase64,
   "html-entity-encoder-decoder": HtmlEntityEncoderDecoder,
+  "epoch-timestamp-converter": EpochTimestampConverter,
 };
 
 export function getToolComponent(slug: string): ComponentType | undefined {

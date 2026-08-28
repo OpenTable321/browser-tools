@@ -538,7 +538,18 @@
     "enterTextToHtmlEncode": "Enter text with special characters to encode…",
     "enterHtmlEntitiesToDecode": "Enter HTML entities to decode…",
     "pleaseEnterHtmlEntityText": "Please enter text to process.",
-    "failedToProcessHtmlEntity": "Failed to process the input. Check for malformed HTML entities."
+    "failedToProcessHtmlEntity": "Failed to process the input. Check for malformed HTML entities.",
+    "localTime": "Local",
+    "utcTime": "UTC",
+    "currentEpoch": "Current epoch",
+    "useCurrentTime": "Use current time",
+    "unixTimestamp": "Unix Timestamp",
+    "dateTime": "Date & Time",
+    "enterEpochPlaceholder": "Enter Unix timestamp (e.g. 1700000000)",
+    "epochToDateTimeHint": "Enter a Unix timestamp in seconds to convert to a human-readable date.",
+    "dateTimeToEpochHint": "Pick a date and time to get the corresponding Unix timestamp.",
+    "invalidTimestamp": "Invalid timestamp. Please enter a valid number.",
+    "invalidDate": "Invalid date. Please enter a valid date and time."
   },
   "footer": {
     "categories": "Categories",
@@ -985,6 +996,16 @@
       "faq": [
         { "question": "What characters does the encoder convert?", "answer": "It converts the five most important HTML special characters: & to &amp;, < to &lt;, > to &gt;, \" to &quot;, and ' to &#39;. These are the characters that have special meaning in HTML markup and must be escaped to display them as literal text." },
         { "question": "Is my text sent to a server?", "answer": "No. All encoding and decoding happens entirely in your browser. Your text is never transmitted to any server." }
+      ]
+    },
+    "epoch-timestamp-converter": {
+      "name": "Epoch/Unix Timestamp Converter",
+      "description": "Convert Unix timestamps to human-readable dates and vice versa. Supports UTC and local timezones with live updates — all in your browser.",
+      "longDescription": "Convert between Unix epoch timestamps and human-readable date-times instantly. Enter a Unix timestamp to see the corresponding date and time, or pick a date-time to get its epoch value. Toggle between UTC and your local timezone. A live current-time display updates every second. Everything runs client-side — no data is sent to any server.",
+      "limitations": { "0": "Timestamps are in seconds — millisecond precision is not supported in the input field", "1": "Date-time input uses the browser's native datetime-local picker", "2": "Date range is limited by JavaScript's Date object (±100,000,000 days from epoch)" },
+      "faq": [
+        { "question": "What is a Unix timestamp?", "answer": "A Unix timestamp (also called epoch time) is the number of seconds that have elapsed since January 1, 1970 (the Unix epoch), not counting leap seconds. It is widely used in programming, databases, and APIs." },
+        { "question": "Does this tool support milliseconds?", "answer": "The input field accepts timestamps in seconds. If you have a millisecond timestamp, divide by 1000 before entering it. The live current-time display also shows seconds." }
       ]
     }
   }

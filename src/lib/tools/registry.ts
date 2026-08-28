@@ -1358,6 +1358,45 @@ export const toolRegistry: ToolMeta[] = [
       },
     ],
   },
+  {
+    slug: "epoch-timestamp-converter",
+    name: "Epoch/Unix Timestamp Converter",
+    description:
+      "Convert Unix timestamps to human-readable dates and vice versa. Supports UTC and local timezones with live updates — all in your browser.",
+    longDescription:
+      "Convert between Unix epoch timestamps and human-readable date-times instantly. Enter a Unix timestamp to see the corresponding date and time, or pick a date-time to get its epoch value. Toggle between UTC and your local timezone. A live current-time display updates every second. Everything runs client-side — no data is sent to any server.",
+    category: "developers",
+    keywords: [
+      "epoch converter",
+      "unix timestamp converter",
+      "unix to date",
+      "date to unix",
+      "epoch timestamp",
+      "unix time converter",
+      "timestamp to human readable",
+    ],
+    icon: "⏱️",
+    isClientSide: true,
+    relatedSlugs: ["date-calculator", "json-formatter", "url-encoder-decoder"],
+    supportedFormats: ["Unix timestamp (seconds)", "Date-time string"],
+    limitations: [
+      "Timestamps are in seconds — millisecond precision is not supported in the input field",
+      "Date-time input uses the browser's native datetime-local picker",
+      "Date range is limited by JavaScript's Date object (±100,000,000 days from epoch)",
+    ],
+    faq: [
+      {
+        question: "What is a Unix timestamp?",
+        answer:
+          "A Unix timestamp (also called epoch time) is the number of seconds that have elapsed since January 1, 1970 (the Unix epoch), not counting leap seconds. It is widely used in programming, databases, and APIs.",
+      },
+      {
+        question: "Does this tool support milliseconds?",
+        answer:
+          "The input field accepts timestamps in seconds. If you have a millisecond timestamp, divide by 1000 before entering it. The live current-time display also shows seconds.",
+      },
+    ],
+  },
 ];
 
 /* ---- Lookup helpers ---- */
