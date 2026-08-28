@@ -1745,6 +1745,45 @@ export const toolRegistry: ToolMeta[] = [
       },
     ],
   },
+  {
+    slug: "sha256-hash-generator",
+    name: "SHA-256 Hash Generator",
+    description:
+      "Generate SHA-256 hashes from text or files using the Web Crypto API. Drag and drop files, live text hashing, uppercase toggle, one-click copy — all in your browser.",
+    longDescription:
+      "Compute SHA-256 cryptographic hashes securely in your browser using the native Web Crypto API (crypto.subtle.digest). The tool supports two modes: text mode with live hashing as you type, and file mode with a drag-and-drop drop zone for hashing any file. Toggle between lowercase and uppercase hex output, and copy the hash to your clipboard with one click. SHA-256 is part of the SHA-2 family and is widely used for data integrity verification, digital signatures, and blockchain applications. All processing happens locally — your data never leaves your device.",
+    category: "developers",
+    keywords: [
+      "sha256 hash generator",
+      "sha-256 hash",
+      "generate sha256",
+      "sha256 online",
+      "sha256 checksum",
+      "sha256 file hash",
+      "sha-2 hash",
+    ],
+    icon: "🔐",
+    isClientSide: true,
+    relatedSlugs: ["md5-hash-generator", "base64-encoder", "uuid-generator"],
+    supportedFormats: ["Plain text", "Any file"],
+    limitations: [
+      "Requires a browser that supports the Web Crypto API (all modern browsers do)",
+      "File mode reads the entire file into memory — very large files may cause memory issues",
+      "Only SHA-256 is supported — for other algorithms (SHA-1, SHA-512), use a dedicated tool",
+    ],
+    faq: [
+      {
+        question: "What is the difference between MD5 and SHA-256?",
+        answer:
+          "MD5 produces a 128-bit hash and is considered cryptographically broken. SHA-256 produces a 256-bit hash and is part of the SHA-2 family, which is still considered secure for most applications. SHA-256 is recommended for security-sensitive use cases, while MD5 should only be used for non-security purposes like checksums.",
+      },
+      {
+        question: "Can I hash files with this tool?",
+        answer:
+          "Yes. Switch to file mode and drag and drop any file onto the drop zone, or click to browse. The tool reads the file and computes its SHA-256 hash using the Web Crypto API. The file is processed entirely in your browser and never uploaded to a server.",
+      },
+    ],
+  },
 ];
 
 /* ---- Lookup helpers ---- */

@@ -40,6 +40,7 @@ import { ColorPaletteGenerator } from "@/tools/color-palette-generator/ColorPale
 import { SqlFormatter } from "@/tools/sql-formatter/SqlFormatter";
 import { JsonValidator } from "@/tools/json-validator/JsonValidator";
 import { Md5HashGenerator } from "@/tools/md5-hash-generator/Md5HashGenerator";
+import { Sha256HashGenerator } from "@/tools/sha256-hash-generator/Sha256HashGenerator";
 
 const JpgToPdf = dynamic(() =>
   import("@/tools/jpg-to-pdf/JpgToPdf").then((m) => m.JpgToPdf),
@@ -108,6 +109,7 @@ const toolComponents: Record<string, ComponentType> = {
   "sql-formatter": SqlFormatter,
   "json-validator": JsonValidator,
   "md5-hash-generator": Md5HashGenerator,
+  "sha256-hash-generator": Sha256HashGenerator,
 };
 
 export function getToolComponent(slug: string): ComponentType | undefined {
