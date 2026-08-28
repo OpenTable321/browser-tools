@@ -104,6 +104,63 @@
     "urlParserQueryParams": "Query Parameters",
     "urlParserDelete": "Delete",
     "urlParserFullUrl": "Full URL",
+    "htmlStripperInput": "Paste HTML to strip",
+    "htmlStripperPlaceholder": "<p>Hello <strong>world</strong></p>",
+    "htmlStripperModeStrip": "Remove all tags",
+    "htmlStripperModeBreaks": "Preserve line breaks",
+    "htmlStripperOutput": "Clean text",
+    "slugInput": "Enter text to slugify",
+    "slugPlaceholder": "Hello World! This is a test",
+    "slugOutput": "URL Slug",
+    "textReplacerInput": "Enter text",
+    "textReplacerPlaceholder": "Paste your text here…",
+    "textReplacerFind": "Find",
+    "textReplacerReplace": "Replace with",
+    "textReplacerCaseSensitive": "Case sensitive",
+    "textReplacerUseRegex": "Use regex",
+    "textReplacerOutput": "Result",
+    "textReplacerError": "Invalid regex pattern",
+    "nbcBinary": "Binary (Base 2)",
+    "nbcOctal": "Octal (Base 8)",
+    "nbcDecimal": "Decimal (Base 10)",
+    "nbcHex": "Hexadecimal (Base 16)",
+    "nbcBase36": "Base 36",
+    "colorRgb": "RGB",
+    "colorHsl": "HSL",
+    "colorCmyk": "CMYK",
+    "colorInvalid": "Invalid HEX color code",
+    "jwtInput": "Paste JWT token",
+    "jwtPlaceholder": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+    "jwtError": "Invalid JWT format. A JWT must have 3 parts separated by dots.",
+    "jwtHeader": "Header",
+    "jwtPayload": "Payload",
+    "jwtActive": "Active",
+    "jwtExpired": "Expired",
+    "morseEncode": "Text → Morse",
+    "morseDecode": "Morse → Text",
+    "morseInput": "Input",
+    "morseEncodePlaceholder": "Hello World",
+    "morseDecodePlaceholder": ".... . .-.. .-.. --- / .-- --- .-. .-.. -..",
+    "morseOutput": "Output",
+    "binaryEncode": "Text → Binary",
+    "binaryDecode": "Binary → Text",
+    "binaryInput": "Input",
+    "binaryEncodePlaceholder": "Enter text to encode",
+    "binaryDecodePlaceholder": "01001000 01101001",
+    "binaryOutput": "Output",
+    "binaryError": "Invalid binary input. Use space-separated 8-bit values.",
+    "prefixSuffixInput": "Enter text (one line per row)",
+    "prefixSuffixPlaceholder": "apple\nbanana\ncherry",
+    "prefixLabel": "Prefix",
+    "suffixLabel": "Suffix",
+    "prefixSuffixSkipEmpty": "Skip empty lines",
+    "prefixSuffixOutput": "Result",
+    "listRandomizerInput": "Enter list items (one per line)",
+    "listRandomizerPlaceholder": "Item 1\nItem 2\nItem 3",
+    "listRandomizerPickCount": "Pick N items",
+    "listRandomizerRemoveEmpty": "Remove empty lines",
+    "listRandomizerPicked": "Picked",
+    "listRandomizerShuffled": "Shuffled list",
     "removeDuplicates": "Remove Duplicates",
     "duplicatesRemoved": "{count} duplicates removed",
     "caseSensitive": "Case sensitive",
@@ -1269,6 +1326,106 @@
       "faq": [
         { "question": "What URL formats are supported?", "answer": "Any valid URL with a protocol (http://, https://, ftp://, etc.) can be parsed. The tool uses the browser's native URL API for accurate parsing." },
         { "question": "Can I edit query parameters?", "answer": "Yes. You can delete individual query parameters by clicking the delete button next to each pair. The tool shows all parameters as editable key-value pairs." }
+      ]
+    },
+    "html-stripper": {
+      "name": "HTML Tag Stripper",
+      "description": "Remove HTML tags from any markup, leaving clean text. Option to preserve line breaks from block elements.",
+      "longDescription": "Clean HTML markup by stripping all tags and leaving only raw text. Choose between completely removing tags or converting block-level tags (br, p, div, li) to line breaks for better readability. All processing happens in your browser.",
+      "limitations": { "0": "Does not parse or validate HTML — uses regex-based tag removal", "1": "Script and style tag contents are not removed (only the tags themselves)" },
+      "faq": [
+        { "question": "Does this remove script contents?", "answer": "No. The tool removes HTML tags using regex. The content inside <script> or <style> tags will remain. For full HTML parsing, use a DOM-based approach." },
+        { "question": "What does the 'Preserve line breaks' mode do?", "answer": "It converts block-level closing tags (</p>, </div>, </li>, <br>) to newlines before stripping all remaining tags, preserving paragraph structure as line breaks." }
+      ]
+    },
+    "url-slug-generator": {
+      "name": "URL Slug Generator",
+      "description": "Convert text into URL-safe slugs. Lowercased, spaces to hyphens, special chars stripped, with Cyrillic transliteration.",
+      "longDescription": "Generate clean, SEO-friendly URL slugs from any text. The tool lowercases the input, replaces spaces with hyphens, removes special characters, and transliterates Cyrillic characters to Latin (e.g., 'привет' → 'privet'). All processing is client-side.",
+      "limitations": { "0": "Transliteration supports Russian Cyrillic only — other Cyrillic characters are stripped", "1": "Consecutive hyphens are collapsed into one" },
+      "faq": [
+        { "question": "How does Cyrillic transliteration work?", "answer": "Each Cyrillic character is mapped to its Latin equivalent (e.g., 'я' → 'ya', 'ж' → 'zh'). This produces readable slugs from Russian text without manual conversion." },
+        { "question": "What characters are kept in the slug?", "answer": "Only lowercase letters (a-z), digits (0-9), and hyphens are kept. All other characters are removed. Spaces are converted to hyphens." }
+      ]
+    },
+    "text-replacer": {
+      "name": "Text Replacer",
+      "description": "Find and replace text in large blocks. Supports case-sensitive matching and regex patterns.",
+      "longDescription": "Mass find-and-replace tool for text. Enter a search phrase and replacement, toggle case sensitivity, or enable regex mode for pattern-based replacements. All processing happens locally in your browser.",
+      "limitations": { "0": "Regex errors will display an error message instead of output", "1": "No undo/history — keep your original text safe" },
+      "faq": [
+        { "question": "Can I use regular expressions?", "answer": "Yes. Enable the 'Use Regex' toggle to treat the find field as a regex pattern. All JavaScript regex features are supported, including capture groups in the replacement string." },
+        { "question": "Is the matching case-sensitive by default?", "answer": "No. By default, matching is case-insensitive. Enable the 'Case sensitive' toggle for exact case matching." }
+      ]
+    },
+    "number-base-converter": {
+      "name": "Number Base Converter",
+      "description": "Convert numbers between Binary, Octal, Decimal, Hexadecimal, and Base 36 with live updates.",
+      "longDescription": "Interactively convert numbers between common bases: Binary (base 2), Octal (base 8), Decimal (base 10), Hexadecimal (base 16), and Base 36. Type in any field and all others update instantly. All calculations happen in your browser.",
+      "limitations": { "0": "Supports integers only — fractional numbers are not supported", "1": "Maximum value is limited by JavaScript's number precision (2^53)" },
+      "faq": [
+        { "question": "What is Base 36?", "answer": "Base 36 uses digits 0-9 and letters A-Z to represent numbers. It's the highest base that can be represented with alphanumeric characters in a case-insensitive manner." },
+        { "question": "Can I convert fractional numbers?", "answer": "No. This tool supports integer conversion only. Fractional number base conversion requires a different algorithm." }
+      ]
+    },
+    "hex-rgb-converter": {
+      "name": "HEX to RGB Converter",
+      "description": "Convert colors between HEX, RGB, HSL, and CMYK formats in real time. Includes color picker.",
+      "longDescription": "Real-time color format converter. Pick a color or enter a HEX code, and instantly see RGB, HSL, and CMYK representations. All conversions happen locally in your browser.",
+      "limitations": { "0": "HEX input must be 3 or 6 character hex codes (with or without #)", "1": "CMYK conversion is approximate for display purposes" },
+      "faq": [
+        { "question": "What color formats are supported?", "answer": "HEX, RGB (e.g., rgb(52, 152, 219)), HSL (e.g., hsl(204, 70%, 53%)), and CMYK (e.g., cmyk(76%, 30%, 0%, 14%))." },
+        { "question": "Can I use 3-digit HEX codes?", "answer": "Yes. 3-digit HEX codes (like #fff) are automatically expanded to 6-digit equivalents (#ffffff)." }
+      ]
+    },
+    "jwt-decoder": {
+      "name": "JWT Debugger & Decoder",
+      "description": "Decode JWT tokens to inspect header and payload. See expiration status with Active/Expired badge.",
+      "longDescription": "Paste a JWT (JSON Web Token) to instantly decode its header and payload as formatted JSON. The tool checks the 'exp' claim and displays an Active/Expired badge with the expiration date. All decoding happens client-side — your token never leaves your browser.",
+      "limitations": { "0": "Only decodes header and payload — does not verify signature", "1": "Expiration check only works if the 'exp' claim is present in the payload" },
+      "faq": [
+        { "question": "Does this verify the JWT signature?", "answer": "No. This tool only decodes the header and payload (which are Base64-encoded JSON). Signature verification requires the secret/public key, which is not available client-side." },
+        { "question": "Is it safe to paste my JWT here?", "answer": "Yes. All decoding happens in your browser using JavaScript's atob function. No data is transmitted to any server." }
+      ]
+    },
+    "morse-code-translator": {
+      "name": "Morse Code Translator",
+      "description": "Encode text to Morse code or decode Morse code back to text. Supports letters, numbers, and punctuation.",
+      "longDescription": "Bidirectional Morse code converter. Encode any text into international Morse code (dots and dashes), or paste Morse code to decode it back to readable text. Supports A-Z, 0-9, and common punctuation marks. All processing is client-side.",
+      "limitations": { "0": "Morse code is case-insensitive — all output is uppercase", "1": "Unsupported characters are silently skipped during encoding" },
+      "faq": [
+        { "question": "What characters are supported?", "answer": "Letters A-Z, digits 0-9, and common punctuation (. , ? ! / ( ) & @ = + - _ \" : ;) are supported. Spaces between words are represented as /." },
+        { "question": "How do I decode Morse code?", "answer": "Switch to decode mode and paste Morse code with spaces between characters and / between words. For example, '.... . .-.. .-.. --- / .-- --- .-. .-.. -..' decodes to 'HELLO WORLD'." }
+      ]
+    },
+    "binary-text-converter": {
+      "name": "Binary Text Converter",
+      "description": "Encode text into binary (0s and 1s) or decode binary back to readable text. Supports full Unicode.",
+      "longDescription": "Convert text to space-separated 8-bit binary values, or translate binary sequences back to human-readable text. Supports multi-byte Unicode characters. All processing happens in your browser.",
+      "limitations": { "0": "Binary input must be space-separated 8-bit values for decoding", "1": "Invalid binary sequences will produce error output" },
+      "faq": [
+        { "question": "How is text encoded to binary?", "answer": "Each character is converted to its Unicode code point and represented as an 8-bit binary number. For example, 'A' (code point 65) becomes '01000001'." },
+        { "question": "Can I decode binary without spaces?", "answer": "No. The decoder requires spaces between 8-bit values to correctly separate characters. Ensure your binary input is space-separated." }
+      ]
+    },
+    "text-prefix-suffix": {
+      "name": "Text Prefix & Suffix Appender",
+      "description": "Add custom prefix and/or suffix to every line of text. Option to skip empty lines.",
+      "longDescription": "Loop over each line of your text and append a custom prefix to the beginning and/or a suffix to the end. Toggle skipping empty lines. Useful for adding quotes, commas, HTML tags, or code syntax to list items. All processing is client-side.",
+      "limitations": { "0": "Prefix and suffix are added as literal strings — no regex or pattern support" },
+      "faq": [
+        { "question": "Can I add only a prefix or only a suffix?", "answer": "Yes. Leave the prefix or suffix field empty to add only one of them. Both fields can also be used simultaneously." },
+        { "question": "What does 'Skip empty lines' do?", "answer": "When enabled, empty lines (lines with no content or only whitespace) are left unchanged. When disabled, prefix and suffix are added to every line including empty ones." }
+      ]
+    },
+    "list-randomizer": {
+      "name": "List Randomizer & Picker",
+      "description": "Shuffle list items randomly, pick N unique items, remove empty lines. Download or copy results.",
+      "longDescription": "Randomize your lists with three operations: shuffle all entries randomly, pick 1 or N unique items from the list, and remove empty lines before processing. All randomization happens client-side using the Fisher-Yates shuffle algorithm.",
+      "limitations": { "0": "Uses Math.random() — not cryptographically secure", "1": "Pick count cannot exceed the number of non-empty items" },
+      "faq": [
+        { "question": "Is the shuffle truly random?", "answer": "The tool uses the Fisher-Yates shuffle algorithm with Math.random(). This is suitable for general use but not for cryptographic purposes." },
+        { "question": "How does the pick count work?", "answer": "After shuffling, the first N items are selected as the 'picked' results. If you request more items than available, all items are returned." }
       ]
     }
   }

@@ -43,6 +43,16 @@ import { Md5HashGenerator } from "@/tools/md5-hash-generator/Md5HashGenerator";
 import { Sha256HashGenerator } from "@/tools/sha256-hash-generator/Sha256HashGenerator";
 import { PasswordStrengthMeter } from "@/tools/password-strength-meter/PasswordStrengthMeter";
 import { UrlParser } from "@/tools/url-parser/UrlParser";
+import { HtmlStripper } from "@/tools/html-stripper/HtmlStripper";
+import { UrlSlugGenerator } from "@/tools/url-slug-generator/UrlSlugGenerator";
+import { TextReplacer } from "@/tools/text-replacer/TextReplacer";
+import { NumberBaseConverter } from "@/tools/number-base-converter/NumberBaseConverter";
+import { HexRgbConverter } from "@/tools/hex-rgb-converter/HexRgbConverter";
+import { JwtDecoder } from "@/tools/jwt-decoder/JwtDecoder";
+import { MorseCodeTranslator } from "@/tools/morse-code-translator/MorseCodeTranslator";
+import { BinaryTextConverter } from "@/tools/binary-text-converter/BinaryTextConverter";
+import { TextPrefixSuffix } from "@/tools/text-prefix-suffix/TextPrefixSuffix";
+import { ListRandomizer } from "@/tools/list-randomizer/ListRandomizer";
 
 const JpgToPdf = dynamic(() =>
   import("@/tools/jpg-to-pdf/JpgToPdf").then((m) => m.JpgToPdf),
@@ -114,6 +124,16 @@ const toolComponents: Record<string, ComponentType> = {
   "sha256-hash-generator": Sha256HashGenerator,
   "password-strength-meter": PasswordStrengthMeter,
   "url-parser": UrlParser,
+  "html-stripper": HtmlStripper,
+  "url-slug-generator": UrlSlugGenerator,
+  "text-replacer": TextReplacer,
+  "number-base-converter": NumberBaseConverter,
+  "hex-rgb-converter": HexRgbConverter,
+  "jwt-decoder": JwtDecoder,
+  "morse-code-translator": MorseCodeTranslator,
+  "binary-text-converter": BinaryTextConverter,
+  "text-prefix-suffix": TextPrefixSuffix,
+  "list-randomizer": ListRandomizer,
 };
 
 export function getToolComponent(slug: string): ComponentType | undefined {
