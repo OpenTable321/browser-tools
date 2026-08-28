@@ -4,7 +4,7 @@ import { useState } from "react";
 import { CopyButton } from "@/components/CopyButton";
 import { useTranslation } from "@/i18n/LanguageProvider";
 
-type CaseType = "upper" | "lower" | "title" | "sentence" | "toggle";
+type CaseType = "upper" | "lower" | "title" | "sentence" | "camel" | "snake" | "inverse";
 
 function toTitleCase(str: string): string {
   return str.replace(/\w\S*/g, (txt) => txt.charAt(0).toUpperCase() + txt.slice(1).toLowerCase());
@@ -14,8 +14,25 @@ function toSentenceCase(str: string): string {
   return str.replace(/(^\s*\w|[.!?]\s*\w)/g, (c) => c.toUpperCase()).toLowerCase().replace(/(^\s*\w|[.!?]\s*\w)/g, (c) => c.toUpperCase());
 }
 
-function toToggleCase(str: string): string {
+function toInverseCase(str: string): string {
   return str.split("").map((c) => (c === c.toUpperCase() ? c.toLowerCase() : c.toUpperCase())).join("");
+}
+
+function toCamelCase(str: string): string {
+  const words = str.trim().split(/[\s_\-]+/).filter(Boolean);
+  if (words.length === 0) return "";
+  const first = words[0]!.toLowerCase();
+  const rest = words.slice(1).map((w) => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase());
+  return first + rest.join("");
+}
+
+function toSnakeCase(str: string): string {
+  return str
+    .trim()
+    .split(/[\s\-]+/)
+    .filter(Boolean)
+    .map((w) => w.replace(/([a-z])([A-Z])/g, "$1_$2").toLowerCase())
+    .join("_");
 }
 
 function convertCase(text: string, type: CaseType): string {
@@ -24,7 +41,9 @@ function convertCase(text: string, type: CaseType): string {
     case "lower": return text.toLowerCase();
     case "title": return toTitleCase(text);
     case "sentence": return toSentenceCase(text);
-    case "toggle": return toToggleCase(text);
+    case "camel": return toCamelCase(text);
+    case "snake": return toSnakeCase(text);
+    case "inverse": return toInverseCase(text);
   }
 }
 
@@ -38,7 +57,9 @@ export function CaseConverter() {
     lower: t("common.lowercase"),
     title: t("common.titleCase"),
     sentence: t("common.sentenceCase"),
-    toggle: t("common.toggleCase"),
+    camel: t("common.camelCase"),
+    snake: t("common.snakeCase"),
+    inverse: t("common.inverseCase"),
   };
 
   const output = activeCase ? convertCase(text, activeCase) : "";

@@ -497,9 +497,9 @@ export const toolRegistry: ToolMeta[] = [
     slug: "case-converter",
     name: "Case Converter",
     description:
-      "Convert text to UPPERCASE, lowercase, Title Case, Sentence case, or toggle case instantly in your browser.",
+      "Convert text to UPPERCASE, lowercase, Title Case, Sentence case, camelCase, snake_case, or iNVERSE cASE instantly in your browser.",
     longDescription:
-      "Transform text between different letter cases with one click. Choose from UPPERCASE, lowercase, Title Case (each word capitalized), Sentence case (first letter of each sentence capitalized), or toggle case (reverse the case of each letter). All transformations happen instantly in your browser — no uploads, no sign-up.",
+      "Transform text between different letter cases with one click. Choose from UPPERCASE, lowercase, Title Case (each word capitalized), Sentence case (first letter of each sentence capitalized), camelCase (first word lowercase, subsequent words capitalized and joined), snake_case (words joined with underscores), or iNVERSE cASE (reverse the case of each letter). All transformations happen instantly in your browser — no uploads, no sign-up.",
     category: "text",
     keywords: [
       "case converter",
@@ -507,6 +507,9 @@ export const toolRegistry: ToolMeta[] = [
       "lowercase converter",
       "title case converter",
       "sentence case",
+      "camelCase converter",
+      "snake_case converter",
+      "inverse case",
       "text case changer",
       "capitalize text",
     ],
@@ -517,6 +520,7 @@ export const toolRegistry: ToolMeta[] = [
     limitations: [
       "Title Case capitalizes every word — for headlines, manual review may be needed for articles and prepositions",
       "Sentence case relies on punctuation (. ! ?) to detect sentence boundaries",
+      "camelCase and snake_case split text on spaces, hyphens, and underscores — existing camelCase words are split on capital letters for snake_case only",
     ],
     faq: [
       {
@@ -525,9 +529,14 @@ export const toolRegistry: ToolMeta[] = [
           "Title Case capitalizes the first letter of every word (e.g., \"The Quick Brown Fox\"). Sentence case only capitalizes the first letter of each sentence (e.g., \"The quick brown fox\").",
       },
       {
-        question: "What is toggle case?",
+        question: "What is iNVERSE cASE?",
         answer:
-          "Toggle case reverses the case of each letter — uppercase becomes lowercase and vice versa. For example, \"Hello World\" becomes \"hELLO wORLD\".",
+          "iNVERSE cASE reverses the case of each letter — uppercase becomes lowercase and vice versa. For example, \"Hello World\" becomes \"hELLO wORLD\".",
+      },
+      {
+        question: "How do camelCase and snake_case work?",
+        answer:
+          "camelCase joins words by capitalizing the first letter of each word except the first (e.g., \"hello world\" → \"helloWorld\"). snake_case joins words with underscores in all lowercase (e.g., \"Hello World\" → \"hello_world\"). Both split input on spaces, hyphens, and underscores.",
       },
     ],
   },
