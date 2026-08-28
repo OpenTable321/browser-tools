@@ -1706,6 +1706,45 @@ export const toolRegistry: ToolMeta[] = [
       },
     ],
   },
+  {
+    slug: "md5-hash-generator",
+    name: "MD5 Hash Generator",
+    description:
+      "Generate MD5 hashes from text input instantly in your browser. Supports UTF-8, uppercase/lowercase toggle, and one-click copy — no uploads.",
+    longDescription:
+      "Compute MD5 cryptographic hashes from any text directly in your browser. The tool uses a pure JavaScript MD5 implementation that properly handles UTF-8 encoded text, including Cyrillic, emoji, and other multi-byte characters. Toggle between lowercase and uppercase hex output, and copy the hash to your clipboard with one click. All processing happens locally — your text never leaves your device.",
+    category: "developers",
+    keywords: [
+      "md5 hash generator",
+      "md5 hash",
+      "generate md5",
+      "md5 online",
+      "md5 checksum",
+      "md5 converter",
+      "text to md5",
+    ],
+    icon: "#️⃣",
+    isClientSide: true,
+    relatedSlugs: ["base64-encoder", "base64-decoder", "uuid-generator"],
+    supportedFormats: ["Plain text", "UTF-8"],
+    limitations: [
+      "MD5 is not cryptographically secure — do not use for password storage or security-sensitive applications",
+      "Computes hash for text only — file hashing is not supported",
+      "Uses a pure JavaScript implementation, not the native Web Crypto API (which does not support MD5)",
+    ],
+    faq: [
+      {
+        question: "Is MD5 secure for password hashing?",
+        answer:
+          "No. MD5 is considered cryptographically broken and should not be used for password storage or any security-sensitive purpose. Use bcrypt, Argon2, or PBKDF2 for password hashing. MD5 is still useful for checksums, file integrity verification, and non-security applications.",
+      },
+      {
+        question: "Does this tool handle UTF-8 text correctly?",
+        answer:
+          "Yes. The tool uses the TextEncoder API to encode input as UTF-8 before computing the MD5 hash. This ensures that Cyrillic characters, emoji, accented letters, and other multi-byte characters produce the correct MD5 hash.",
+      },
+    ],
+  },
 ];
 
 /* ---- Lookup helpers ---- */
