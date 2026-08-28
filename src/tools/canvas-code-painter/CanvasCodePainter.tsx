@@ -73,10 +73,12 @@ export function CanvasCodePainter() {
   function handleMouseUp(e: React.MouseEvent<HTMLCanvasElement>) {
     if (!startPos.current) return;
     const pos = getMousePos(e);
+    const startX = startPos.current.x;
+    const startY = startPos.current.y;
     if (mode === "rect") {
-      setShapes((prev) => [...prev, { type: "rect", x: startPos.current!.x, y: startPos.current!.y, x2: pos.x, y2: pos.y }]);
+      setShapes((prev) => [...prev, { type: "rect", x: startX, y: startY, x2: pos.x, y2: pos.y }]);
     } else if (mode === "line") {
-      setShapes((prev) => [...prev, { type: "line", x: startPos.current!.x, y: startPos.current!.y, x2: pos.x, y2: pos.y }]);
+      setShapes((prev) => [...prev, { type: "line", x: startX, y: startY, x2: pos.x, y2: pos.y }]);
     }
     startPos.current = null;
   }
