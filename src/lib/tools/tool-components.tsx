@@ -37,6 +37,7 @@ import { RegexTester } from "@/tools/regex-tester/RegexTester";
 import { JsonXmlConverter } from "@/tools/json-xml-converter/JsonXmlConverter";
 import { SvgToPngConverter } from "@/tools/svg-to-png-converter/SvgToPngConverter";
 import { ColorPaletteGenerator } from "@/tools/color-palette-generator/ColorPaletteGenerator";
+import { SqlFormatter } from "@/tools/sql-formatter/SqlFormatter";
 
 const JpgToPdf = dynamic(() =>
   import("@/tools/jpg-to-pdf/JpgToPdf").then((m) => m.JpgToPdf),
@@ -102,6 +103,7 @@ const toolComponents: Record<string, ComponentType> = {
   "json-xml-converter": JsonXmlConverter,
   "svg-to-png-converter": SvgToPngConverter,
   "color-palette-generator": ColorPaletteGenerator,
+  "sql-formatter": SqlFormatter,
 };
 
 export function getToolComponent(slug: string): ComponentType | undefined {

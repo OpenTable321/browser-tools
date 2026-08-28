@@ -618,7 +618,15 @@
     "pleaseSelectImage": "Please select a valid image file.",
     "imageLoadError": "Failed to load the image.",
     "copy": "Copy",
-    "copied": "Copied!"
+    "copied": "Copied!",
+    "sqlInput": "SQL Input",
+    "sqlInputPlaceholder": "Paste your raw SQL query here…",
+    "sqlOutput": "Formatted SQL",
+    "keywordCasing": "Keyword Casing",
+    "casing_upper": "UPPER",
+    "casing_lower": "lower",
+    "casing_preserve": "Preserve",
+    "sqlFormatError": "Failed to format SQL. Please check your input."
   },
   "footer": {
     "categories": "Categories",
@@ -1135,6 +1143,16 @@
       "faq": [
         { "question": "How does the color extraction algorithm work?", "answer": "The tool downscales the image to 200px maximum dimension, then groups pixels into color buckets (32-value ranges per RGB channel). The 5 most populated buckets are averaged to produce the dominant colors, each shown with its percentage of the image." },
         { "question": "Can I copy both HEX and RGB codes?", "answer": "Yes. Each color block displays both the HEX code (e.g. #FF5733) and RGB code (e.g. rgb(255, 87, 51)). Click either one to copy it to your clipboard instantly." }
+      ]
+    },
+    "sql-formatter": {
+      "name": "SQL Formatter / Beautifier",
+      "description": "Format and beautify messy SQL queries with proper line breaks, indentation, and consistent keyword casing — all in your browser, no uploads.",
+      "longDescription": "Transform raw, unformatted SQL into clean, readable queries instantly. Paste your SQL and the formatter adds proper line breaks before major keywords (SELECT, FROM, WHERE, JOIN, GROUP BY, ORDER BY, etc.), applies consistent indentation, and normalizes keyword casing to uppercase, lowercase, or preserves original casing. Handles string literals, comments, subqueries, and nested parentheses. All processing happens locally in your browser — your queries never leave your device.",
+      "limitations": { "0": "Supports standard SQL syntax — dialect-specific keywords may not be recognized", "1": "Does not validate SQL syntax — only formats and beautifies", "2": "Complex nested subqueries may not indent perfectly in all cases" },
+      "faq": [
+        { "question": "Does this tool validate my SQL syntax?", "answer": "No. The formatter beautifies your SQL by adding line breaks, indentation, and consistent keyword casing. It does not validate whether the SQL is syntactically correct or will execute successfully against a database." },
+        { "question": "Can I choose uppercase or lowercase keywords?", "answer": "Yes. You can select from three keyword casing modes: UPPERCASE (converts all keywords to uppercase), lowercase (converts all keywords to lowercase), or Preserve (keeps original casing). The default is UPPERCASE." }
       ]
     }
   }

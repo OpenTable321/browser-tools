@@ -1628,6 +1628,45 @@ export const toolRegistry: ToolMeta[] = [
       },
     ],
   },
+  {
+    slug: "sql-formatter",
+    name: "SQL Formatter / Beautifier",
+    description:
+      "Format and beautify messy SQL queries with proper line breaks, indentation, and consistent keyword casing — all in your browser, no uploads.",
+    longDescription:
+      "Transform raw, unformatted SQL into clean, readable queries instantly. Paste your SQL and the formatter adds proper line breaks before major keywords (SELECT, FROM, WHERE, JOIN, GROUP BY, ORDER BY, etc.), applies consistent indentation, and normalizes keyword casing to uppercase, lowercase, or preserves original casing. Handles string literals, comments, subqueries, and nested parentheses. All processing happens locally in your browser — your queries never leave your device.",
+    category: "developers",
+    keywords: [
+      "sql formatter",
+      "sql beautifier",
+      "format sql",
+      "sql pretty print",
+      "sql indent",
+      "sql format online",
+      "beautify sql",
+    ],
+    icon: "🗄️",
+    isClientSide: true,
+    relatedSlugs: ["json-formatter", "regex-tester", "json-xml-converter"],
+    supportedFormats: ["SQL"],
+    limitations: [
+      "Supports standard SQL syntax — dialect-specific keywords may not be recognized",
+      "Does not validate SQL syntax — only formats and beautifies",
+      "Complex nested subqueries may not indent perfectly in all cases",
+    ],
+    faq: [
+      {
+        question: "Does this tool validate my SQL syntax?",
+        answer:
+          "No. The formatter beautifies your SQL by adding line breaks, indentation, and consistent keyword casing. It does not validate whether the SQL is syntactically correct or will execute successfully against a database.",
+      },
+      {
+        question: "Can I choose uppercase or lowercase keywords?",
+        answer:
+          "Yes. You can select from three keyword casing modes: UPPERCASE (converts all keywords to uppercase), lowercase (converts all keywords to lowercase), or Preserve (keeps original casing). The default is UPPERCASE.",
+      },
+    ],
+  },
 ];
 
 /* ---- Lookup helpers ---- */
