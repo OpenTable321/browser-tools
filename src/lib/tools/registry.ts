@@ -1281,6 +1281,45 @@ export const toolRegistry: ToolMeta[] = [
       },
     ],
   },
+  {
+    slug: "image-to-base64",
+    name: "Image to Base64 Converter",
+    description:
+      "Convert images to Base64 strings instantly. Drag and drop, get a data URL, HTML tag, or CSS snippet — 100% client-side, no uploads.",
+    longDescription:
+      "Convert any image to a Base64 data URL directly in your browser using the HTML5 FileReader API. Drag and drop or upload an image, and instantly get the Base64 string, a ready-to-paste HTML <img> tag, or a CSS background-image snippet. This is useful for embedding images directly in HTML, CSS, or JSON without external file requests. All processing happens locally — your images never leave your device.",
+    category: "image",
+    keywords: [
+      "image to base64",
+      "base64 image converter",
+      "image to data url",
+      "convert image to base64",
+      "base64 encode image",
+      "data uri image",
+      "inline image base64",
+    ],
+    icon: "🖼️",
+    isClientSide: true,
+    relatedSlugs: ["image-compressor", "image-resizer", "image-cropper"],
+    supportedFormats: ["JPG", "JPEG", "PNG", "WebP", "GIF", "SVG", "BMP"],
+    limitations: [
+      "Maximum file size: 10 MB (Base64 encoding increases size by ~33%)",
+      "Very large images produce very long Base64 strings that may slow down page rendering",
+      "Animated GIFs are supported but only the first frame is displayed in the preview",
+    ],
+    faq: [
+      {
+        question: "Is it safe to convert my images here?",
+        answer:
+          "Yes. All processing happens locally in your browser. Your images are never uploaded to any server — the conversion is done entirely client-side using the FileReader API.",
+      },
+      {
+        question: "What output formats are available?",
+        answer:
+          "You can copy the raw Base64 data URL, a complete HTML <img> tag with the image embedded, or a CSS background-image snippet. Switch between the three output modes with one click.",
+      },
+    ],
+  },
 ];
 
 /* ---- Lookup helpers ---- */

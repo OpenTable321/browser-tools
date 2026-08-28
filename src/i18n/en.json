@@ -524,7 +524,15 @@
     "selectAll": "Select all",
     "deselectAll": "Deselect all",
     "maxFiles": "max {count} files",
-    "free": "Free"
+    "free": "Free",
+    "file": "File",
+    "imageInfo": "Image Info",
+    "base64Length": "Base64 length",
+    "base64DataUrl": "Base64 Data URL",
+    "htmlImgTag": "HTML <img> Tag",
+    "cssBackgroundImage": "CSS background-image",
+    "imageToBase64SizeLimit": "File too large. Maximum file size is 10 MB for Base64 conversion.",
+    "imageToBase64Formats": "Supports JPG, PNG, WebP, GIF, SVG, BMP — max 10 MB"
   },
   "footer": {
     "categories": "Categories",
@@ -951,6 +959,16 @@
       "faq": [
         { "question": "What is the difference between encodeURI and encodeURIComponent?", "answer": "encodeURI is for encoding full URLs — it preserves characters like :, /, ?, &, and = that are part of the URL structure. encodeURIComponent is for encoding individual query parameter values — it encodes all special characters including those that have meaning in URLs." },
         { "question": "Can I encode URLs with Unicode or emoji characters?", "answer": "Yes. Both encodeURI and encodeURIComponent handle Unicode characters including emoji. They are converted to UTF-8 percent-encoded sequences (e.g., 🔗 becomes %F0%9F%94%97)." }
+      ]
+    },
+    "image-to-base64": {
+      "name": "Image to Base64 Converter",
+      "description": "Convert images to Base64 strings instantly. Drag and drop, get a data URL, HTML tag, or CSS snippet — 100% client-side, no uploads.",
+      "longDescription": "Convert any image to a Base64 data URL directly in your browser using the HTML5 FileReader API. Drag and drop or upload an image, and instantly get the Base64 string, a ready-to-paste HTML <img> tag, or a CSS background-image snippet. This is useful for embedding images directly in HTML, CSS, or JSON without external file requests. All processing happens locally — your images never leave your device.",
+      "limitations": { "0": "Maximum file size: 10 MB (Base64 encoding increases size by ~33%)", "1": "Very large images produce very long Base64 strings that may slow down page rendering", "2": "Animated GIFs are supported but only the first frame is displayed in the preview" },
+      "faq": [
+        { "question": "Is it safe to convert my images here?", "answer": "Yes. All processing happens locally in your browser. Your images are never uploaded to any server — the conversion is done entirely client-side using the FileReader API." },
+        { "question": "What output formats are available?", "answer": "You can copy the raw Base64 data URL, a complete HTML <img> tag with the image embedded, or a CSS background-image snippet. Switch between the three output modes with one click." }
       ]
     }
   }
