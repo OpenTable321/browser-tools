@@ -611,7 +611,14 @@
     "svgRenderError": "Failed to render the SVG. Check for invalid markup or external resources.",
     "canvasError": "Failed to get canvas context.",
     "pngConvertError": "Failed to convert to PNG.",
-    "pasteSvgFirst": "Please paste or load an SVG first."
+    "pasteSvgFirst": "Please paste or load an SVG first.",
+    "dropOrClickImage": "Drop an image here or click to upload",
+    "colorPaletteFormats": "Supports JPG, PNG, WebP, GIF, BMP",
+    "dominantColors": "Dominant Colors",
+    "pleaseSelectImage": "Please select a valid image file.",
+    "imageLoadError": "Failed to load the image.",
+    "copy": "Copy",
+    "copied": "Copied!"
   },
   "footer": {
     "categories": "Categories",
@@ -1118,6 +1125,16 @@
       "faq": [
         { "question": "Can I set custom output dimensions?", "answer": "Yes. You can set custom width and height in pixels. Enable the 'Keep aspect ratio' toggle to automatically maintain the original proportions when changing one dimension." },
         { "question": "Why does my SVG preview look different from the original?", "answer": "If your SVG references external fonts, images, or stylesheets, the browser may not load them due to security restrictions. Inline all resources within the SVG for best results." }
+      ]
+    },
+    "color-palette-generator": {
+      "name": "Color Palette Generator from Image",
+      "description": "Extract the top 5 dominant colors from any image. Upload, get beautiful color blocks with HEX/RGB codes, and copy with one click — all in your browser.",
+      "longDescription": "Generate a color palette from any image directly in your browser. Upload or drag and drop an image, and the tool uses a color quantization algorithm to extract the 5 most dominant colors. Each color is displayed as a beautiful color block showing its percentage of the image, with both HEX and RGB codes available for one-click copying. The image is downscaled for fast processing, and all computation happens locally using the HTML5 Canvas API — your image never leaves your device.",
+      "limitations": { "0": "Extracts exactly 5 dominant colors using bucket-based quantization", "1": "Images are downscaled to 200px max dimension for processing speed", "2": "Transparent pixels are ignored during color extraction" },
+      "faq": [
+        { "question": "How does the color extraction algorithm work?", "answer": "The tool downscales the image to 200px maximum dimension, then groups pixels into color buckets (32-value ranges per RGB channel). The 5 most populated buckets are averaged to produce the dominant colors, each shown with its percentage of the image." },
+        { "question": "Can I copy both HEX and RGB codes?", "answer": "Yes. Each color block displays both the HEX code (e.g. #FF5733) and RGB code (e.g. rgb(255, 87, 51)). Click either one to copy it to your clipboard instantly." }
       ]
     }
   }

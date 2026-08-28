@@ -1589,6 +1589,45 @@ export const toolRegistry: ToolMeta[] = [
       },
     ],
   },
+  {
+    slug: "color-palette-generator",
+    name: "Color Palette Generator from Image",
+    description:
+      "Extract the top 5 dominant colors from any image. Upload, get beautiful color blocks with HEX/RGB codes, and copy with one click — all in your browser.",
+    longDescription:
+      "Generate a color palette from any image directly in your browser. Upload or drag and drop an image, and the tool uses a color quantization algorithm to extract the 5 most dominant colors. Each color is displayed as a beautiful color block showing its percentage of the image, with both HEX and RGB codes available for one-click copying. The image is downscaled for fast processing, and all computation happens locally using the HTML5 Canvas API — your image never leaves your device.",
+    category: "image",
+    keywords: [
+      "color palette generator",
+      "extract colors from image",
+      "image color picker",
+      "dominant colors",
+      "color scheme from image",
+      "hex color extractor",
+      "image to color palette",
+    ],
+    icon: "🎨",
+    isClientSide: true,
+    relatedSlugs: ["image-to-base64", "svg-to-png-converter", "image-compressor"],
+    supportedFormats: ["JPG", "PNG", "WebP", "GIF", "BMP"],
+    limitations: [
+      "Extracts exactly 5 dominant colors using bucket-based quantization",
+      "Images are downscaled to 200px max dimension for processing speed",
+      "Transparent pixels are ignored during color extraction",
+    ],
+    faq: [
+      {
+        question: "How does the color extraction algorithm work?",
+        answer:
+          "The tool downscales the image to 200px maximum dimension, then groups pixels into color buckets (32-value ranges per RGB channel). The 5 most populated buckets are averaged to produce the dominant colors, each shown with its percentage of the image.",
+      },
+      {
+        question: "Can I copy both HEX and RGB codes?",
+        answer:
+          "Yes. Each color block displays both the HEX code (e.g. #FF5733) and RGB code (e.g. rgb(255, 87, 51)). Click either one to copy it to your clipboard instantly.",
+      },
+    ],
+  },
 ];
 
 /* ---- Lookup helpers ---- */
