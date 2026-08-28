@@ -1473,6 +1473,44 @@ export const toolRegistry: ToolMeta[] = [
       },
     ],
   },
+  {
+    slug: "regex-tester",
+    name: "RegEx Tester",
+    description:
+      "Test regular expressions in real time. Enter a pattern and test string, toggle flags (g, i, m, s, u, y), see highlighted matches and capturing groups — all in your browser.",
+    longDescription:
+      "Test and debug regular expressions with instant feedback. Enter your regex pattern and a test string, toggle modifier flags (global, case-insensitive, multiline, dotall, unicode, sticky), and see matches highlighted in real time. The tool shows the number of matches, capturing group count, and detailed match information including group captures. Syntax errors are displayed immediately. All processing happens locally using JavaScript's native RegExp engine — your input never leaves your device.",
+    category: "developers",
+    keywords: [
+      "regex tester",
+      "regular expression tester",
+      "regex tester online",
+      "regex pattern tester",
+      "regex debugger",
+      "regexp tester",
+      "regex matcher",
+    ],
+    icon: "🔬",
+    isClientSide: true,
+    relatedSlugs: ["json-formatter", "epoch-timestamp-converter", "url-encoder-decoder"],
+    supportedFormats: ["Regular expressions", "Plain text"],
+    limitations: [
+      "Uses JavaScript's native RegExp engine — lookbehind assertions may not work in older browsers",
+      "Capturing group count is estimated by counting opening parentheses (may include non-capturing groups)",
+    ],
+    faq: [
+      {
+        question: "What regex flags are supported?",
+        answer:
+          "All standard JavaScript RegExp flags: g (global — find all matches), i (case-insensitive), m (multiline — ^ and $ match per line), s (dotall — . matches newlines), u (unicode), and y (sticky — match at lastIndex only).",
+      },
+      {
+        question: "Does this tool use the same regex engine as my programming language?",
+        answer:
+          "This tool uses JavaScript's native RegExp engine, which is very similar to PCRE but has some differences. Most patterns work the same way across JavaScript, Python, and other languages, but advanced features like named groups or lookbehind may behave differently.",
+      },
+    ],
+  },
 ];
 
 /* ---- Lookup helpers ---- */

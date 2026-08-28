@@ -566,7 +566,25 @@
     "markdownPlaceholder": "# Heading\n\nWrite your **Markdown** here…\n\n- List item 1\n- List item 2",
     "livePreview": "Live Preview",
     "htmlOutput": "HTML Output",
-    "previewEmpty": "Start typing Markdown to see the live preview…"
+    "previewEmpty": "Start typing Markdown to see the live preview…",
+    "regexPattern": "Regular Expression",
+    "regexPatternPlaceholder": "Enter regex pattern…",
+    "regexFlags": "Flags",
+    "flagGlobal": "Global (find all)",
+    "flagCaseInsensitive": "Case-insensitive",
+    "flagMultiline": "Multiline (^ $ per line)",
+    "flagDotall": "Dotall (. matches newline)",
+    "flagUnicode": "Unicode",
+    "flagSticky": "Sticky (match at lastIndex)",
+    "testString": "Test String",
+    "testStringPlaceholder": "Enter text to test against your regex…",
+    "regexError": "Error",
+    "regexInvalid": "Invalid regular expression.",
+    "matchesFound": "Matches",
+    "capturingGroups": "Capturing groups",
+    "highlightedMatches": "Highlighted Matches",
+    "matchDetails": "Match Details",
+    "noMatches": "No matches found."
   },
   "footer": {
     "categories": "Categories",
@@ -1043,6 +1061,16 @@
       "faq": [
         { "question": "What Markdown features are supported?", "answer": "Headings (H1–H6), bold, italic, strikethrough, inline code, code blocks, links, images, unordered lists, ordered lists, blockquotes, and horizontal rules. Tables and footnotes are not supported." },
         { "question": "Does this tool send my content to a server?", "answer": "No. All Markdown parsing and HTML generation happens entirely in your browser. Your content is never transmitted to any server." }
+      ]
+    },
+    "regex-tester": {
+      "name": "RegEx Tester",
+      "description": "Test regular expressions in real time. Enter a pattern and test string, toggle flags (g, i, m, s, u, y), see highlighted matches and capturing groups — all in your browser.",
+      "longDescription": "Test and debug regular expressions with instant feedback. Enter your regex pattern and a test string, toggle modifier flags (global, case-insensitive, multiline, dotall, unicode, sticky), and see matches highlighted in real time. The tool shows the number of matches, capturing group count, and detailed match information including group captures. Syntax errors are displayed immediately. All processing happens locally using JavaScript's native RegExp engine — your input never leaves your device.",
+      "limitations": { "0": "Uses JavaScript's native RegExp engine — lookbehind assertions may not work in older browsers", "1": "Capturing group count is estimated by counting opening parentheses (may include non-capturing groups)" },
+      "faq": [
+        { "question": "What regex flags are supported?", "answer": "All standard JavaScript RegExp flags: g (global — find all matches), i (case-insensitive), m (multiline — ^ and $ match per line), s (dotall — . matches newlines), u (unicode), and y (sticky — match at lastIndex only)." },
+        { "question": "Does this tool use the same regex engine as my programming language?", "answer": "This tool uses JavaScript's native RegExp engine, which is very similar to PCRE but has some differences. Most patterns work the same way across JavaScript, Python, and other languages, but advanced features like named groups or lookbehind may behave differently." }
       ]
     }
   }
