@@ -35,6 +35,7 @@ import { TextDiffChecker } from "@/tools/text-diff-checker/TextDiffChecker";
 import { MarkdownToHtml } from "@/tools/markdown-to-html/MarkdownToHtml";
 import { RegexTester } from "@/tools/regex-tester/RegexTester";
 import { JsonXmlConverter } from "@/tools/json-xml-converter/JsonXmlConverter";
+import { SvgToPngConverter } from "@/tools/svg-to-png-converter/SvgToPngConverter";
 
 const JpgToPdf = dynamic(() =>
   import("@/tools/jpg-to-pdf/JpgToPdf").then((m) => m.JpgToPdf),
@@ -98,6 +99,7 @@ const toolComponents: Record<string, ComponentType> = {
   "markdown-to-html": MarkdownToHtml,
   "regex-tester": RegexTester,
   "json-xml-converter": JsonXmlConverter,
+  "svg-to-png-converter": SvgToPngConverter,
 };
 
 export function getToolComponent(slug: string): ComponentType | undefined {

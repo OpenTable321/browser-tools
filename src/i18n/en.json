@@ -594,7 +594,24 @@
     "xmlOutput": "XML Output",
     "jsonOutput": "JSON Output",
     "pleaseEnterJsonXml": "Please enter data to convert.",
-    "failedToConvertJsonXml": "Failed to convert. Check your input syntax."
+    "failedToConvertJsonXml": "Failed to convert. Check your input syntax.",
+    "svgInput": "SVG Input",
+    "loadSvgFile": "Load SVG File",
+    "svgInputPlaceholder": "Paste your SVG markup here…",
+    "originalSize": "Original size",
+    "svgPreview": "SVG Preview",
+    "keepAspectRatio": "Keep aspect ratio",
+    "outputWidth": "Output Width (px)",
+    "outputHeight": "Output Height (px)",
+    "convertToPng": "Convert to PNG",
+    "downloadPng": "Download PNG",
+    "pngResult": "PNG Result",
+    "notValidSvg": "Not a valid SVG — no <svg> root element found.",
+    "svgLoadError": "Failed to load the SVG file.",
+    "svgRenderError": "Failed to render the SVG. Check for invalid markup or external resources.",
+    "canvasError": "Failed to get canvas context.",
+    "pngConvertError": "Failed to convert to PNG.",
+    "pasteSvgFirst": "Please paste or load an SVG first."
   },
   "footer": {
     "categories": "Categories",
@@ -1091,6 +1108,16 @@
       "faq": [
         { "question": "How are JSON arrays converted to XML?", "answer": "Each element in a JSON array becomes an <item> element inside the parent element. For example, [1, 2] becomes <root><item>1</item><item>2</item></root>." },
         { "question": "Are XML attributes preserved when converting to JSON?", "answer": "No. This converter focuses on element content and structure. XML attributes are not preserved — only element text and child elements are converted to JSON properties." }
+      ]
+    },
+    "svg-to-png-converter": {
+      "name": "SVG to PNG Converter",
+      "description": "Convert SVG to PNG in your browser. Paste or load an SVG, set custom width/height, keep aspect ratio, and download a high-quality PNG — no uploads.",
+      "longDescription": "Convert SVG images to PNG format directly in your browser. Paste SVG markup or load an .svg file, preview the SVG instantly, set custom output width and height in pixels, and toggle aspect ratio locking. The tool renders the SVG onto an HTML5 canvas and exports a high-quality PNG download. Original SVG dimensions are auto-detected from width/height or viewBox attributes. All processing happens locally — your files never leave your device.",
+      "limitations": { "0": "SVG must be valid XML — malformed SVG will not render", "1": "External resources referenced in SVG (fonts, images) may not load due to browser security restrictions", "2": "Very large output dimensions may cause memory issues in the browser" },
+      "faq": [
+        { "question": "Can I set custom output dimensions?", "answer": "Yes. You can set custom width and height in pixels. Enable the 'Keep aspect ratio' toggle to automatically maintain the original proportions when changing one dimension." },
+        { "question": "Why does my SVG preview look different from the original?", "answer": "If your SVG references external fonts, images, or stylesheets, the browser may not load them due to security restrictions. Inline all resources within the SVG for best results." }
       ]
     }
   }

@@ -1550,6 +1550,45 @@ export const toolRegistry: ToolMeta[] = [
       },
     ],
   },
+  {
+    slug: "svg-to-png-converter",
+    name: "SVG to PNG Converter",
+    description:
+      "Convert SVG to PNG in your browser. Paste or load an SVG, set custom width/height, keep aspect ratio, and download a high-quality PNG — no uploads.",
+    longDescription:
+      "Convert SVG images to PNG format directly in your browser. Paste SVG markup or load an .svg file, preview the SVG instantly, set custom output width and height in pixels, and toggle aspect ratio locking. The tool renders the SVG onto an HTML5 canvas and exports a high-quality PNG download. Original SVG dimensions are auto-detected from width/height or viewBox attributes. All processing happens locally — your files never leave your device.",
+    category: "image",
+    keywords: [
+      "svg to png",
+      "convert svg to png",
+      "svg to png converter",
+      "svg to png online",
+      "svg converter",
+      "rasterize svg",
+      "svg to image",
+    ],
+    icon: "🖼️",
+    isClientSide: true,
+    relatedSlugs: ["image-to-base64", "image-resizer", "image-compressor"],
+    supportedFormats: ["SVG input", "PNG output"],
+    limitations: [
+      "SVG must be valid XML — malformed SVG will not render",
+      "External resources referenced in SVG (fonts, images) may not load due to browser security restrictions",
+      "Very large output dimensions may cause memory issues in the browser",
+    ],
+    faq: [
+      {
+        question: "Can I set custom output dimensions?",
+        answer:
+          "Yes. You can set custom width and height in pixels. Enable the 'Keep aspect ratio' toggle to automatically maintain the original proportions when changing one dimension.",
+      },
+      {
+        question: "Why does my SVG preview look different from the original?",
+        answer:
+          "If your SVG references external fonts, images, or stylesheets, the browser may not load them due to security restrictions. Inline all resources within the SVG for best results.",
+      },
+    ],
+  },
 ];
 
 /* ---- Lookup helpers ---- */
