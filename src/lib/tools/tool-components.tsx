@@ -53,6 +53,14 @@ import { MorseCodeTranslator } from "@/tools/morse-code-translator/MorseCodeTran
 import { BinaryTextConverter } from "@/tools/binary-text-converter/BinaryTextConverter";
 import { TextPrefixSuffix } from "@/tools/text-prefix-suffix/TextPrefixSuffix";
 import { ListRandomizer } from "@/tools/list-randomizer/ListRandomizer";
+import { UserAgentParser } from "@/tools/user-agent-parser/UserAgentParser";
+import { HtmlEncoderDecoder } from "@/tools/html-encoder-decoder/HtmlEncoderDecoder";
+import { CsvJsonConverter } from "@/tools/csv-json-converter/CsvJsonConverter";
+import { XmlFormatter } from "@/tools/xml-formatter/XmlFormatter";
+import { CssMinifier } from "@/tools/css-minifier/CssMinifier";
+import { ContrastChecker } from "@/tools/contrast-checker/ContrastChecker";
+import { LoanCalculator } from "@/tools/loan-calculator/LoanCalculator";
+import { TextLineCounter } from "@/tools/text-line-counter/TextLineCounter";
 
 const JpgToPdf = dynamic(() =>
   import("@/tools/jpg-to-pdf/JpgToPdf").then((m) => m.JpgToPdf),
@@ -134,6 +142,14 @@ const toolComponents: Record<string, ComponentType> = {
   "binary-text-converter": BinaryTextConverter,
   "text-prefix-suffix": TextPrefixSuffix,
   "list-randomizer": ListRandomizer,
+  "user-agent-parser": UserAgentParser,
+  "html-encoder-decoder": HtmlEncoderDecoder,
+  "csv-json-converter": CsvJsonConverter,
+  "xml-formatter": XmlFormatter,
+  "css-minifier": CssMinifier,
+  "contrast-checker": ContrastChecker,
+  "loan-calculator": LoanCalculator,
+  "text-line-counter": TextLineCounter,
 };
 
 export function getToolComponent(slug: string): ComponentType | undefined {

@@ -161,6 +161,52 @@
     "listRandomizerRemoveEmpty": "Remove empty lines",
     "listRandomizerPicked": "Picked",
     "listRandomizerShuffled": "Shuffled list",
+    "uaInput": "User-Agent string",
+    "uaBrowser": "Browser",
+    "uaOs": "Operating System",
+    "uaEngine": "Engine",
+    "uaDevice": "Device Type",
+    "uaMobile": "Mobile",
+    "uaDesktop": "Desktop",
+    "uaUnknown": "Unknown",
+    "uaFullString": "Full User-Agent",
+    "htmlEncode": "Encode",
+    "htmlDecode": "Decode",
+    "htmlEncInput": "Input",
+    "htmlEncOutput": "Output",
+    "csvToJson": "CSV → JSON",
+    "jsonToCsv": "JSON → CSV",
+    "csvJsonDelimiter": "Delimiter",
+    "csvJsonInput": "Input",
+    "csvJsonOutput": "Output",
+    "csvJsonError": "Invalid JSON format",
+    "xmlBeautify": "Beautify",
+    "xmlMinify": "Minify",
+    "xmlInput": "XML input",
+    "xmlOutput": "Output",
+    "xmlError": "Invalid XML format",
+    "cssBeautify": "Beautify",
+    "cssMinify": "Minify",
+    "cssInput": "CSS input",
+    "cssOutput": "Output",
+    "contrastFg": "Foreground",
+    "contrastBg": "Background",
+    "contrastRatio": "Contrast Ratio",
+    "contrastPass": "Pass",
+    "contrastFail": "Fail",
+    "loanPrincipal": "Principal amount",
+    "loanRate": "Annual interest rate (%)",
+    "loanYears": "Loan term (years)",
+    "loanMonthly": "Monthly payment",
+    "loanTotalInterest": "Total interest",
+    "loanTotal": "Total cost",
+    "lineCounterInput": "Enter text",
+    "lineCounterPlaceholder": "Line 1\nLine 2\nLine 3",
+    "lineCounterTrim": "Trim whitespace",
+    "lineCounterRemoveEmpty": "Remove empty lines",
+    "lineCounterMaxChars": "Max chars/line",
+    "lineCounterCount": "Line count",
+    "lineCounterOutput": "Result",
     "removeDuplicates": "Remove Duplicates",
     "duplicatesRemoved": "{count} duplicates removed",
     "caseSensitive": "Case sensitive",
@@ -1426,6 +1472,86 @@
       "faq": [
         { "question": "Is the shuffle truly random?", "answer": "The tool uses the Fisher-Yates shuffle algorithm with Math.random(). This is suitable for general use but not for cryptographic purposes." },
         { "question": "How does the pick count work?", "answer": "After shuffling, the first N items are selected as the 'picked' results. If you request more items than available, all items are returned." }
+      ]
+    },
+    "user-agent-parser": {
+      "name": "User Agent Parser",
+      "description": "Parse User-Agent strings to extract browser name, OS, device type, and rendering engine. All client-side.",
+      "longDescription": "Evaluate any User-Agent string to extract detailed information: browser name, operating system, device type, and rendering engine. All parsing happens locally in your browser.",
+      "limitations": { "0": "User-Agent strings can be spoofed — results may not reflect the actual browser", "1": "Detection is based on regex patterns — new or uncommon browsers may show as Unknown" },
+      "faq": [
+        { "question": "Can I parse a custom User-Agent string?", "answer": "Yes. The tool pre-fills with your current browser's User-Agent, but you can edit the field to parse any string." },
+        { "question": "How accurate is the detection?", "answer": "The tool uses regex pattern matching against common User-Agent formats. It correctly identifies major browsers and operating systems." }
+      ]
+    },
+    "html-encoder-decoder": {
+      "name": "HTML Encoder/Decoder",
+      "description": "Encode HTML special characters to entities or decode entities back to HTML. All client-side.",
+      "longDescription": "Convert HTML special characters to their entity equivalents or reverse the process. Useful for safely displaying HTML code in web pages. All processing happens in your browser.",
+      "limitations": { "0": "Only encodes/decodes the 5 core HTML entities", "1": "Does not encode numeric entities like &#60; or named entities like &nbsp;" },
+      "faq": [
+        { "question": "Which characters are encoded?", "answer": "The tool encodes the 5 HTML special characters: & < > \" '." },
+        { "question": "Why encode HTML?", "answer": "Encoding prevents HTML injection (XSS) by converting special characters to their entity equivalents." }
+      ]
+    },
+    "csv-json-converter": {
+      "name": "CSV to JSON Converter",
+      "description": "Convert CSV data to JSON objects and vice versa. Supports comma, semicolon, and tab delimiters.",
+      "longDescription": "Transform flat CSV data into structured JSON arrays and back. Choose your delimiter. The first row is treated as headers when converting CSV to JSON. All processing happens locally in your browser.",
+      "limitations": { "0": "CSV parsing does not handle quoted fields containing delimiters", "1": "JSON to CSV only works with arrays of flat objects" },
+      "faq": [
+        { "question": "How are CSV headers handled?", "answer": "When converting CSV to JSON, the first row is used as object keys. Each subsequent row becomes an object with those keys." },
+        { "question": "Can I use different delimiters?", "answer": "Yes. You can choose between comma, semicolon, or tab as the delimiter." }
+      ]
+    },
+    "xml-formatter": {
+      "name": "XML Formatter & Validator",
+      "description": "Format and beautify XML with proper indentation, or minify XML by removing whitespace. All client-side.",
+      "longDescription": "Parse raw XML and format it cleanly with standard tag indentation, or collapse everything into a minified string. All processing happens in your browser.",
+      "limitations": { "0": "Formatting uses regex-based approach — may not handle all XML edge cases", "1": "Does not validate XML schema or DTD" },
+      "faq": [
+        { "question": "Does this validate XML?", "answer": "The tool formats XML using regex-based parsing. It does not perform full XML schema validation." },
+        { "question": "What does minify do?", "answer": "Minify removes all unnecessary whitespace between tags, creating a compact single-line XML string." }
+      ]
+    },
+    "css-minifier": {
+      "name": "CSS Minifier & Beautifier",
+      "description": "Beautify CSS with clean indentation or minify by stripping comments, whitespace, and trailing semicolons.",
+      "longDescription": "Optimize raw CSS with dual actions: Beautify and Minify. All processing happens locally in your browser.",
+      "limitations": { "0": "Beautifier uses regex-based formatting — may not handle all CSS preprocessing syntax", "1": "Minifier removes all comments including important ones" },
+      "faq": [
+        { "question": "What does minify remove?", "answer": "Minify removes all CSS comments, extra whitespace, and unnecessary semicolons/colons." },
+        { "question": "Can this handle SCSS/SASS?", "answer": "The tool is designed for standard CSS. SCSS/SASS-specific syntax may not be formatted correctly." }
+      ]
+    },
+    "contrast-checker": {
+      "name": "Color Contrast Checker",
+      "description": "Check WCAG 2.1 contrast ratios between foreground and background colors. Shows Pass/Fail for AA and AAA.",
+      "longDescription": "Compute exact contrast ratio between foreground and background colors using standard WCAG 2.1 formulas. All calculations happen in your browser.",
+      "limitations": { "0": "Only supports HEX color input", "1": "WCAG thresholds are based on the standard 2.1 specification" },
+      "faq": [
+        { "question": "What are the WCAG thresholds?", "answer": "AA Normal: 4.5:1, AA Large: 3:1, AAA Normal: 7:1, AAA Large: 4.5:1." },
+        { "question": "Why is contrast important?", "answer": "Sufficient contrast ensures text is readable for users with visual impairments." }
+      ]
+    },
+    "loan-calculator": {
+      "name": "Loan Calculator",
+      "description": "Calculate monthly payments, total interest, and total cost for loans. Enter principal, rate, and term.",
+      "longDescription": "Compute monthly repayments, total interest, and aggregate lifetime cost of loans. Uses the standard amortization formula. All calculations happen in your browser.",
+      "limitations": { "0": "Uses fixed-rate amortization formula — does not support variable-rate loans", "1": "Does not account for fees, taxes, or insurance" },
+      "faq": [
+        { "question": "What formula is used?", "answer": "The tool uses the standard amortization formula: M = P × (r(1+r)^n) / ((1+r)^n - 1)." },
+        { "question": "Does this include fees or taxes?", "answer": "No. The calculator only computes principal and interest." }
+      ]
+    },
+    "text-line-counter": {
+      "name": "Text Line Counter & Trimmer",
+      "description": "Count lines, trim whitespace, remove empty lines, and truncate lines by character count. All client-side.",
+      "longDescription": "Process multi-line text with multiple operations: count total lines, trim whitespace, remove empty lines, and truncate lines. All processing happens in your browser.",
+      "limitations": { "0": "Truncation is by character count — does not consider word boundaries", "1": "Trim only removes leading/trailing whitespace, not internal spaces" },
+      "faq": [
+        { "question": "What does 'Trim' do?", "answer": "Trim removes leading and trailing whitespace from each line. Internal spaces are preserved." },
+        { "question": "How does 'Max chars per line' work?", "answer": "When set to a value greater than 0, each line is truncated to that maximum character count." }
       ]
     }
   }
