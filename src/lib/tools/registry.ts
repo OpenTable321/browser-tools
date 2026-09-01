@@ -1519,6 +1519,17 @@ export const toolRegistry: ToolMeta[] = [
           "This tool uses JavaScript's native RegExp engine, which is very similar to PCRE but has some differences. Most patterns work the same way across JavaScript, Python, and other languages, but advanced features like named groups or lookbehind may behave differently.",
       },
     ],
+    seoContent: {
+      heading: "How to use the Online RegEx Tester",
+      steps: [
+        "Enter your regular expression pattern in the pattern input field. Use standard JavaScript regex syntax including character classes, quantifiers, and groups.",
+        "Type or paste the test string you want to match against in the test string textarea.",
+        "Toggle any regex flags you need — g (global), i (case-insensitive), m (multiline), s (dotall), u (unicode), or y (sticky) — by clicking the corresponding flag buttons.",
+        "Review the highlighted matches in real time. The tool displays the total match count, capturing group details, and any syntax errors immediately below the input fields.",
+      ],
+      privacy:
+        "All regex processing happens 100% locally in your browser using JavaScript's native RegExp engine. Your pattern and test string never leave your device, are never sent to any server, and are not stored anywhere. There is no backend, no tracking, and no data collection.",
+    },
   },
   {
     slug: "json-xml-converter",
@@ -2192,6 +2203,16 @@ export const toolRegistry: ToolMeta[] = [
       { question: "What is cron syntax?", answer: "Cron is a time-based job scheduler. The 5 fields are: minute (0-59), hour (0-23), day of month (1-31), month (1-12), and day of week (0-7 where 0 and 7 are Sunday)." },
       { question: "What does * mean in cron?", answer: "An asterisk (*) means 'every' — e.g., * in the minute field means every minute. */5 means every 5 minutes." },
     ],
+    seoContent: {
+      heading: "How to use the Online Cron Expression Generator",
+      steps: [
+        "Select the desired value for each of the five cron fields — minute, hour, day of month, month, and weekday — using the dropdown menus provided.",
+        "Watch the generated cron expression update in real time at the top of the tool, along with a human-readable description of the schedule it represents.",
+        "Copy the generated cron string using the copy button and paste it into your crontab, scheduling configuration, or CI/CD pipeline.",
+      ],
+      privacy:
+        "All cron expression generation happens entirely in your browser. No schedule data, selections, or generated expressions are transmitted to any server. The tool works offline once the page has loaded and does not use cookies or tracking pixels.",
+    },
   },
   {
     slug: "css-gradient-generator",
@@ -2481,6 +2502,17 @@ export const toolRegistry: ToolMeta[] = [
       { question: "What is clip-path?", answer: "The clip-path CSS property creates a clipping region that determines which parts of an element are visible. The polygon function defines a custom shape using percentage coordinates." },
       { question: "Can I use circle or ellipse clip-paths?", answer: "The current version only supports polygon clip-paths. Circle and ellipse shapes may be added in future updates." },
     ],
+    seoContent: {
+      heading: "How to use the Online CSS Clip-Path Maker",
+      steps: [
+        "Start with the default polygon shape in the preview area. Drag any existing node to reposition it and adjust the clipping region in real time.",
+        "Add new polygon points by clicking on the preview canvas, or remove points using the delete button next to each coordinate. You can use up to 12 points.",
+        "Watch the live preview update instantly as you drag nodes or add points. The clipped result shows exactly how your element will appear.",
+        "Copy the generated clip-path CSS code using the copy button and paste it into your stylesheet or CSS-in-JS setup.",
+      ],
+      privacy:
+        "All clip-path generation and visual editing happens 100% locally in your browser. No shape data, coordinates, or CSS code is ever sent to a server. The tool requires no internet connection after the page loads and does not store your input.",
+    },
   },
   {
     slug: "colorblind-simulator",
@@ -2532,6 +2564,17 @@ export const toolRegistry: ToolMeta[] = [
       { question: "Does the formatter validate my Nginx config?", answer: "No. The tool only formats indentation based on opening and closing braces. It does not validate Nginx syntax. Use nginx -t to validate your config." },
       { question: "Are comments preserved?", answer: "Yes. Lines starting with # are treated as comments and preserved in the output without indentation changes." },
     ],
+    seoContent: {
+      heading: "How to use the Online Nginx Config Beautifier",
+      steps: [
+        "Paste your raw Nginx configuration text into the input textarea. The formatter accepts server blocks, location blocks, upstream directives, and any standard nginx syntax.",
+        "Click the Format button to instantly beautify the configuration with proper indentation based on brace nesting levels.",
+        "Review the formatted output in the result panel. Comments starting with # are preserved and directives are indented consistently.",
+        "Copy the beautified config using the copy button and paste it back into your nginx.conf or site configuration file.",
+      ],
+      privacy:
+        "All Nginx config formatting happens entirely in your browser. Your configuration text is never uploaded to any server, never stored, and never transmitted over the network. The tool processes everything locally using JavaScript and works completely offline.",
+    },
   },
   {
     slug: "csv-to-sql-converter",
@@ -2804,6 +2847,17 @@ export const toolRegistry: ToolMeta[] = [
       { question: "Does the tool work offline?", answer: "Yes. Once the page is loaded, all scanning happens in your browser. Camera access requires HTTPS or localhost for security." },
       { question: "Why can't it detect my QR code?", answer: "Ensure the QR code is well-lit, centered, and fills a good portion of the image. Very small, blurry, or damaged QR codes may not be detected." },
     ],
+    seoContent: {
+      heading: "How to use the Online QR Code Scanner",
+      steps: [
+        "Choose your scanning mode: upload an image file containing a QR code, or activate your device camera for real-time scanning.",
+        "If using image upload mode, select a PNG, JPEG, or WebP file from your device. The tool will automatically decode the QR code using the jsQR library.",
+        "If using camera mode, grant browser permission when prompted. Point your camera at a QR code and the tool will detect and decode it automatically in real time.",
+        "Copy the decoded result using the copy button. The result typically contains a URL, text, or other encoded data from the QR code.",
+      ],
+      privacy:
+        "All QR code scanning and decoding happens 100% locally in your browser using the jsQR JavaScript library. Camera streams are processed in real time and never recorded or transmitted. Uploaded images are decoded in memory and never sent to any server. No data is stored, tracked, or collected.",
+    },
   },
 ];
 

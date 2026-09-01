@@ -14,5 +14,10 @@ export interface ToolMeta {
   relatedSlugs?: string[];
   supportedFormats?: string[];
   limitations?: string[];
+  seoContent?: {
+    heading: string;
+    steps: string[];
+    privacy: string;
+  };
 }
 

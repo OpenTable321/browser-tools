@@ -5,6 +5,8 @@ import { getCategory } from "@/lib/tools/categories";
 import { createMetadata } from "@/lib/seo";
 import { siteConfig } from "@/lib/site";
 import { ToolContent } from "./ToolContent";
+import { RelatedTools } from "@/components/RelatedTools";
+import { SeoContent } from "@/components/SeoContent";
 
 interface PageProps {
   params: { slug: string };
@@ -118,6 +120,8 @@ export default function ToolPage({ params }: PageProps) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
       <ToolContent slug={params.slug} />
+      <SeoContent slug={params.slug} />
+      <RelatedTools slug={params.slug} />
     </div>
   );
 }

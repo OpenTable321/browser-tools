@@ -1,10 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { getToolBySlug, getToolsByCategory } from "@/lib/tools/registry";
+import { getToolBySlug } from "@/lib/tools/registry";
 import { getToolComponent } from "@/lib/tools/tool-components";
 import { getCategory } from "@/lib/tools/categories";
-import { ToolCard } from "@/components/ToolCard";
 import { useTranslation } from "@/i18n/LanguageProvider";
 import { MetadataUpdater } from "@/i18n/MetadataUpdater";
 
@@ -22,15 +21,6 @@ export function ToolContent({ slug }: ToolContentProps) {
   if (!ToolComponent) return null;
 
   const category = getCategory(tool.category);
-
-  const relatedTools = tool.relatedSlugs
-    ? tool.relatedSlugs
-        .map((s) => getToolBySlug(s))
-        .filter((tk): tk is NonNullable<typeof tk> => tk !== undefined)
-        .slice(0, 3)
-    : getToolsByCategory(tool.category)
-        .filter((tk) => tk.slug !== tool.slug)
-        .slice(0, 3);
 
   const toolName = t(`tools.${tool.slug}.name`);
   const toolDesc = t(`tools.${tool.slug}.description`);
@@ -157,18 +147,6 @@ export function ToolContent({ slug }: ToolContentProps) {
         </div>
       )}
 
-      {relatedTools.length > 0 && (
-        <div className="mt-12">
-          <h2 className="text-xl font-bold text-slate-900">
-            {t("common.relatedTools")}
-          </h2>
-          <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {relatedTools.map((tk) => (
-              <ToolCard key={tk.slug} tool={tk} />
-            ))}
-          </div>
-        </div>
-      )}
     </>
   );
 }
