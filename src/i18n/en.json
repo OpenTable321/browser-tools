@@ -1080,8 +1080,6 @@
       "heading": "Contact Us",
       "p1": "Have a suggestion for a new tool, found a bug, or want to share feedback? We would love to hear from you.",
       "email": "Email",
-      "github": "GitHub",
-      "githubDesc": "Report issues or contribute",
       "suggestTool": "Suggest a Tool",
       "suggestToolP": "We are actively expanding our tool collection. If there is a tool you need that we do not yet offer, let us know. We prioritize tools that can run entirely client-side and do not require paid APIs."
     },
