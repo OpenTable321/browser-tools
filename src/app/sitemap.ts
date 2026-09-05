@@ -5,7 +5,7 @@ import { getToolSlugs } from "@/lib/tools/registry";
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticPages: MetadataRoute.Sitemap = [
     {
-      url: `${siteConfig.url}/`,
+      url: `${siteConfig.url}`,
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 1,
